@@ -36,7 +36,7 @@ class Login extends Component {
     dispatchFetchToken();
   };
 
-  handleEnterKey(event, isDisabledButton) {
+  handleEnterKey = (event, isDisabledButton) => {
     if (event.key === 'Enter' && !isDisabledButton) {
       this.handleClick();
     }
@@ -68,7 +68,7 @@ class Login extends Component {
                 id="gravatarEmail"
                 value={ gravatarEmail }
                 onChange={ this.handleChange }
-                onKeyDown={ (event) => this.handleEnterKey(event, isDisabledButton)}
+                onKeyDown={ (event) => this.handleEnterKey(event, isDisabledButton) }
                 data-testid="input-gravatar-email"
                 type="email"
                 placeholder="Email do Gravatar"
@@ -84,7 +84,7 @@ class Login extends Component {
                 id="name"
                 value={ name }
                 onChange={ this.handleChange }
-                onKeyDown={ (event) => this.handleEnterKey(event, isDisabledButton)}
+                onKeyDown={ (event) => this.handleEnterKey(event, isDisabledButton) }
                 data-testid="input-player-name"
                 type="text"
                 placeholder="Nome do Jogador"
