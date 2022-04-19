@@ -2,7 +2,7 @@ import propTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchToken, resetGame, setUser } from '../../redux/actions';
-import svgAvatar from '../../images/svg_avatar.svg';
+import triviaLogo from '../../images/trivia.png';
 import './style.css';
 
 class Login extends Component {
@@ -30,10 +30,22 @@ class Login extends Component {
     });
   };
 
+  handleClick = () => {
+    const { dispatchSetUser, dispatchFetchToken } = this.props;
+    dispatchSetUser(this.state);
+    dispatchFetchToken();
+  };
+
+  handleEnterKey(event, isDisabledButton) {
+    if (event.key === 'Enter' && !isDisabledButton) {
+      this.handleClick();
+    }
+  };
+
   render() {
     const { gravatarEmail, name } = this.state;
     const isDisabledButton = !(gravatarEmail.length && name.length);
-    const { dispatchSetUser, history, dispatchFetchToken } = this.props;
+    const { history } = this.props;
 
     return (
       <div className="container-form">
@@ -43,7 +55,7 @@ class Login extends Component {
           className="container-form-box"
         >
           <header className="container-form-header">
-            <img src={ svgAvatar } alt="svg_avatar" className="svg_avatar" />
+            <img src={ triviaLogo } alt="Trivia logo" className="trivia-logo" />
           </header>
 
           <main className="container-form-main">
@@ -56,10 +68,12 @@ class Login extends Component {
                 id="gravatarEmail"
                 value={ gravatarEmail }
                 onChange={ this.handleChange }
+                onKeyDown={ (event) => this.handleEnterKey(event, isDisabledButton)}
                 data-testid="input-gravatar-email"
                 type="email"
-                placeholder="Email do Gravatar:"
+                placeholder="Email do Gravatar"
                 name="gravatarEmail"
+                autoComplete="off"
                 required
               />
             </label>
@@ -70,10 +84,12 @@ class Login extends Component {
                 id="name"
                 value={ name }
                 onChange={ this.handleChange }
+                onKeyDown={ (event) => this.handleEnterKey(event, isDisabledButton)}
                 data-testid="input-player-name"
                 type="text"
-                placeholder="Nome do Jogador:"
+                placeholder="Nome do Jogador"
                 name="name"
+                autoComplete="off"
                 required
               />
             </label>
@@ -87,10 +103,7 @@ class Login extends Component {
               id="play-Button"
               type="button"
               disabled={ isDisabledButton }
-              onClick={ () => {
-                dispatchSetUser(this.state);
-                dispatchFetchToken();
-              } }
+              onClick={ this.handleClick }
               data-testid="btn-play"
             >
               Jogar
