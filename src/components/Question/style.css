@@ -57,12 +57,11 @@
 .category {
   background-color: #c9c9c9;
   border-bottom: 3px solid black;
-  border-spacing: 20 px;
   border-top: 1px solid #b4b4b4;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  font-size: 30px;
-  font-weight: 100;
+  font-size: 32px;
+  font-weight: 900;
   height: 25%;
   padding: 18px 10px;
   text-align: center;
