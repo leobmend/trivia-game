@@ -9,7 +9,7 @@ class Login extends Component {
   state = {
     gravatarEmail: '',
     name: '',
-  };
+  }
 
   componentDidMount() {
     const { dispatchResetGame } = this.props;
