@@ -1,4 +1,4 @@
-# Trivia Game :thinking::brain::hourglass:
+# Trivia Game :thinking: :brain: :hourglass:
 
 A aplicação Trivia Game nasceu a partir de um projeto realizado durante o curso de [Desenvolvimento Web da Trybe](https://www.betrybe.com/). Na oportunidade, o projeto foi realizado em conjunto com os colegas e amigos [Higor Anjos](https://github.com/HigorAnjos) e [Gabriel Julio](https://github.com/GJTrybe).
 
