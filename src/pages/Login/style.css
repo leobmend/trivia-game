@@ -1,6 +1,7 @@
 .container-form {
   align-items: center;
-  background-color: #616161;
+  background-color: #264653;
+  border-radius: 10px;
   display: flex;
   justify-content: center;
   margin: auto;
@@ -10,7 +11,7 @@
 }
 
 .container-form-box {
-  border: 3px solid #3c3c3c;
+  border: 3px solid #022433;
 }
 
 .container-form-header {
@@ -18,9 +19,8 @@
   text-align: center;
 }
 
-.svg_avatar {
-  border-radius: 50%;
-  width: 30%;
+.trivia-logo {
+  width: 45%;
 }
 
 .container-form-main {
@@ -37,11 +37,16 @@
   margin: 8px 0;
   padding: 12px 20px;
   width: 100%;
+  text-align: center;
+}
+
+.container-form-main-label1-input1::placeholder, .container-form-main-label2-input1::placeholder {
+  text-align: center;
 }
 
 .container-form-main-button1, .container-form-main-button2 {
-  background-color: #1e8ac8;
-  border: 3px solid#1e8ac8;
+  background-color: #2A9D8F;
+  border: 3px solid #2A9D8F;
   border-radius: 5px;
   box-shadow: 0 2px 2px 0 black;
   color: whitesmoke;
@@ -50,7 +55,7 @@
   margin: 15px 12px;
   padding: 8px;
   transition-duration: 0.4s;
-  width: 40%;
+  width: 30%;
 }
 
 .container-form-main-button1:hover, .container-form-main-button2:hover {
