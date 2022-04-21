@@ -172,7 +172,7 @@ class Question extends React.Component {
     return (
       <main className="Question">
         <section className="question-container">
-          {this.renderQuestion(correctAnswer, category, questionText, cleanQuestionText)}
+          {this.renderQuestion(category, cleanQuestionText)}
           <div className={ `timer ${timer <= TIMER_ENDING && ' timer-ending'}` }>
             { `${timer}'` }
           </div>
@@ -182,7 +182,8 @@ class Question extends React.Component {
 
         <section className="buttons-container" data-testid="answer-options">
           {type === 'multiple'
-            ? this.renderMultipleAnswers(correctAnswer, incorrectAnswers)
+            ? this.renderMultipleAnswers(sanitizeHtml(correctAnswer),
+              incorrectAnswers.map((incorrectAnswer) => sanitizeHtml(incorrectAnswer)))
             : this.renderBoolAnswers(correctAnswer)}
           {
             (isBtnNextVisible || timer < 1) && (
