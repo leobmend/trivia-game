@@ -1,6 +1,6 @@
 .FeedBack {
   align-items: center;
-  background-color: #616161;
+  background-color: #264653;
   border-radius: 25px;
   box-shadow: 0 4px 8px 0 rgb(99, 97, 97);
   display: flex;
@@ -13,7 +13,7 @@
 
 .feedback-container {
   align-items: center;
-  background-color: whitesmoke;
+  background-color: rgb(224, 224, 224);
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 black;
   display: flex;
@@ -21,7 +21,7 @@
   height: 70%;
   justify-content: space-evenly;
   padding: 20px;
-  width: 90%;
+  width: 85%;
 }
 
 .fb-h1 {
@@ -41,11 +41,11 @@
 }
 
 .fb-buttons-container button {
-  background-color: #c5c7c3;
-  border: 3px solid#c5c7c3;
+  background-color: #2a9d8f;
+  border: 3px solid #2a9d8f;
   border-radius: 5px;
   box-shadow: 0 2px 2px 0 black;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 800;
   margin: 15px 12px;
   padding: 8px;
@@ -54,7 +54,7 @@
 }
 
 .fb-buttons-container button:hover {
-  background-color: whitesmoke;
+  background-color: rgb(224, 224, 224);
   color: black;
   transform: scale(1.1);
 }
