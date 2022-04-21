@@ -5,17 +5,28 @@ import getGravatarUrl from '../../services/gravatar';
 import './style.css';
 
 class Header extends React.Component {
+  state = {
+    isModalVisible: false,
+  }
+
   render() {
     const { name, score, gravatarEmail } = this.props;
+    const { isModalVisible } = this.state;
 
     return (
       <header className="Header">
-        <img
-          className="player-img"
-          src={ getGravatarUrl(gravatarEmail) }
-          alt="Imagem de perfil"
-          data-testid="header-profile-picture"
-        />
+        <div>
+          <img
+            className="player-img"
+            src={ getGravatarUrl(gravatarEmail) }
+            alt="Imagem de perfil"
+            data-testid="header-profile-picture"
+          />
+          <div className={ isModalVisible ? 'modal-on' : 'modal-off' }>
+            <button className="close-modal-btn" type="button">X</button>
+            <p>Alou</p>
+          </div>
+        </div>
 
         <h1
           className="player-name"
