@@ -7,7 +7,7 @@
 
 .title-container {
   align-items: center;
-  background-color: #3c3c3c;
+  background-color: #264653;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   box-shadow: 0 4px 8px 0 rgb(92, 92, 92);
@@ -20,16 +20,16 @@
 }
 
 .config-title {
-  background-color: whitesmoke;
+  background-color: #c9c9c9;
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 black;
   font-size: 65px;
-  padding: 3px 50px;
+  padding: 5px 100px;
 }
 
 .home-button {
   background-color: #c5c7c3;
-  border: 3px solid#c5c7c3;
+  border: 3px solid #c5c7c3;
   border-radius: 5px;
   box-shadow: 0 2px 2px 0 black;
   font-size: 17px;
@@ -48,7 +48,7 @@
 
 .config-container {
   align-items: center;
-  background-color: #616161;
+  background-color: #264653;
   border-radius: 25px;
   box-shadow: 0 4px 8px 0 rgb(99, 97, 97);
   display: flex;
@@ -62,7 +62,7 @@
 }
 
 .config-label {
-  background-color: whitesmoke;
+  background-color: #c9c9c9;
   border-radius: 10px;
   box-shadow: 0 2px 2px 0 black;
   display: flex;
@@ -74,6 +74,9 @@
 }
 
 .config-select {
+  background-color: whitesmoke;
+  border: 3px solid black;
   border-radius: 5px;
+  text-align: center;
   width: 50%;
 }
