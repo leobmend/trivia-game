@@ -145,7 +145,7 @@ class Question extends React.Component {
     );
   }
 
-  renderQuestion = (correctAnswer, category, questionText, cleanQuestionText) => (
+  renderQuestion = (category, cleanQuestionText) => (
     <div className="rotated-card-1">
       <div className="rotated-card-2">
         <div className="rotated-card-3">
