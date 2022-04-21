@@ -183,7 +183,7 @@
 }
 
 .next-button:hover {
-  background-color: whitesmoke;
+  background-color: rgb(224, 224, 224);
   color: black;
   transform: scale(1.1);
 }
