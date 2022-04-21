@@ -151,16 +151,12 @@ class Question extends React.Component {
         <div className="rotated-card-3">
           <div className="question-card">
             <h1 className="category" data-testid="question-category">{category}</h1>
-            {correctAnswer === 'Dirk the Daring'
-              ? <p data-testid="question-text">{questionText}</p>
-              : (
-                <p
-                  className="question"
-                  data-testid="question-text"
-                  // eslint-disable-next-line react/no-danger
-                  dangerouslySetInnerHTML={ { __html: cleanQuestionText } }
-                />
-              )}
+            <p
+              className="question"
+              data-testid="question-text"
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={ { __html: cleanQuestionText } }
+            />
           </div>
         </div>
       </div>
