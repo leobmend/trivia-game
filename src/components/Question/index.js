@@ -145,22 +145,18 @@ class Question extends React.Component {
     );
   }
 
-  renderQuestion = (correctAnswer, category, questionText, cleanQuestionText) => (
+  renderQuestion = (category, cleanQuestionText) => (
     <div className="rotated-card-1">
       <div className="rotated-card-2">
         <div className="rotated-card-3">
           <div className="question-card">
             <h1 className="category" data-testid="question-category">{category}</h1>
-            {correctAnswer === 'Dirk the Daring'
-              ? <p data-testid="question-text">{questionText}</p>
-              : (
-                <p
-                  className="question"
-                  data-testid="question-text"
-                  // eslint-disable-next-line react/no-danger
-                  dangerouslySetInnerHTML={ { __html: cleanQuestionText } }
-                />
-              )}
+            <p
+              className="question"
+              data-testid="question-text"
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={ { __html: cleanQuestionText } }
+            />
           </div>
         </div>
       </div>
@@ -176,7 +172,7 @@ class Question extends React.Component {
     return (
       <main className="Question">
         <section className="question-container">
-          {this.renderQuestion(correctAnswer, category, questionText, cleanQuestionText)}
+          {this.renderQuestion(category, cleanQuestionText)}
           <div className={ `timer ${timer <= TIMER_ENDING && ' timer-ending'}` }>
             { `${timer}'` }
           </div>
@@ -186,7 +182,8 @@ class Question extends React.Component {
 
         <section className="buttons-container" data-testid="answer-options">
           {type === 'multiple'
-            ? this.renderMultipleAnswers(correctAnswer, incorrectAnswers)
+            ? this.renderMultipleAnswers(sanitizeHtml(correctAnswer),
+              incorrectAnswers.map((incorrectAnswer) => sanitizeHtml(incorrectAnswer)))
             : this.renderBoolAnswers(correctAnswer)}
           {
             (isBtnNextVisible || timer < 1) && (
