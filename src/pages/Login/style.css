@@ -37,17 +37,21 @@
   font-weight: 800;
   margin: 8px 0;
   padding: 12px 20px;
+  text-align: center;
   width: 100%;
+}
+
+.container-form-main-label1-input1::placeholder {
   text-align: center;
 }
 
-.container-form-main-label1-input1::placeholder, .container-form-main-label2-input1::placeholder {
+.container-form-main-label2-input1::placeholder {
   text-align: center;
 }
 
 .container-form-main-button1, .container-form-main-button2 {
-  background-color: #2A9D8F;
-  border: 3px solid #2A9D8F;
+  background-color: #2a9d8f;
+  border: 3px solid #2a9d8f;
   border-radius: 5px;
   box-shadow: 0 2px 2px 0 black;
   color: whitesmoke;

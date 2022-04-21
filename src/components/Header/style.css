@@ -1,6 +1,6 @@
 .Header {
   align-items: center;
-  background-color: #3c3c3c;
+  background-color: #264653;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   box-shadow: 0 4px 8px 0 rgb(92, 92, 92);
@@ -11,24 +11,25 @@
 }
 
 .player-img {
-  border: 3px solid white;
+  border: 3px solid #c9c9c9;
   border-radius: 100%;
   margin: 0 60px;
   width: 100px;
 }
 
 .player-name {
-  background-color: white;
+  background-color: #c9c9c9;
   border-radius: 15px;
   margin: 0 25px;
   padding: 13px 40px;
 }
 
 .player-score {
-  background-color: white;
+  background-color: #c9c9c9;
   border-radius: 12px;
   margin: 5px;
   padding: 8px 25px;
+  text-align: center;
   width: 210px;
 }
 
