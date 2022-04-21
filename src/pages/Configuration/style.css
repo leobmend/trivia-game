@@ -77,6 +77,8 @@
   background-color: whitesmoke;
   border: 3px solid black;
   border-radius: 5px;
+  font-size: 18px;
+  font-weight: 800;
   text-align: center;
   width: 50%;
 }
