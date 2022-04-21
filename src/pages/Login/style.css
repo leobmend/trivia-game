@@ -31,14 +31,14 @@
 
 .container-form-main-label1-input1, .container-form-main-label2-input1 {
   background-color: whitesmoke;
-  border: 1px solid #ccc;
+  border: 3px solid black;
   border-radius: 10px;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 800;
   margin: 8px 0;
   padding: 12px 20px;
   text-align: center;
-  width: 100%;
+  width: 90%;
 }
 
 .container-form-main-label1-input1::placeholder {
@@ -55,12 +55,12 @@
   border-radius: 5px;
   box-shadow: 0 2px 2px 0 black;
   color: whitesmoke;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 800;
   margin: 15px 12px;
   padding: 8px;
   transition-duration: 0.4s;
-  width: 30%;
+  width: 25%;
 }
 
 .container-form-main-button1:hover, .container-form-main-button2:hover {
