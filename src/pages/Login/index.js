@@ -114,7 +114,7 @@ class Login extends Component {
               type="button"
               data-testid="btn-settings"
               onClick={ () => {
-                history.push('/Configuration');
+                history.push('/configuration');
               } }
             >
               Configurações

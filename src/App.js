@@ -12,9 +12,9 @@ export default function App() {
     <div className="App">
       <Switch>
         <Route exact path="/" component={ LoginPage } />
-        <Route path="/Trivia" component={ TriviaPage } />
-        <Route path="/Ranking" component={ RankingPage } />
-        <Route path="/Configuration" component={ ConfigurationPage } />
+        <Route path="/trivia" component={ TriviaPage } />
+        <Route path="/ranking" component={ RankingPage } />
+        <Route path="/configuration" component={ ConfigurationPage } />
         <Route path="/feedback" component={ FeedBackPage } />
       </Switch>
     </div>
