@@ -5,6 +5,8 @@ import { fetchToken, resetGame, setUser } from '../../redux/actions';
 import triviaLogo from '../../images/trivia.png';
 import './style.css';
 
+const pattern = /^\w.+@\w.+[\w]$/;
+
 class Login extends Component {
   state = {
     gravatarEmail: '',
@@ -44,7 +46,7 @@ class Login extends Component {
 
   render() {
     const { gravatarEmail, name } = this.state;
-    const isDisabledButton = !(gravatarEmail.length && name.length);
+    const isDisabledButton = !(gravatarEmail.match(pattern) && name.length);
     const { history } = this.props;
 
     return (
