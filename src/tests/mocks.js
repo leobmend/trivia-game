@@ -63,3 +63,24 @@ export const defaultQuestions = [
 ];
 
 export const boolQuestions = [];
+
+export const getInitialState = (playerName = '', questionsMocked = [],
+  configs = { category: '', difficulty: '', type: '' }) => ({
+  player: {
+    name: playerName,
+    assertions: 0,
+    score: 0,
+    gravatarEmail: '',
+  },
+  token: '',
+  trivia: {
+    isFetching: false,
+    questions: questionsMocked,
+    responseCode: 0,
+  },
+  configs: {
+    category: configs.category,
+    difficulty: configs.difficulty,
+    type: configs.type,
+  },
+});
