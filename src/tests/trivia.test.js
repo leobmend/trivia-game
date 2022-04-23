@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { cleanup, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 
@@ -10,8 +10,11 @@ import { defaultQuestions, getInitialState } from './mocks';
 
 const VALID_EMAIL = 'email@test.com';
 const VALID_NAME = 'Player One';
+const ATTEMPTS_NUMBER = 10;
 
 describe('Trivia Page Tests', () => {
+  afterEach(cleanup);
+
   const login = () => {
     const emailInput = screen.getByPlaceholderText('Email do Gravatar');
     const nameInput = screen.getByPlaceholderText('Nome do Jogador');
@@ -50,15 +53,35 @@ describe('Trivia Page Tests', () => {
     expect(categoryH1).toBeInTheDocument();
   });
 
-  it('Should have the possible answers, presented in random order buttons, '
-    + 'and a timer starting at 30sec', () => {
+  it('Should have the possible answers, presented in random order buttons.', () => {
     renderWithRouterAndStore(<App />, { route: '/trivia' }, defaultState);
 
-    const correctAnswerButton = screen.getByText(defaultQuestions[0].correct_answer);
+    let correctAnswerButton = screen
+      .getByRole('button', { name: defaultQuestions[0].correct_answer });
     expect(correctAnswerButton).toBeInTheDocument();
     defaultQuestions[0].incorrect_answers.forEach((incorrectAnswer) => {
-      const incorrectAnswerButton = screen.getByText(incorrectAnswer);
+      const incorrectAnswerButton = screen.getByRole('button', { name: incorrectAnswer });
       expect(incorrectAnswerButton).toBeInTheDocument();
     });
+
+    const positionsList = [];
+    for (let i = 1; i <= ATTEMPTS_NUMBER; i += 1) {
+      cleanup();
+      renderWithRouterAndStore(<App />, { route: '/trivia' }, defaultState);
+
+      const answersButtons = screen.getAllByRole('button');
+      correctAnswerButton = screen
+        .getByRole('button', { name: defaultQuestions[0].correct_answer });
+      const correctAnswerIndex = answersButtons.indexOf(correctAnswerButton);
+
+      positionsList.push(correctAnswerIndex);
+    }
+    const uniquePositions = positionsList.reduce((uniquePositionsList, position) => {
+      if (!uniquePositionsList.includes(position)) {
+        return [...uniquePositionsList, position];
+      }
+      return uniquePositionsList;
+    }, []);
+    expect(uniquePositions.length).toBeGreaterThan(2);
   });
 });
