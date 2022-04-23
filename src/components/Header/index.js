@@ -47,7 +47,7 @@ class Header extends React.Component {
               <a
                 href="https://br.gravatar.com/"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="modal-title"
               >
                 Gravatar
