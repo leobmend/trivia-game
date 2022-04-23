@@ -40,6 +40,7 @@ class Header extends React.Component {
               className="close-modal-btn"
               onClick={ this.handleClick }
               type="button"
+              disabled={ !isModalVisible }
             >
               X
             </button>
