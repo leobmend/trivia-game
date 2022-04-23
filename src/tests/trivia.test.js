@@ -10,7 +10,8 @@ import { defaultQuestions, getInitialState } from './mocks';
 
 const VALID_EMAIL = 'email@test.com';
 const VALID_NAME = 'Player One';
-const ATTEMPTS_NUMBER = 10;
+const ATTEMPTS_NUMBER = 12;
+const TIMER_LENGTH = 35000;
 
 describe('Trivia Page Tests', () => {
   afterEach(cleanup);
@@ -53,7 +54,7 @@ describe('Trivia Page Tests', () => {
     expect(categoryH1).toBeInTheDocument();
   });
 
-  it('Should have the possible answers, presented in random order buttons.', () => {
+  it('Should have the possible answers in buttons, presented in random order.', () => {
     renderWithRouterAndStore(<App />, { route: '/trivia' }, defaultState);
 
     let correctAnswerButton = screen
@@ -69,10 +70,13 @@ describe('Trivia Page Tests', () => {
       cleanup();
       renderWithRouterAndStore(<App />, { route: '/trivia' }, defaultState);
 
-      const answersButtons = screen.getAllByRole('button');
+      const answerButtons = screen.getAllByTestId(/wrong-answer\d/);
+      answerButtons.push(screen.getByTestId('correct-answer'));
       correctAnswerButton = screen
         .getByRole('button', { name: defaultQuestions[0].correct_answer });
-      const correctAnswerIndex = answersButtons.indexOf(correctAnswerButton);
+      const correctAnswerIndex = answerButtons.indexOf(correctAnswerButton);
+
+      console.log(correctAnswerIndex);
 
       positionsList.push(correctAnswerIndex);
     }
@@ -82,6 +86,31 @@ describe('Trivia Page Tests', () => {
       }
       return uniquePositionsList;
     }, []);
+    console.log(uniquePositions);
     expect(uniquePositions.length).toBeGreaterThan(2);
+  });
+
+  it('Should have a timer, starting with 30 seconds and disabling '
+    + 'answers buttons after 30 seconds', async () => {
+    renderWithRouterAndStore(<App />, { route: '/trivia' }, defaultState);
+
+    jest.setTimeout(TIMER_LENGTH + 1);
+
+    const initialTimerDiv = screen.getByText('30\'');
+    expect(initialTimerDiv).toBeInTheDocument();
+
+    const pause = (msec) => new Promise((res) => setTimeout(res, msec));
+    await pause(TIMER_LENGTH);
+
+    const endedTimerDiv = screen.getByText('0\'');
+    expect(endedTimerDiv).toBeInTheDocument();
+
+    const answerButtons = screen.getAllByTestId(/wrong-answer\d/);
+    answerButtons.push(screen.getByTestId('correct-answer'));
+    console.log(answerButtons.length);
+    answerButtons.forEach((answerButton) => {
+      console.log(answerButton);
+      expect(answerButton).toHaveAttribute('disabled');
+    });
   });
 });
