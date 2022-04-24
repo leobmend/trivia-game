@@ -111,7 +111,6 @@ describe('Trivia Page Tests', () => {
 
     const answerButtons = screen.getAllByTestId(/wrong-answer-\d/);
     answerButtons.push(screen.getByTestId('correct-answer'));
-    console.log(answerButtons.length);
     answerButtons.forEach((answerButton) => {
       expect(answerButton).toHaveAttribute('disabled');
     });
