@@ -109,7 +109,7 @@ describe('Trivia Page Tests', () => {
     const endedTimerDiv = screen.getByText('0\'');
     expect(endedTimerDiv).toBeInTheDocument();
 
-    const answerButtons = screen.getAllByTestId(/wrong-answer\d/);
+    const answerButtons = screen.getAllByTestId(/wrong-answer-\d/);
     answerButtons.push(screen.getByTestId('correct-answer'));
     console.log(answerButtons.length);
     answerButtons.forEach((answerButton) => {
