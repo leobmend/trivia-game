@@ -62,8 +62,6 @@ export const defaultQuestions = [
   },
 ];
 
-export const boolQuestions = [];
-
 export const getInitialState = (playerName = '', questionsMocked = [],
   playerScore = { score: 0, assertions: 0 },
   configs = { category: '', difficulty: '', type: '' }) => ({
@@ -85,3 +83,16 @@ export const getInitialState = (playerName = '', questionsMocked = [],
     type: configs.type,
   },
 });
+
+export const rankingMock = [
+  {
+    name: 'Leonardo',
+    score: 150,
+    picture: 'https://www.gravatar.com/avatar/0f077cac8e26b4daffc25af525400e1a',
+  },
+  {
+    name: 'Amanda',
+    score: 140,
+    picture: 'https://www.gravatar.com/avatar/5e9c7a87ab7a351dabc508b28acaec11',
+  },
+];
