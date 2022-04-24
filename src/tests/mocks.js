@@ -65,11 +65,12 @@ export const defaultQuestions = [
 export const boolQuestions = [];
 
 export const getInitialState = (playerName = '', questionsMocked = [],
+  playerScore = { score: 0, assertions: 0 },
   configs = { category: '', difficulty: '', type: '' }) => ({
   player: {
     name: playerName,
-    assertions: 0,
-    score: 0,
+    assertions: playerScore.assertions,
+    score: playerScore.score,
     gravatarEmail: '',
   },
   token: '',
