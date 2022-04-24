@@ -106,7 +106,7 @@ class Question extends React.Component {
         value={ index }
         data-testid={ index === randomCorrectIndex
           ? CORRECT_ANSWER
-          : `wrong-answer${incorrectList.indexOf(answer)}` }
+          : `wrong-answer-${incorrectList.indexOf(answer)}` }
       >
         {answer}
       </button>
