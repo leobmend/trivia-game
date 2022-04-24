@@ -11,7 +11,10 @@ import { defaultQuestions, getInitialState } from './mocks';
 const VALID_EMAIL = 'email@test.com';
 const VALID_NAME = 'Player One';
 // const ATTEMPTS_NUMBER = 12;
-const TIMER_LENGTH = 35000;
+const PAUSE_LENGTH = 35000;
+const DEFAULT_SCORE = 10;
+const QUESTION_QUANTITY = 5;
+const TIMER_SCORE_CALC = 30;
 
 describe('Trivia Page Tests', () => {
   afterEach(cleanup);
@@ -54,7 +57,7 @@ describe('Trivia Page Tests', () => {
     expect(categoryH1).toBeInTheDocument();
   });
 
-  it('Should have the possible answers in buttons, presented in random order.', () => {
+  it('Should have the possible answers in buttons.', () => {
     renderWithRouterAndStore(<App />, { route: '/trivia' }, defaultState);
 
     const correctAnswerButton = screen
@@ -95,13 +98,13 @@ describe('Trivia Page Tests', () => {
     + 'answers buttons after 30 seconds', async () => {
     renderWithRouterAndStore(<App />, { route: '/trivia' }, defaultState);
 
-    jest.setTimeout(TIMER_LENGTH + 1);
+    jest.setTimeout(PAUSE_LENGTH + 1);
 
     const initialTimerDiv = screen.getByText('30\'');
     expect(initialTimerDiv).toBeInTheDocument();
 
     const pause = (msec) => new Promise((res) => setTimeout(res, msec));
-    await pause(TIMER_LENGTH);
+    await pause(PAUSE_LENGTH);
 
     const endedTimerDiv = screen.getByText('0\'');
     expect(endedTimerDiv).toBeInTheDocument();
@@ -110,8 +113,31 @@ describe('Trivia Page Tests', () => {
     answerButtons.push(screen.getByTestId('correct-answer'));
     console.log(answerButtons.length);
     answerButtons.forEach((answerButton) => {
-      console.log(answerButton);
       expect(answerButton).toHaveAttribute('disabled');
     });
+  });
+
+  it('Should increase the player score if he chooses the correct answer', async () => {
+    renderWithRouterAndStore(<App />, { route: '/trivia' }, defaultState);
+
+    const getDifficultyPoints = { hard: 3, medium: 2, easy: 1 };
+    const getScore = (timer, difficulty) => (
+      DEFAULT_SCORE + timer * getDifficultyPoints[difficulty]
+    );
+
+    let score = 0;
+    for (let i = 0; i < QUESTION_QUANTITY - 1; i += 1) {
+      const correctAnswerButton = screen.getByTestId('correct-answer');
+      userEvent.click(correctAnswerButton);
+
+      const nextButton = screen.getByRole('button', { name: 'Próxima' });
+      userEvent.click(nextButton);
+
+      /* const pause = (msec) => new Promise((res) => setTimeout(res, msec)); */
+
+      score += getScore(TIMER_SCORE_CALC, defaultQuestions[i].difficulty);
+    }
+    const playerScoreDiv = screen.getByText(score.toString());
+    expect(playerScoreDiv).toBeInTheDocument();
   });
 });
