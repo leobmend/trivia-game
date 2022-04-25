@@ -14,6 +14,13 @@ describe('Ranking Page Tests', () => {
     .spyOn(Object.getPrototypeOf(localStorage), 'getItem')
     .mockImplementation(() => JSON.stringify(rankingMock));
 
+  it('Should have a header displaying "Ranking".', () => {
+    renderWithRouterAndStore(<App />, { route: '/ranking' });
+
+    const rankingH1 = screen.getByRole('heading', { level: 1, name: 'Ranking' });
+    expect(rankingH1).toBeInTheDocument();
+  });
+
   it('Should get the previously ranked players on localStorage.', () => {
     renderWithRouterAndStore(<App />, { route: '/ranking' });
 
@@ -28,6 +35,13 @@ describe('Ranking Page Tests', () => {
     rankingMock.forEach((player, index) => {
       const playerImg = screen.getAllByRole('img')[index];
       expect(playerImg).toHaveAttribute('src', player.picture);
+
+      const playerNameH1 = screen.getByRole('heading', { level: 1, name: player.name });
+      expect(playerNameH1).toBeInTheDocument();
+
+      const playerScoreH2 = screen
+        .getByRole('heading', { level: 2, name: player.score.toString() });
+      expect(playerScoreH2).toBeInTheDocument();
     });
   });
 
