@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 export const defaultQuestions = [
   {
     category: 'Geography',
@@ -96,3 +97,181 @@ export const rankingMock = [
     picture: 'https://www.gravatar.com/avatar/5e9c7a87ab7a351dabc508b28acaec11',
   },
 ];
+
+export const categoriesMock = {
+  trivia_categories: [
+    {
+      id: 9,
+      name: 'General Knowledge',
+    },
+    {
+      id: 10,
+      name: 'Entertainment: Books',
+    },
+    {
+      id: 11,
+      name: 'Entertainment: Film',
+    },
+    {
+      id: 12,
+      name: 'Entertainment: Music',
+    },
+    {
+      id: 13,
+      name: 'Entertainment: Musicals & Theatres',
+    },
+    {
+      id: 14,
+      name: 'Entertainment: Television',
+    },
+    {
+      id: 15,
+      name: 'Entertainment: Video Games',
+    },
+    {
+      id: 16,
+      name: 'Entertainment: Board Games',
+    },
+    {
+      id: 17,
+      name: 'Science & Nature',
+    },
+    {
+      id: 18,
+      name: 'Science: Computers',
+    },
+    {
+      id: 19,
+      name: 'Science: Mathematics',
+    },
+    {
+      id: 20,
+      name: 'Mythology',
+    },
+    {
+      id: 21,
+      name: 'Sports',
+    },
+    {
+      id: 22,
+      name: 'Geography',
+    },
+    {
+      id: 23,
+      name: 'History',
+    },
+    {
+      id: 24,
+      name: 'Politics',
+    },
+    {
+      id: 25,
+      name: 'Art',
+    },
+    {
+      id: 26,
+      name: 'Celebrities',
+    },
+    {
+      id: 27,
+      name: 'Animals',
+    },
+    {
+      id: 28,
+      name: 'Vehicles',
+    },
+    {
+      id: 29,
+      name: 'Entertainment: Comics',
+    },
+    {
+      id: 30,
+      name: 'Science: Gadgets',
+    },
+    {
+      id: 31,
+      name: 'Entertainment: Japanese Anime & Manga',
+    },
+    {
+      id: 32,
+      name: 'Entertainment: Cartoon & Animations',
+    },
+  ],
+};
+
+export const categoriesFetchMock = () => ({
+  json: () => categoriesMock,
+});
+
+const GENERAL_KNOWLEDGE = 'General Knowledge';
+
+const configuredQuestionsMock = {
+  response_code: 0,
+  results: [
+    {
+      category: GENERAL_KNOWLEDGE,
+      type: 'multiple',
+      difficulty: 'medium',
+      question: 'This field is sometimes known as &ldquo;The Dismal Science.&rdquo;',
+      correct_answer: 'Economics',
+      incorrect_answers: [
+        'Philosophy',
+        'Politics',
+        'Physics',
+      ],
+    },
+    {
+      category: GENERAL_KNOWLEDGE,
+      type: 'multiple',
+      difficulty: 'medium',
+      question: 'Which Italian automobile manufacturer gained majority control '
+        + 'of U.S. automobile manufacturer Chrysler in 2011?',
+      correct_answer: 'Fiat',
+      incorrect_answers: [
+        'Maserati',
+        'Alfa Romeo',
+        'Ferrari',
+      ],
+    },
+    {
+      category: GENERAL_KNOWLEDGE,
+      type: 'multiple',
+      difficulty: 'medium',
+      question: 'Which of the following carbonated soft drinks were introduced first?',
+      correct_answer: 'Dr. Pepper',
+      incorrect_answers: [
+        'Coca-Cola',
+        'Sprite',
+        'Mountain Dew',
+      ],
+    },
+    {
+      category: GENERAL_KNOWLEDGE,
+      type: 'multiple',
+      difficulty: 'medium',
+      question: 'Who invented Pastafarianism?',
+      correct_answer: 'Bobby Henderson',
+      incorrect_answers: [
+        'Eric Tignor',
+        'Bill Nye',
+        'Zach Soldi',
+      ],
+    },
+    {
+      category: GENERAL_KNOWLEDGE,
+      type: 'multiple',
+      difficulty: 'medium',
+      question: 'What is the star sign of someone born on Valentines day?',
+      correct_answer: 'Aquarius',
+      incorrect_answers: [
+        'Pisces',
+        'Capricorn',
+        'Scorpio',
+      ],
+    },
+  ],
+};
+
+export const configuredQuestionsFetchMock = () => ({
+  json: () => configuredQuestionsMock,
+});
