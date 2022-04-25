@@ -40,6 +40,7 @@ class Header extends React.Component {
               className="close-modal-btn"
               onClick={ this.handleClick }
               type="button"
+              disabled={ !isModalVisible }
             >
               X
             </button>
@@ -47,7 +48,7 @@ class Header extends React.Component {
               <a
                 href="https://br.gravatar.com/"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="modal-title"
               >
                 Gravatar
