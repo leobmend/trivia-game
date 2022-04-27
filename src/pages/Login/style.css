@@ -6,13 +6,13 @@
   font-weight: 900;
   justify-content: center;
   margin: auto;
-  max-height: 80vh;
   max-width: 80vw;
   padding: 20px;
 }
 
 .container-form-box {
   border: 3px solid #022433;
+  height: 100%;
 }
 
 .container-form-header {
