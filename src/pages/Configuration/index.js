@@ -67,12 +67,12 @@ export class Configuration extends Component {
 
     return (
       <main className="Configuration">
-        <section className="title-container">
+        <section className="config-title-container">
           <h1 className="config-title" data-testid="settings-title">
             Configurações
           </h1>
           <button
-            className="home-button"
+            className="config-home-button"
             data-testid="btn-go-home"
             type="button"
             onClick={ this.handleClick }
