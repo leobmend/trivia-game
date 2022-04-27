@@ -21,7 +21,7 @@
 }
 
 .trivia-logo {
-  width: 45%;
+  width: 95%;
 }
 
 .container-form-main {
@@ -33,7 +33,7 @@
   background-color: whitesmoke;
   border: 3px solid black;
   border-radius: 10px;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 800;
   margin: 8px 0;
   padding: 12px 20px;
@@ -55,12 +55,12 @@
   border-radius: 5px;
   box-shadow: 0 2px 2px 0 black;
   color: whitesmoke;
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 800;
   margin: 15px 12px;
   padding: 8px;
   transition-duration: 0.4s;
-  width: 25%;
+  width: 60%;
 }
 
 .container-form-main-button1:hover, .container-form-main-button2:hover {
@@ -72,4 +72,43 @@
 .disabled {
   cursor: not-allowed;
   opacity: 0.75;
+}
+
+@media screen and ( min-width : 500px ) {
+
+  .trivia-logo {
+    width: 85%;
+  }
+
+  .container-form-main-label1-input1, .container-form-main-label2-input1 {
+    font-size: 20px;
+  }
+
+  .container-form-main-button1, .container-form-main-button2 {
+    font-size: 16px;
+    width: 40%;
+  }
+}
+
+@media screen and ( min-width : 1000px ) {
+
+  .trivia-logo {
+    width: 75%;
+  }
+
+  .container-form-main-label1-input1, .container-form-main-label2-input1 {
+    font-size: 24px;
+  }
+
+  .container-form-main-button1, .container-form-main-button2 {
+    font-size: 20px;
+    width: 35%;
+  }
+}
+
+@media screen and ( min-width : 1500px ) {
+
+  .trivia-logo {
+    width: 65%;
+  }
 }
