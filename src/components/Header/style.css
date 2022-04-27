@@ -10,26 +10,30 @@
 }
 
 .player-img {
-  border: 4px solid #c9c9c9;
+  border: 2px solid #c9c9c9;
   border-radius: 100%;
-  margin: 10px 60px;
-  width: 160px;
+  margin: 10px;
+  width: 80px;
 }
 
 .player-name {
   background-color: #c9c9c9;
   border-radius: 15px;
-  margin: 0 25px;
-  padding: 13px 40px;
+  font-size: 18px;
+  margin: 0 auto;
+  padding: 5px;
+  text-align: center;
+  width: 130px;
 }
 
 .player-score {
   background-color: #c9c9c9;
   border-radius: 12px;
-  margin: 5px;
-  padding: 8px 25px;
+  font-size: 15px;
+  margin: 0 10px;
+  padding: 5px;
   text-align: center;
-  width: 210px;
+  width: 100px;
 }
 
 .player-score span {
@@ -98,4 +102,56 @@
   font-size: 20px;
   padding: 12px;
   text-align: center;
+}
+
+@media screen and ( min-width : 500px ) {
+
+  .player-img {
+    border-width: 4px;
+    margin: 10px 25px;
+    width: 120px;
+  }
+
+  .player-name {
+    font-size: 23px;
+    padding: 13px 20px;
+    width: 180px;
+  }
+
+  .player-score {
+    font-size: 18px;
+    margin: 0 25px;
+    padding: 8px 20px;
+    width: 150px;
+  }
+}
+
+@media screen and ( min-width : 1000px ) {
+
+  .player-img {
+    margin: 10px 60px;
+    width: 160px;
+  }
+
+  .player-name {
+    font-size: 35px;
+    padding: 13px 30px;
+    width: auto;
+  }
+
+  .player-score {
+    font-size: 22px;
+    margin: 0 60px;
+    padding: 8px 25px;
+    width: 250px;
+  }
+}
+
+@media screen and ( min-width : 1500px ) {
+
+  .player-name {
+    font-size: 40px;
+    padding: 13px 40px;
+    width: auto;
+  }
 }
