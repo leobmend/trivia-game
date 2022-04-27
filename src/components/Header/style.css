@@ -49,16 +49,16 @@
 .modal-on {
   align-items: center;
   background-color: #264653;
-  border: 1px solid black;
+  border: 1px solid #1a2f38;
   border-radius: 25px;
   color: whitesmoke;
   display: flex;
   flex-direction: column;
-  height: 10vw;
+  left: 10px;
   opacity: 1;
   position: absolute;
   transition-duration: 0.4s;
-  width: 15vw;
+  width: 80%;
   z-index: 1;
 }
 
@@ -99,7 +99,7 @@
 }
 
 .modal-p {
-  font-size: 20px;
+  font-size: 15px;
   padding: 12px;
   text-align: center;
 }
@@ -144,6 +144,17 @@
     margin: 0 60px;
     padding: 8px 25px;
     width: 250px;
+  }
+
+  .modal-on {
+    height: 10vw;
+    width: 30vw;
+  }
+
+  .modal-p {
+    font-size: 20px;
+    padding: 12px;
+    text-align: center;
   }
 }
 
