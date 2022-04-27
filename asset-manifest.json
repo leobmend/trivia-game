@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/trivia-game/static/css/main.8cdff81c.chunk.css",
-    "main.js": "/trivia-game/static/js/main.e069484c.chunk.js",
-    "main.js.map": "/trivia-game/static/js/main.e069484c.chunk.js.map",
+    "main.css": "/trivia-game/static/css/main.8d5acdb9.chunk.css",
+    "main.js": "/trivia-game/static/js/main.d01548e5.chunk.js",
+    "main.js.map": "/trivia-game/static/js/main.d01548e5.chunk.js.map",
     "runtime-main.js": "/trivia-game/static/js/runtime-main.4bc9de50.js",
     "runtime-main.js.map": "/trivia-game/static/js/runtime-main.4bc9de50.js.map",
     "static/js/2.f1c5d7e4.chunk.js": "/trivia-game/static/js/2.f1c5d7e4.chunk.js",
     "static/js/2.f1c5d7e4.chunk.js.map": "/trivia-game/static/js/2.f1c5d7e4.chunk.js.map",
     "index.html": "/trivia-game/index.html",
-    "precache-manifest.b1d6475751609c2dc41911946a427bfb.js": "/trivia-game/precache-manifest.b1d6475751609c2dc41911946a427bfb.js",
+    "precache-manifest.695b58e639503a4a118ca27847cd7538.js": "/trivia-game/precache-manifest.695b58e639503a4a118ca27847cd7538.js",
     "service-worker.js": "/trivia-game/service-worker.js",
-    "static/css/main.8cdff81c.chunk.css.map": "/trivia-game/static/css/main.8cdff81c.chunk.css.map",
+    "static/css/main.8d5acdb9.chunk.css.map": "/trivia-game/static/css/main.8d5acdb9.chunk.css.map",
     "static/js/2.f1c5d7e4.chunk.js.LICENSE.txt": "/trivia-game/static/js/2.f1c5d7e4.chunk.js.LICENSE.txt",
     "static/media/index.css": "/trivia-game/static/media/tile_background.9172729a.png",
     "static/media/trivia.png": "/trivia-game/static/media/trivia.466d153e.png"
@@ -18,7 +18,7 @@
   "entrypoints": [
     "static/js/runtime-main.4bc9de50.js",
     "static/js/2.f1c5d7e4.chunk.js",
-    "static/css/main.8cdff81c.chunk.css",
-    "static/js/main.e069484c.chunk.js"
+    "static/css/main.8d5acdb9.chunk.css",
+    "static/js/main.d01548e5.chunk.js"
   ]
 }
