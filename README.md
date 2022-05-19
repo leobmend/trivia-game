@@ -14,9 +14,13 @@ Além de fornecer a possibilidade do usuário jogar o jogo, a aplicação permit
 
 Por fim, ao finalizar uma partida, a aplicação salva as informações e produz um ranking dos jogadores que utilizaram a aplicação. É utilizado o [*local storage do navegador*](https://developer.mozilla.org/pt-BR/docs/Web/API/Window/localStorage) para armazenar e resgatar as informações das pontuações anteriores.
 
+## Testes automatizados
+
+A aplicação foi desenvolvida com testes de integração com cobertura de 95% de todo o código. Para tal, foram utilizados os frameworks *Jest* e *React Testing Library*.
+
 ## Teste você mesmo!
 
-A aplicação está em produção neste [em construção]. Caso queira, meus outros projetos estão disponíveis em meu [portfolio](https://leobmend.github.io). 
+A aplicação está em produção [aqui](https://leobmend.github.io/trivia-game/)! Caso se interesse, meus outros projetos estão disponíveis em meu [portfolio](https://leobmend.github.io). 
 
 ## Tecnologias
 
@@ -24,6 +28,7 @@ Durante o desenvolvimento da aplicação, foram utilizados:
 
 * React
 * Redux
+* Jest / RTL
 * Javascript 
 * HTML
 * CSS
