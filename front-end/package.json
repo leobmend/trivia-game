@@ -19,7 +19,7 @@
     "redux-thunk": "^2.3.0",
     "sanitize-html": "^2.7.0"
   },
-  "homepage": "https://leobmend.github.io/trivia-game",
+  "homepage": "https://trivia-game-front.herokuapp.com/",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
