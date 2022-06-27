@@ -33,7 +33,7 @@
     "test-coverage": "react-scripts test --coverage --watchAll=false",
     "lint:styles": "npx stylelint '**/*.css'",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js,.jsx",
-    "publishToHeroku": "cd ../ && git subtree push --prefix frontend heroku-app-frontend master || true"
+    "publishToHeroku": "cd ../ && git subtree push --prefix front-end heroku-front master || true"
   },
   "eslintConfig": {
     "extends": "react-app"
