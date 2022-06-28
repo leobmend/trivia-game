@@ -6,9 +6,11 @@ services:
     volumes: 
       - ./:/app
     container_name: trivia-back
+    tty: true
+    stdin_open: true
+    command: /bin/sh
     restart: always
     ports:
       - 3001:3001
     environment:
       - PORT=3001
-    command: npm run dev
