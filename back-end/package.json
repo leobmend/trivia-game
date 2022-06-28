@@ -6,12 +6,20 @@
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "publishToHeroku": "cd ../ && git subtree push --prefix back-end heroku-back master || true"
+    "dev": "nodemon index.js",
+    "publishToHeroku": "cd ../ && git subtree push --prefix back-end heroku-back master || true",
+    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.18.0",
+    "eslint-config-trybe-backend": "^1.0.4",
+    "eslint-plugin-sonarjs": "^0.13.0",
+    "nodemon": "^2.0.18"
   }
 }

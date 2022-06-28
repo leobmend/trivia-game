@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  node:
+    build: .
+    volumes: 
+      - ./:/app
+    container_name: trivia-back
+    restart: always
+    environment:
+      - PORT=3001
+    ports:
+      - 3001:3001
+    command: npm run dev
