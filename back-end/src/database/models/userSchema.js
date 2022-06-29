@@ -6,6 +6,8 @@ const userSchema = (sequelize, DataTypes) => {
       autoIncrement: true,
     },
     name: DataTypes.STRING,
+    admin: DataTypes.BOOLEAN,
+    active: DataTypes.BOOLEAN,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     gravatarUrl: DataTypes.STRING,
