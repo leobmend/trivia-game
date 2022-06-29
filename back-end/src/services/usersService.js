@@ -14,8 +14,21 @@ const authentication = async ({ email, password }) => {
   return jwtToken;
 };
 
+const create = async ({ name, email, password, gravatarUrl }) => {
+  const userByEmail = await User.findOne({ where: { email } });
+
+  if (userByEmail) throw new CustomError(409, 'The e-mail already exists');
+
+  const newUser = await User.create({ name, email, password, gravatarUrl });
+
+  const jwtToken = generateToken(newUser);
+
+  return jwtToken;
+};
+
 const usersService = {
   authentication,
+  create,
 };
 
 module.exports = usersService;
