@@ -11,9 +11,19 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
+      admin: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
+      active: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+      },
       email: {
         allowNull: false,
-        type:Sequelize.STRING,
+        type: Sequelize.STRING,
       },
       password: {
         allowNull: false,

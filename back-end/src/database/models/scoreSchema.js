@@ -18,7 +18,7 @@ const scoreSchema = (sequelize, DataTypes) => {
   });
 
   scoreModel.associate = (models) => {
-    configModel.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' });
+    scoreModel.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' });
   };
   
   return scoreModel;
