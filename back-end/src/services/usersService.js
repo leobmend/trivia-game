@@ -32,9 +32,36 @@ const create = async ({ name, email, password, gravatarUrl }) => {
   return jwtToken;
 };
 
+const update = async (id, { name, email, gravatarUrl }) => {
+  await checkIfUserExists(id);
+
+  const userByEmail = await User.findOne({ where: { email } });
+
+  if (userByEmail && userByEmail.id !== id) {
+    throw new CustomError(409, 'This e-mail already exists'); 
+  }
+
+  await User.update(
+    { name, email, gravatarUrl },
+    { where: { id } },
+  );
+
+  const updatedUser = { name, email, gravatarUrl };
+
+  return updatedUser;
+};
+
+const remove = async (id) => {
+  await checkIfUserExists(id);
+
+  await User.destroy({ where: { id } });
+};
+
 const usersService = {
   authentication,
   create,
+  update,
+  remove,
 };
 
 module.exports = usersService;
