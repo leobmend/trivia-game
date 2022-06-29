@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  node:
+    build: .
+    volumes: 
+      - ./:/app
+    container_name: trivia-front
+    tty: true
+    stdin_open: true
+    ports:
+      - 3000:3000
