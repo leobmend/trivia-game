@@ -3,9 +3,9 @@ const errorHandling = require('../controllers/middlewares/errorHandling');
 
 const routes = express.Router();
 
-// const usersRouter = require('./usersRouter');
+const loginRouter = require('./loginRouter');
 
-// routes.use(usersRouter);
+routes.use('/login', loginRouter);
 
 routes.use(errorHandling);
 
