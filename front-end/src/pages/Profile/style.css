@@ -1,0 +1,163 @@
+.Profile {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.title-container {
+  align-items: center;
+  background-color: #264653;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgb(92, 92, 92);
+  display: flex;
+  flex-direction: column;
+  height: 20vh;
+  justify-content: space-evenly;
+  text-align: center;
+  width: 90%;
+}
+
+.profile-title {
+  background-color: #c9c9c9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 black;
+  font-size: 35px;
+  padding: 5px 15px;
+}
+
+.home-button {
+  background-color: #2a9d8f;
+  border: 3px solid #2a9d8f;
+  border-radius: 5px;
+  box-shadow: 0 2px 2px 0 black;
+  color: whitesmoke;
+  font-size: 18px;
+  font-weight: 800;
+  padding: 3px 10px;
+  transition-duration: 0.4s;
+}
+
+.home-button:hover {
+  background-color: whitesmoke;
+  color: black;
+  transform: scale(1.1);
+}
+
+.profile-container {
+  background-color: #264653;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 65%;
+  justify-content: space-evenly;
+  margin: auto;
+  padding: 5px 25px;
+}
+
+.gravatar-container {
+  align-items: center;
+  background-color: whitesmoke;
+  border-radius: 7px;
+  display: flex;
+  padding: 10px;
+}
+
+.gravatar-container h2 {
+  margin-right: 10px;
+}
+
+.profile-player-img {
+  border: 2px solid #c9c9c9;
+  border-radius: 100%;
+  margin: auto;
+  width: 17vh;
+}
+
+.gravatar-anchor {
+  background-color: #264653;
+  border: 1px solid #1a2f38;
+  border-radius: 6px;
+  color: whitesmoke;
+  font-size: 12px;
+  left: 5px;
+  padding: 2px 6px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  top: -20px;
+}
+
+.info-container {
+  align-items: center;
+  background-color: whitesmoke;
+  border-radius: 7px;
+  display: flex;
+  padding: 10px;
+}
+
+.info-container p {
+  margin: auto;
+}
+
+.edit-input {
+  background-color: whitesmoke;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin: auto;
+  padding: 4px 5px;
+  text-align: center;
+  width: 60%;
+}
+
+.container-form-main-label1-input1::placeholder {
+  text-align: center;
+}
+
+.container-form-main-label2-input1::placeholder {
+  text-align: center;
+}
+
+@media screen and ( min-width : 500px ) {
+
+  .profile-title {
+    font-size: 45px;
+    padding: 5px 50px;
+  }
+
+  .home-button {
+    font-size: 22px;
+    padding: 3px 20px;
+  }
+
+  .profile-container {
+    width: 60%;
+  }
+}
+
+@media screen and ( min-width : 1000px ) {
+
+  .title-container {
+    height: 25vh;
+  }
+
+  .profile-title {
+    font-size: 55px;
+    padding: 5px 75px;
+  }
+}
+
+@media screen and ( min-width : 1500px ) {
+
+  .profile-title {
+    font-size: 65px;
+    padding: 5px 120px;
+  }
+
+  .home-button {
+    font-size: 25px;
+    padding: 3px 50px;
+  }
+}
