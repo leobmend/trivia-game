@@ -55,6 +55,7 @@
   justify-content: space-evenly;
   margin: auto;
   padding: 5px 25px;
+  width: 90%;
 }
 
 .gravatar-container {
@@ -112,11 +113,7 @@
   width: 60%;
 }
 
-.container-form-main-label1-input1::placeholder {
-  text-align: center;
-}
-
-.container-form-main-label2-input1::placeholder {
+.edit-input::placeholder {
   text-align: center;
 }
 
