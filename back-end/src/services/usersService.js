@@ -17,7 +17,7 @@ const authentication = async ({ email, password }) => {
 
   const jwtToken = generateToken(user);
 
-  return jwtToken;
+  return { jwtToken, name: user.name };
 };
 
 const create = async ({ name, email, password, gravatarUrl }) => {

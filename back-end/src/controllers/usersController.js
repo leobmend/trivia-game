@@ -5,9 +5,9 @@ const usersService = require('../services/usersService');
 const login = express(async (req, res, _next) => {
   const { email, password } = req.body;
 
-  const jwtToken = await usersService.authentication({ email, password });
+  const { jwtToken, name } = await usersService.authentication({ email, password });
 
-  res.status(200).json({ token: jwtToken });
+  res.status(200).json({ token: jwtToken, name });
 });
 
 const signUp = express(async (req, res, _next) => {
