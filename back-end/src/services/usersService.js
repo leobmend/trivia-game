@@ -17,7 +17,7 @@ const authentication = async ({ email, password }) => {
 
   const jwtToken = generateToken(user);
 
-  return { jwtToken, name: user.name };
+  return { jwtToken, id: user.id };
 };
 
 const create = async ({ name, email, password }) => {
@@ -29,7 +29,18 @@ const create = async ({ name, email, password }) => {
 
   const jwtToken = generateToken(newUser);
 
-  return jwtToken;
+  return { jwtToken, id: newUser.id };
+};
+
+const getById = async (id) => {
+  await checkIfUserExists(id);
+
+  const user = await User.findOne({
+    where: { id },
+    attributes: { exclude: ['password', 'admin', 'active'] }, 
+  });
+
+  return user;
 };
 
 const update = async (id, { name, email }) => {
@@ -60,6 +71,7 @@ const remove = async (id) => {
 const usersService = {
   authentication,
   create,
+  getById,
   update,
   remove,
 };

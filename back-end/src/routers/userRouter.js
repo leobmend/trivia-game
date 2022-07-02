@@ -13,6 +13,13 @@ userRouter.post(
   usersController.signUp,
 );
 
+userRouter.get(
+  '/:id',
+  userAuthentication,
+  userAuthorization,
+  usersController.getById,
+);
+
 userRouter.put(
   '/:id',
   userAuthentication,
