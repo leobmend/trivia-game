@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import triviaUsersAPI from '../services/triviaUsersAPI';
+import usersAPI from '../services/usersAPI';
 
 const initialState = {
   loading: false,
@@ -14,7 +14,7 @@ const initialState = {
 const fetchLogin = createAsyncThunk(
   'player/fetchLogin',
   async ({ email, password }) => {
-    const { token: userToken, name } = await triviaUsersAPI.login({ email, password });
+    const { token: userToken, name } = await usersAPI.login({ email, password });
     const info = { userToken, email, name };
     return info;
   },
@@ -23,7 +23,7 @@ const fetchLogin = createAsyncThunk(
 const fetchSignUp = createAsyncThunk(
   'player/fetchSignUp',
   async ({ email, password }) => {
-    const { token: userToken } = await triviaUsersAPI.signUp(
+    const { token: userToken } = await usersAPI.signUp(
       { email, password, name: 'Player' },
     );
     const info = { userToken, email, name: 'Player' };
