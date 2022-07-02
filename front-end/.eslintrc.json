@@ -14,6 +14,7 @@
         "sourceType": "module"
     },
     "rules": {
-        "react/no-did-mount-set-state": "off"
+        "react/no-did-mount-set-state": "off",
+        "react/jsx-max-depth": "off"
     }
 }
