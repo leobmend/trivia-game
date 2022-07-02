@@ -49,9 +49,7 @@ const LoginNew = () => {
         method="post"
         className="container-form-box"
       >
-        <header className="container-form-header">
-          <img src={ triviaLogo } alt="Trivia logo" className="trivia-logo" />
-        </header>
+        <img src={ triviaLogo } alt="Trivia logo" className="logo-login" />
 
         <main className="container-form-main">
           <label htmlFor="email" className="login-label">
