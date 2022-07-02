@@ -47,12 +47,9 @@ const LoginNew = () => {
         </header>
 
         <main className="container-form-main">
-          <label
-            htmlFor="email"
-            className="container-form-main-label1"
-          >
+          <label htmlFor="email" className="login-label">
             <input
-              className="container-form-main-label1-input1"
+              className="login-input"
               id="email"
               value={ email }
               onChange={ ({ target }) => setEmail(target.value) }
@@ -65,14 +62,13 @@ const LoginNew = () => {
             />
           </label>
 
-          <label htmlFor="password" className="container-form-main-label2">
+          <label htmlFor="password" className="login-label">
             <input
-              className="container-form-main-label2-input1"
+              className="login-input"
               id="password"
               value={ password }
               onChange={ ({ target }) => setPassword(target.value) }
               onKeyDown={ (event) => handleEnterKey(event) }
-              data-testid="input-player-name"
               type="text"
               placeholder="Password"
               name="password"
