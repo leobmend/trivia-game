@@ -8,6 +8,7 @@ import TriviaPage from './pages/Trivia';
 import FeedBackPage from './pages/FeedBack';
 import ProfilePage from './pages/Profile';
 import LoginNewPage from './pages/LoginNew';
+import LobbyPage from './pages/Lobby';
 
 export default function App() {
   return (
@@ -15,10 +16,11 @@ export default function App() {
       <Switch>
         <Route exact path="/" component={ LoginPage } />
         <Route path="/login" component={ LoginNewPage } />
+        <Route path="/lobby" component={ LobbyPage } />
         <Route path="/profile" component={ ProfilePage } />
         <Route path="/trivia" component={ TriviaPage } />
         <Route path="/ranking" component={ RankingPage } />
-        <Route path="/configuration" component={ ConfigurationPage } />
+        <Route path="/settings" component={ ConfigurationPage } />
         <Route path="/feedback" component={ FeedBackPage } />
       </Switch>
     </div>
