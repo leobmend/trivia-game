@@ -1,27 +1,32 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-// import { useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import triviaLogo from '../../images/trivia.png';
-import triviaUsersAPI from '../../services/triviaUsersAPI';
+import { fetchLogin, fetchSignUp } from '../../redux-test/player';
 import './style.css';
 
 const pattern = /^\w.+@\w.+[\w]$/;
 
 const LoginNew = () => {
-  /* state = {
-    gravatarEmail: '',
-    name: '',
-  } */
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSigningUp, setIsSigningUp] = useState(false);
 
-  // const history = useHistory();
+  const dispatch = useDispatch();
+  const player = useSelector((state) => state.player);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (player.info.userToken) {
+      if (player.info.name === 'Player') history.push('/profile');
+      else history.push('/ranking');
+    }
+  });
 
   const isDisabledButton = !(email.match(pattern) && password.length);
 
   const handleLogin = async () => {
-    console.log(await triviaUsersAPI.login({ email, password }));
+    dispatch(fetchLogin({ email, password }));
   };
 
   const handleEnterKey = (event) => {
@@ -30,10 +35,9 @@ const LoginNew = () => {
     }
   };
 
-  // const { gravatarEmail, name } = this.state;
-  // const { history } = this.props;
-
-  const handleSignUp = () => setIsSigningUp(false);
+  const handleSignUp = () => {
+    dispatch(fetchSignUp({ email, password }));
+  };
 
   return (
     <div className="container-form">
@@ -112,4 +116,4 @@ const LoginNew = () => {
   );
 };
 
-export default connect(null, null)(LoginNew);
+export default LoginNew;

@@ -5,13 +5,20 @@ const api = axios.create({
 });
 
 const login = async ({ email, password }) => (
-  api.post('/user/login', { email, password })
+  api.post('/login', { email, password })
+    .then((response) => response.data)
+    .catch((err) => console.log(err.message))
+);
+
+const signUp = async ({ name, email, password, gravatarUrl }) => (
+  api.post('/user/signup', { name, email, password, gravatarUrl })
     .then((response) => response.data)
     .catch((err) => console.log(err.message))
 );
 
 const triviaUsersAPI = {
   login,
+  signUp,
 };
 
 export default triviaUsersAPI;
