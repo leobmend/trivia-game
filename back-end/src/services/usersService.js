@@ -20,19 +20,19 @@ const authentication = async ({ email, password }) => {
   return { jwtToken, name: user.name };
 };
 
-const create = async ({ name, email, password, gravatarUrl }) => {
+const create = async ({ name, email, password }) => {
   const userByEmail = await User.findOne({ where: { email } });
 
   if (userByEmail) throw new CustomError(409, 'The e-mail already exists');
 
-  const newUser = await User.create({ name, email, password, gravatarUrl });
+  const newUser = await User.create({ name: name || 'Player', email, password });
 
   const jwtToken = generateToken(newUser);
 
   return jwtToken;
 };
 
-const update = async (id, { name, email, gravatarUrl }) => {
+const update = async (id, { name, email }) => {
   await checkIfUserExists(id);
 
   const userByEmail = await User.findOne({ where: { email } });
@@ -42,11 +42,11 @@ const update = async (id, { name, email, gravatarUrl }) => {
   }
 
   await User.update(
-    { name, email, gravatarUrl },
+    { name, email },
     { where: { id } },
   );
 
-  const updatedUser = { name, email, gravatarUrl };
+  const updatedUser = { name, email };
 
   return updatedUser;
 };

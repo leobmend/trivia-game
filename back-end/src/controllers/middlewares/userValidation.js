@@ -8,7 +8,6 @@ const newUserSchema = Joi.object(
     name: Joi.string().min(3).required(),
     email: Joi.string().regex(/\w.+@\w.+[.]\w.+/i).required(),
     password: Joi.string().min(6),
-    gravatarUrl: Joi.string().required(),
   },
 ).messages(
   {
@@ -20,8 +19,8 @@ const newUserSchema = Joi.object(
 );
 
 const userValidation = rescue((req, _res, next) => {
-  const { name, email, password, gravatarUrl } = req.body;
-  const { error } = newUserSchema.validate({ name, email, password, gravatarUrl });
+  const { name, email, password } = req.body;
+  const { error } = newUserSchema.validate({ name, email, password });
 
   if (error) throw new CustomError(400, error.message);
 

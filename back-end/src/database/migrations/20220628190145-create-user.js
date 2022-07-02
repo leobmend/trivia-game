@@ -29,11 +29,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      gravatarUrl: {
-        allowNull: false,
-        type: Sequelize.STRING,
-        field: 'gravatar_url',
-      },
     });
   },
   down: async (queryInterface, _Sequelize) => {

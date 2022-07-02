@@ -9,7 +9,6 @@ module.exports = {
         admin: true,
         email: process.env.API_ADMIN_EMAIL,
         password: process.env.API_ADMIN_PASSWORD,
-        gravatar_url: '...',
       },
       {
         id: 101,
@@ -17,7 +16,6 @@ module.exports = {
         admin: false,
         email: 'test@email.com',
         password: 'test123',
-        gravatar_url: '...',
       },
       ], { timestamps: false });
   },

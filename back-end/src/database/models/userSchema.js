@@ -10,7 +10,6 @@ const userSchema = (sequelize, DataTypes) => {
     active: DataTypes.BOOLEAN,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
-    gravatarUrl: DataTypes.STRING,
   },
   {
     timestamps: false,
