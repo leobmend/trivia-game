@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import triviaLogo from '../../images/trivia.png';
-import { fetchLogin, fetchSignUp } from '../../redux-test/player';
 import './style.css';
+
+import { fetchLogin, fetchSignUp } from '../../redux-test/player';
+import { fetchToken } from '../../redux-test/trivia';
 
 const pattern = /^\w.+@\w.+[\w]$/;
 
@@ -13,19 +15,19 @@ const LoginNew = () => {
   const [isSigningUp, setIsSigningUp] = useState(false);
 
   const dispatch = useDispatch();
-  const player = useSelector((state) => state.player);
+  const { userToken, name } = useSelector((state) => state.player.info);
+  const { token } = useSelector((state) => state.trivia);
   const history = useHistory();
 
-  useEffect(() => {
-    if (player.info.userToken) {
-      if (player.info.name === 'Player') history.push('/profile');
-      else history.push('/ranking');
-    }
-  });
+  if (userToken && token) {
+    if (name === 'Player') history.push('/profile');
+    else history.push('/lobby');
+  }
 
   const isDisabledButton = !(email.match(pattern) && password.length);
 
   const handleLogin = async () => {
+    dispatch(fetchToken());
     dispatch(fetchLogin({ email, password }));
   };
 
@@ -36,6 +38,7 @@ const LoginNew = () => {
   };
 
   const handleSignUp = () => {
+    dispatch(fetchToken());
     dispatch(fetchSignUp({ email, password }));
   };
 
