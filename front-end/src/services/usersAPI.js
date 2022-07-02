@@ -16,9 +16,9 @@ const signUp = async ({ name, email, password, gravatarUrl }) => (
     .catch((err) => console.log(err.message))
 );
 
-const triviaUsersAPI = {
+const usersAPI = {
   login,
   signUp,
 };
 
-export default triviaUsersAPI;
+export default usersAPI;
