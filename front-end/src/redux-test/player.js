@@ -5,6 +5,7 @@ const initialState = {
   loading: false,
   error: '',
   info: {
+    id: '',
     userToken: '',
     email: '',
     name: '',
@@ -14,8 +15,9 @@ const initialState = {
 const fetchLogin = createAsyncThunk(
   'player/fetchLogin',
   async ({ email, password }) => {
-    const { token: userToken, name } = await usersAPI.login({ email, password });
-    const info = { userToken, email, name };
+    const { token: userToken, id } = await usersAPI.login({ email, password });
+    const { name } = await usersAPI.getById(id, userToken);
+    const info = { id, userToken, email, name };
     return info;
   },
 );
@@ -23,10 +25,19 @@ const fetchLogin = createAsyncThunk(
 const fetchSignUp = createAsyncThunk(
   'player/fetchSignUp',
   async ({ email, password }) => {
-    const { token: userToken } = await usersAPI.signUp(
+    const { token: userToken, id } = await usersAPI.signUp(
       { email, password, name: 'Player' },
     );
-    const info = { userToken, email, name: 'Player' };
+    const info = { id, userToken, email, name: 'Player' };
+    return info;
+  },
+);
+
+const fetchEditUser = createAsyncThunk(
+  'player/fetchEditUser',
+  async ({ id, userToken, name, email }) => {
+    await usersAPI.update(id, userToken, { name, email });
+    const info = { id, userToken, email, name };
     return info;
   },
 );
@@ -35,14 +46,18 @@ const playerSlice = createSlice({
   name: 'player',
   initialState,
   extraReducers: (builder) => {
-    [fetchLogin, fetchSignUp].forEach((fetchFunc) => {
-      builder.addCase(fetchFunc.pending, (state) => { state.loading = true; });
+    [fetchLogin, fetchSignUp, fetchEditUser].forEach((fetchFunc) => {
+      builder.addCase(fetchFunc.pending, (state) => {
+        console.log(state);
+        state.loading = true;
+      });
       builder.addCase(fetchFunc.fulfilled, (state, action) => {
         state.loading = false;
         state.info = { ...action.payload };
         state.error = '';
       });
       builder.addCase(fetchFunc.rejected, (state, action) => {
+        console.log(state, action);
         state.loading = false;
         state.error = action.error.message;
       });
@@ -50,5 +65,5 @@ const playerSlice = createSlice({
   },
 });
 
-export { fetchLogin, fetchSignUp };
+export { fetchLogin, fetchSignUp, fetchEditUser };
 export default playerSlice.reducer;
