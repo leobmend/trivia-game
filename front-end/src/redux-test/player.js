@@ -48,7 +48,6 @@ const playerSlice = createSlice({
   extraReducers: (builder) => {
     [fetchLogin, fetchSignUp, fetchEditUser].forEach((fetchFunc) => {
       builder.addCase(fetchFunc.pending, (state) => {
-        console.log(state);
         state.loading = true;
       });
       builder.addCase(fetchFunc.fulfilled, (state, action) => {
