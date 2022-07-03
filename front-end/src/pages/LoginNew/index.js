@@ -1,27 +1,38 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-// import { useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import triviaLogo from '../../images/trivia.png';
-import triviaUsersAPI from '../../services/triviaUsersAPI';
 import './style.css';
+
+import { fetchLogin, fetchSignUp } from '../../redux-test/player';
+import { fetchToken } from '../../redux-test/trivia';
 
 const pattern = /^\w.+@\w.+[\w]$/;
 
 const LoginNew = () => {
-  /* state = {
-    gravatarEmail: '',
-    name: '',
-  } */
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSigningUp, setIsSigningUp] = useState(false);
 
-  // const history = useHistory();
+  const dispatch = useDispatch();
+  const { userToken, name } = useSelector((state) => state.player.info);
+  const { token } = useSelector((state) => state.trivia);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (userToken && token) {
+      if (name === 'Player') {
+        history.push('/profile');
+      }
+      history.push('/lobby');
+    }
+  });
 
   const isDisabledButton = !(email.match(pattern) && password.length);
 
   const handleLogin = async () => {
-    console.log(await triviaUsersAPI.login({ email, password }));
+    dispatch(fetchToken());
+    dispatch(fetchLogin({ email, password }));
   };
 
   const handleEnterKey = (event) => {
@@ -30,10 +41,14 @@ const LoginNew = () => {
     }
   };
 
-  // const { gravatarEmail, name } = this.state;
-  // const { history } = this.props;
-
-  const handleSignUp = () => setIsSigningUp(false);
+  const handleSignUp = () => {
+    if (isSigningUp) {
+      dispatch(fetchToken());
+      dispatch(fetchSignUp({ email, password }));
+    } else {
+      setIsSigningUp(true);
+    }
+  };
 
   return (
     <div className="container-form">
@@ -42,17 +57,12 @@ const LoginNew = () => {
         method="post"
         className="container-form-box"
       >
-        <header className="container-form-header">
-          <img src={ triviaLogo } alt="Trivia logo" className="trivia-logo" />
-        </header>
+        <img src={ triviaLogo } alt="Trivia logo" className="logo-login" />
 
         <main className="container-form-main">
-          <label
-            htmlFor="email"
-            className="container-form-main-label1"
-          >
+          <label htmlFor="email" className="login-label">
             <input
-              className="container-form-main-label1-input1"
+              className="login-input"
               id="email"
               value={ email }
               onChange={ ({ target }) => setEmail(target.value) }
@@ -65,14 +75,13 @@ const LoginNew = () => {
             />
           </label>
 
-          <label htmlFor="password" className="container-form-main-label2">
+          <label htmlFor="password" className="login-label">
             <input
-              className="container-form-main-label2-input1"
+              className="login-input"
               id="password"
               value={ password }
               onChange={ ({ target }) => setPassword(target.value) }
               onKeyDown={ (event) => handleEnterKey(event) }
-              data-testid="input-player-name"
               type="text"
               placeholder="Password"
               name="password"
@@ -98,13 +107,7 @@ const LoginNew = () => {
           <button
             className="container-form-main-button2"
             type="button"
-            onClick={ () => {
-              if (isSigningUp) {
-                handleSignUp();
-              } else {
-                setIsSigningUp(true);
-              }
-            } }
+            onClick={ handleSignUp }
           >
             {isSigningUp ? 'Confirm Sign Up' : 'Sign Up'}
           </button>
@@ -116,4 +119,4 @@ const LoginNew = () => {
   );
 };
 
-export default connect(null, null)(LoginNew);
+export default LoginNew;
