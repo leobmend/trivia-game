@@ -14,11 +14,18 @@ userRouter.post(
   usersController.signUp,
 );
 
+// Have to be refactored to become a route for admin use
 userRouter.get(
   '/:id',
   userAuthentication,
   userAuthorization,
   usersController.getById,
+);
+
+userRouter.get(
+  '/',
+  userAuthentication,
+  usersController.getByTokenId,
 );
 
 userRouter.put(

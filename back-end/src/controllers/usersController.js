@@ -26,6 +26,14 @@ const getById = express(async (req, res, _next) => {
   res.status(200).json(user);
 });
 
+const getByTokenId = express(async (req, res, _next) => {
+  const { id } = req.user;
+
+  const user = await usersService.getById(id);
+
+  res.status(200).json(user);
+});
+
 const update = express(async (req, res, _next) => {
   const { id } = req.params;
   const { name, email } = req.body;
@@ -59,6 +67,7 @@ const usersController = {
   login,
   signUp,
   getById,
+  getByTokenId,
   update,
   changePassword,
   remove,
