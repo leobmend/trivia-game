@@ -5,18 +5,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import './style.css';
 
 import getGravatar from '../../services/gravatar';
-import { fetchEditUser } from '../../redux-test/player';
+import {
+  fetchEditUser, fetchEditPassword, editPassword, editUser,
+} from '../../redux-test/player';
 import ProfileInfoContainer from '../../components/ProfileInfoContainer';
 
 const Profile = () => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [isPasswordEditing, setIsPasswordEditing] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password1, setPassword1] = useState('');
   const [password2, setPassword2] = useState('');
 
-  const { info: player, loading: isLoading } = useSelector((state) => state.player);
+  const { info: player, editing } = useSelector((state) => state.player);
   const dispatch = useDispatch();
 
   const history = useHistory();
@@ -28,24 +28,27 @@ const Profile = () => {
   });
 
   const handleClick = () => {
-    history.push('/');
+    history.push('/login');
   };
 
   const handleEdit = () => {
-    if (isEditing) {
+    if (editing === 'user') {
       const newName = name || player.name;
       const newEmail = email || player.email;
-      dispatch(fetchEditUser(
+      return dispatch(fetchEditUser(
         { id: player.id, userToken: player.userToken, name: newName, email: newEmail },
       ));
-      setIsEditing(false);
-    } else setIsEditing(true);
+    }
+    dispatch(editUser());
   };
 
-  const handleEditPassword = () => {
-    if (isPasswordEditing) {
-      console.log(1);
-    } else setIsPasswordEditing(true);
+  const handleEditPassword = async () => {
+    if (editing === 'password') {
+      return dispatch(fetchEditPassword(
+        { id: player.id, userToken: player.userToken, password: password1 },
+      ));
+    }
+    dispatch(editPassword());
   };
 
   return (
@@ -84,25 +87,26 @@ const Profile = () => {
           states={ { name, email, password1, password2 } }
           currValues={ { currName: player.name, currEmail: player.email } }
           setStateFuncs={ { setName, setEmail, setPassword1, setPassword2 } }
-          switchers={ { isEditing, isPasswordEditing, isLoading } }
         />
         <button
-          className={ `home-button ${isEditing && 'editing'}` }
+          className={ `home-button ${editing === 'user' && 'editing-btn'}` }
           data-testid="btn-go-home"
           type="button"
-          disabled={ isPasswordEditing }
+          disabled={ editing === 'password' }
           onClick={ handleEdit }
         >
-          {`${isEditing ? 'Confirm ' : ''}Edit name / e-mail`}
+          {`${editing === 'user' ? 'Confirm ' : ''}Edit name / e-mail`}
         </button>
         <button
-          className="home-button"
+          className={ `home-button ${editing === 'password' && 'editing-btn'}` }
           data-testid="btn-go-home"
           type="button"
-          disabled={ isEditing }
+          disabled={
+            editing === 'user' || (editing === 'password' && password1 !== password2)
+          }
           onClick={ handleEditPassword }
         >
-          Change password
+          {`${editing === 'password' ? 'Confirm ' : ''}Change password`}
         </button>
       </section>
     </main>
