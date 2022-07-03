@@ -6,13 +6,17 @@ import './style.css';
 
 import getGravatar from '../../services/gravatar';
 import { fetchEditUser } from '../../redux-test/player';
+import ProfileInfoContainer from '../../components/ProfileInfoContainer';
 
 const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
-  const [email, setEmail] = useState('');
+  const [isPasswordEditing, setIsPasswordEditing] = useState(false);
   const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password1, setPassword1] = useState('');
+  const [password2, setPassword2] = useState('');
 
-  const player = useSelector((state) => state.player.info);
+  const { info: player, loading: isLoading } = useSelector((state) => state.player);
   const dispatch = useDispatch();
 
   const history = useHistory();
@@ -34,18 +38,15 @@ const Profile = () => {
       dispatch(fetchEditUser(
         { id: player.id, userToken: player.userToken, name: newName, email: newEmail },
       ));
-    } else setIsEditing(!isEditing);
+      setIsEditing(false);
+    } else setIsEditing(true);
   };
 
-  const renderInput = (current, state, setFunc) => (
-    <input
-      type="text"
-      className="edit-input"
-      value={ state }
-      placeholder={ current }
-      onChange={ ({ target }) => setFunc(target.value) }
-    />
-  );
+  const handleEditPassword = () => {
+    if (isPasswordEditing) {
+      console.log(1);
+    } else setIsPasswordEditing(true);
+  };
 
   return (
     <main className="Profile">
@@ -79,26 +80,17 @@ const Profile = () => {
             alt="Gravatar profile"
           />
         </div>
-        <div className="info-container">
-          <h2>Name</h2>
-          {
-            isEditing
-              ? renderInput(player.name, name, setName)
-              : <p>{ player.name }</p>
-          }
-        </div>
-        <div className="info-container">
-          <h2>E-mail</h2>
-          {
-            isEditing
-              ? renderInput(player.email, email, setEmail)
-              : <p>{ player.email }</p>
-          }
-        </div>
+        <ProfileInfoContainer
+          states={ { name, email, password1, password2 } }
+          currValues={ { currName: player.name, currEmail: player.email } }
+          setStateFuncs={ { setName, setEmail, setPassword1, setPassword2 } }
+          switchers={ { isEditing, isPasswordEditing, isLoading } }
+        />
         <button
           className={ `home-button ${isEditing && 'editing'}` }
           data-testid="btn-go-home"
           type="button"
+          disabled={ isPasswordEditing }
           onClick={ handleEdit }
         >
           {`${isEditing ? 'Confirm ' : ''}Edit name / e-mail`}
@@ -107,7 +99,8 @@ const Profile = () => {
           className="home-button"
           data-testid="btn-go-home"
           type="button"
-          onClick={ () => {} }
+          disabled={ isEditing }
+          onClick={ handleEditPassword }
         >
           Change password
         </button>

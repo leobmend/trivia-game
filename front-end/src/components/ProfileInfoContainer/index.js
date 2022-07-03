@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import './style.css';
 
 const ProfileInfoContainer = ({
-  states: { name, email, password },
+  states: { name, email, password1, password2 },
   currValues: { currName, currEmail },
-  setStateFuncs: { setName, setEmail, setPassword },
+  setStateFuncs: { setName, setEmail, setPassword1, setPassword2 },
   switchers: { isEditing, isPasswordEditing, isLoading },
 }) => (
   isPasswordEditing
@@ -14,16 +14,16 @@ const ProfileInfoContainer = ({
         <input
           type="text"
           className="edit-input edit-password"
-          value={ password }
+          value={ password1 }
           placeholder="Password"
-          onChange={ ({ target }) => setPassword(target.value) }
+          onChange={ ({ target }) => setPassword1(target.value) }
         />
         <input
           type="text"
           className="edit-input edit-password"
-          value={ password }
+          value={ password2 }
           placeholder="Confirm Password"
-          onChange={ ({ target }) => setPassword(target.value) }
+          onChange={ ({ target }) => setPassword2(target.value) }
         />
       </div>
     ) : (
