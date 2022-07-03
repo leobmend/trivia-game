@@ -6,8 +6,7 @@ import './style.css';
 
 import getGravatar from '../../services/gravatar';
 import {
-  fetchEditUser, fetchEditPassword, editPassword, editUser,
-} from '../../redux-test/player';
+  fetchEditUser, fetchEditPassword, setEditing } from '../../redux-test/player';
 import ProfileInfoContainer from '../../components/ProfileInfoContainer';
 
 const Profile = () => {
@@ -39,7 +38,7 @@ const Profile = () => {
         { id: player.id, userToken: player.userToken, name: newName, email: newEmail },
       ));
     }
-    dispatch(editUser());
+    dispatch(setEditing('user'));
   };
 
   const handleEditPassword = async () => {
@@ -48,7 +47,7 @@ const Profile = () => {
         { id: player.id, userToken: player.userToken, password: password1 },
       ));
     }
-    dispatch(editPassword());
+    dispatch(setEditing('password'));
   };
 
   return (
@@ -79,7 +78,7 @@ const Profile = () => {
           </h2>
           <img
             className="profile-player-img"
-            src={ getGravatar('') }
+            src={ getGravatar(player.email) }
             alt="Gravatar profile"
           />
         </div>

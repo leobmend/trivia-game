@@ -54,8 +54,8 @@ const playerSlice = createSlice({
   name: 'player',
   initialState,
   reducers: {
-    editUser: (state) => { state.editing = 'user'; },
-    editPassword: (state) => { state.editing = 'password'; },
+    setEditing: (state, action) => { state.editing = action.payload; },
+    setUserToken: (state, action) => { state.info.userToken = action.payload; },
   },
   extraReducers: (builder) => {
     [fetchLogin, fetchSignUp, fetchEditUser, fetchEditPassword].forEach((fetchFunc) => {
@@ -78,5 +78,5 @@ const playerSlice = createSlice({
 });
 
 export { fetchLogin, fetchSignUp, fetchEditUser, fetchEditPassword };
-export const { editUser, editPassword } = playerSlice.actions;
+export const { setEditing, setUserToken } = playerSlice.actions;
 export default playerSlice.reducer;
