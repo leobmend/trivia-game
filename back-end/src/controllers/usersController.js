@@ -38,6 +38,15 @@ const update = express(async (req, res, _next) => {
   res.status(200).json(updatedUser);
 });
 
+const changePassword = express(async (req, res, _next) => {
+  const { id } = req.params;
+  const { password } = req.body;
+
+  await usersService.updatePassword(parseInt(id, 10), { password });
+
+  res.status(200).end();
+});
+
 const remove = express(async (req, res, _next) => {
   const { id } = req.params;
   
@@ -51,6 +60,7 @@ const usersController = {
   signUp,
   getById,
   update,
+  changePassword,
   remove,
 };
 

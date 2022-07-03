@@ -6,6 +6,8 @@ const checkIfUserExists = async (id) => {
   const oldUser = await User.findByPk(id);
 
   if (!oldUser) throw new CustomError(404, 'User does not exist');
+
+  return oldUser;
 };
 
 const authentication = async ({ email, password }) => {
@@ -62,6 +64,17 @@ const update = async (id, { name, email }) => {
   return updatedUser;
 };
 
+const updatePassword = async (id, { password }) => {
+  const oldUser = await checkIfUserExists(id);
+
+  if (oldUser.password !== password) {
+    await User.update(
+      { password },
+      { where: { id } },
+    );
+  }
+};
+
 const remove = async (id) => {
   await checkIfUserExists(id);
 
@@ -73,6 +86,7 @@ const usersService = {
   create,
   getById,
   update,
+  updatePassword,
   remove,
 };
 
