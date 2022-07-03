@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import triviaLogo from '../../images/trivia.png';
 
@@ -6,6 +7,13 @@ import './style.css';
 
 const Lobby = () => {
   const history = useHistory();
+  const player = useSelector((state) => state.player.info);
+
+  useEffect(() => {
+    if (!player.userToken) {
+      history.push('/login');
+    }
+  });
 
   return (
     <main className="Lobby">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import triviaLogo from '../../images/trivia.png';
@@ -19,10 +19,14 @@ const LoginNew = () => {
   const { token } = useSelector((state) => state.trivia);
   const history = useHistory();
 
-  if (userToken && token) {
-    if (name === 'Player') history.push('/profile');
-    else history.push('/lobby');
-  }
+  useEffect(() => {
+    if (userToken && token) {
+      if (name === 'Player') {
+        history.push('/profile');
+      }
+      history.push('/lobby');
+    }
+  });
 
   const isDisabledButton = !(email.match(pattern) && password.length);
 
@@ -38,8 +42,12 @@ const LoginNew = () => {
   };
 
   const handleSignUp = () => {
-    dispatch(fetchToken());
-    dispatch(fetchSignUp({ email, password }));
+    if (isSigningUp) {
+      dispatch(fetchToken());
+      dispatch(fetchSignUp({ email, password }));
+    } else {
+      setIsSigningUp(true);
+    }
   };
 
   return (
@@ -99,13 +107,7 @@ const LoginNew = () => {
           <button
             className="container-form-main-button2"
             type="button"
-            onClick={ () => {
-              if (isSigningUp) {
-                handleSignUp();
-              } else {
-                setIsSigningUp(true);
-              }
-            } }
+            onClick={ handleSignUp }
           >
             {isSigningUp ? 'Confirm Sign Up' : 'Sign Up'}
           </button>

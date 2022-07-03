@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
 import './style.css';
 
 import getGravatar from '../../services/gravatar';
@@ -16,16 +17,24 @@ const Profile = () => {
 
   const history = useHistory();
 
+  useEffect(() => {
+    if (!player.userToken) {
+      history.push('/login');
+    }
+  });
+
   const handleClick = () => {
     history.push('/');
   };
 
   const handleEdit = () => {
-    const newName = name || player.name;
-    const newEmail = email || player.email;
-    dispatch(fetchEditUser(
-      { id: player.id, userToken: player.userToken, name: newName, email: newEmail },
-    ));
+    if (isEditing) {
+      const newName = name || player.name;
+      const newEmail = email || player.email;
+      dispatch(fetchEditUser(
+        { id: player.id, userToken: player.userToken, name: newName, email: newEmail },
+      ));
+    } else setIsEditing(!isEditing);
   };
 
   const renderInput = (current, state, setFunc) => (
@@ -90,10 +99,7 @@ const Profile = () => {
           className={ `home-button ${isEditing && 'editing'}` }
           data-testid="btn-go-home"
           type="button"
-          onClick={ () => {
-            if (isEditing) handleEdit();
-            else setIsEditing(!isEditing);
-          } }
+          onClick={ handleEdit }
         >
           {`${isEditing ? 'Confirm ' : ''}Edit name / e-mail`}
         </button>
