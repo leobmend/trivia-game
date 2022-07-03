@@ -17,22 +17,18 @@ const fetchToken = createAsyncThunk(
   },
 );
 
-// const fetchSignUp = createAsyncThunk(
-//   'player/fetchSignUp',
-//   async ({ email, password }) => {
-//     const { token: userToken } = await triviaAPI.signUp(
-//       { email, password, name: 'Player' },
-//     );
-//     const info = { userToken, email, name: 'Player' };
-//     return info;
-//   },
-// );
-
 const triviaSlice = createSlice({
   name: 'trivia',
   initialState,
+  reducers: {
+    setToken: (state, action) => {
+      state.token = action.payload;
+    },
+  },
   extraReducers: (builder) => {
-    builder.addCase(fetchToken.pending, (state) => { state.loading = true; });
+    builder.addCase(fetchToken.pending, (state) => {
+      state.loading = true;
+    });
     builder.addCase(fetchToken.fulfilled, (state, action) => {
       state.loading = false;
       state.token = action.payload;
@@ -46,4 +42,5 @@ const triviaSlice = createSlice({
 });
 
 export { fetchToken };
+export const { setToken } = triviaSlice.actions;
 export default triviaSlice.reducer;
