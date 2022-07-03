@@ -1,0 +1,10 @@
+.password-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-password {
+  margin: 10px auto;
+  padding: 8px;
+  width: 80%;
+}
