@@ -4,6 +4,7 @@ import usersAPI from '../services/usersAPI';
 const initialState = {
   loading: false,
   error: '',
+  editing: '',
   info: {
     id: '',
     userToken: '',
@@ -42,27 +43,40 @@ const fetchEditUser = createAsyncThunk(
   },
 );
 
+const fetchEditPassword = createAsyncThunk(
+  'player/fetchEditPassword',
+  async ({ id, userToken, password }) => {
+    await usersAPI.updatePassword(id, userToken, { password });
+  },
+);
+
 const playerSlice = createSlice({
   name: 'player',
   initialState,
+  reducers: {
+    editUser: (state) => { state.editing = 'user'; },
+    editPassword: (state) => { state.editing = 'password'; },
+  },
   extraReducers: (builder) => {
-    [fetchLogin, fetchSignUp, fetchEditUser].forEach((fetchFunc) => {
+    [fetchLogin, fetchSignUp, fetchEditUser, fetchEditPassword].forEach((fetchFunc) => {
       builder.addCase(fetchFunc.pending, (state) => {
         state.loading = true;
       });
       builder.addCase(fetchFunc.fulfilled, (state, action) => {
         state.loading = false;
-        state.info = { ...action.payload };
+        if (action.payload) state.info = { ...action.payload };
         state.error = '';
+        state.editing = '';
       });
       builder.addCase(fetchFunc.rejected, (state, action) => {
-        console.log(state, action);
         state.loading = false;
         state.error = action.error.message;
+        state.editing = '';
       });
     });
   },
 });
 
-export { fetchLogin, fetchSignUp, fetchEditUser };
+export { fetchLogin, fetchSignUp, fetchEditUser, fetchEditPassword };
+export const { editUser, editPassword } = playerSlice.actions;
 export default playerSlice.reducer;
