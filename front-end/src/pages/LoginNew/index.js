@@ -5,7 +5,8 @@ import triviaLogo from '../../images/trivia.png';
 import './style.css';
 
 import { fetchLogin, fetchSignUp } from '../../redux-test/player';
-import { fetchToken } from '../../redux-test/trivia';
+import { setLocalStorage, useTokensLocalStorage } from '../../services/localStorage';
+import Loading from '../Loading';
 
 const pattern = /^\w.+@\w.+[\w]$/;
 
@@ -14,41 +15,40 @@ const LoginNew = () => {
   const [password, setPassword] = useState('');
   const [isSigningUp, setIsSigningUp] = useState(false);
 
-  const dispatch = useDispatch();
   const { userToken, name } = useSelector((state) => state.player.info);
   const { token } = useSelector((state) => state.trivia);
+  const { value: isLoading } = useSelector((state) => state.loading);
+
+  const dispatch = useDispatch();
   const history = useHistory();
+
+  useTokensLocalStorage();
 
   useEffect(() => {
     if (userToken && token) {
-      if (name === 'Player') {
-        history.push('/profile');
-      }
       history.push('/lobby');
     }
-  });
+  }, [userToken, token, history, name]);
 
   const isDisabledButton = !(email.match(pattern) && password.length);
 
   const handleLogin = async () => {
-    dispatch(fetchToken());
-    dispatch(fetchLogin({ email, password }));
+    dispatch(fetchLogin({ setLocalStorage, email, password }));
   };
 
   const handleEnterKey = (event) => {
-    if (event.key === 'Enter' && !isDisabledButton) {
-      handleLogin();
-    }
+    if (event.key === 'Enter' && !isDisabledButton) handleLogin();
   };
 
   const handleSignUp = () => {
     if (isSigningUp) {
-      dispatch(fetchToken());
-      dispatch(fetchSignUp({ email, password }));
+      dispatch(fetchSignUp({ setLocalStorage, email, password }));
     } else {
       setIsSigningUp(true);
     }
   };
+
+  if (isLoading) return <Loading />;
 
   return (
     <div className="container-form">
