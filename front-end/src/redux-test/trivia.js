@@ -20,11 +20,6 @@ const fetchToken = createAsyncThunk(
 const triviaSlice = createSlice({
   name: 'trivia',
   initialState,
-  reducers: {
-    setToken: (state, action) => {
-      state.token = action.payload;
-    },
-  },
   extraReducers: (builder) => {
     builder.addCase(fetchToken.pending, (state) => {
       state.loading = true;
