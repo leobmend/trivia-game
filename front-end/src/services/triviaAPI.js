@@ -10,8 +10,16 @@ const getToken = async () => (
     .catch((err) => console.log(err.message))
 );
 
+const getQuestions = async ({ token, category, difficulty, type }) => (
+  api.get(`/api.php?amount=5&token=${token}&category=${category || ''}`
+    + `&difficulty=${difficulty || ''}&type=${type || ''}`)
+    .then((response) => response.data)
+    .catch((err) => console.log(err.message))
+);
+
 const triviaUsersAPI = {
   getToken,
+  getQuestions,
 };
 
 export default triviaUsersAPI;
