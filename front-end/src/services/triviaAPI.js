@@ -17,9 +17,16 @@ const getQuestions = async ({ token, category, difficulty, type }) => (
     .catch((err) => console.log(err.message))
 );
 
+const getCategories = async () => (
+  api.get('api_category.php')
+    .then((response) => response.data)
+    .catch((err) => console.log(err.message))
+);
+
 const triviaUsersAPI = {
   getToken,
   getQuestions,
+  getCategories,
 };
 
 export default triviaUsersAPI;
