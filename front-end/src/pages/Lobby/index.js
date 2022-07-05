@@ -1,28 +1,20 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import triviaLogo from '../../images/trivia.png';
-import { fetchToken } from '../../redux-test/trivia';
 import { useTokensLocalStorage } from '../../services/localStorage';
+import Loading from '../Loading';
 
 import './style.css';
 
 const Lobby = () => {
-  const { token } = useSelector((state) => state.trivia);
-  const { info: { userToken }, loading } = useSelector((state) => state.player);
+  const { value: isLoading } = useSelector((state) => state.loading);
 
-  const dispatch = useDispatch();
   const history = useHistory();
 
   useTokensLocalStorage();
 
-  useEffect(() => {
-    if (!userToken && !loading) {
-      history.push('/login');
-    } else if (!token) {
-      dispatch(fetchToken());
-    }
-  });
+  if (isLoading) return <Loading />;
 
   return (
     <main className="Lobby">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -8,6 +8,8 @@ import getGravatar from '../../services/gravatar';
 import {
   fetchEditUser, fetchEditPassword, setEditing } from '../../redux-test/player';
 import ProfileInfoContainer from '../../components/ProfileInfoContainer';
+import Loading from '../Loading';
+import { useTokensLocalStorage } from '../../services/localStorage';
 
 const Profile = () => {
   const [name, setName] = useState('');
@@ -16,15 +18,12 @@ const Profile = () => {
   const [password2, setPassword2] = useState('');
 
   const { info: player, editing } = useSelector((state) => state.player);
+  const { value: isLoading } = useSelector((state) => state.loading);
   const dispatch = useDispatch();
 
   const history = useHistory();
 
-  useEffect(() => {
-    if (!player.userToken) {
-      history.push('/login');
-    }
-  });
+  useTokensLocalStorage();
 
   const handleClick = () => {
     history.push('/login');
@@ -49,6 +48,8 @@ const Profile = () => {
     }
     dispatch(setEditing('password'));
   };
+
+  if (isLoading) return <Loading />;
 
   return (
     <main className="Profile">

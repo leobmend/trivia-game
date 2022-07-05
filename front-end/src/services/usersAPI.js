@@ -19,7 +19,7 @@ const signUp = async ({ name, email, password, gravatarUrl }) => (
 const getById = async (userToken) => (
   api.get('/user', { headers: { Authorization: userToken } })
     .then(({ data, status }) => ({ data, status }))
-    .catch((err) => err.message)
+    .catch(({ response: { status } }) => ({ status }))
 );
 
 const update = async (id, userToken, { name, email }) => (
