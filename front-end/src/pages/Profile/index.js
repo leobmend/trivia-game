@@ -6,7 +6,7 @@ import ProfileInfoContainer from '../../components/ProfileInfoContainer';
 
 import './style.css';
 
-import useTokensLocalStorage from '../../services/myHooks';
+import { useTokensLocalStorage } from '../../services/myHooks';
 import { fetchEditUser, fetchEditPassword, setEditing, setLogout,
 } from '../../redux-test/player';
 import { setLocalStorage } from '../../services/localStorage';

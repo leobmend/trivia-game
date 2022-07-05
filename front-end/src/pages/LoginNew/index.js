@@ -7,7 +7,7 @@ import './style.css';
 
 import { fetchLogin, fetchSignUp } from '../../redux-test/player';
 import { setLocalStorage } from '../../services/localStorage';
-import useTokensLocalStorage from '../../services/myHooks';
+import { useTokensLocalStorage } from '../../services/myHooks';
 import Loading from '../Loading';
 
 const pattern = /^\w.+@\w.+[\w]$/;

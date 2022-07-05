@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import triviaLogo from '../../images/trivia.png';
-import useTokensLocalStorage from '../../services/myHooks';
+import { useTokensLocalStorage } from '../../services/myHooks';
 import Loading from '../Loading';
 
 import './style.css';
@@ -28,7 +28,7 @@ const Lobby = () => {
             <button
               className="configs-button"
               type="button"
-              onClick={ () => {} }
+              onClick={ () => { history.push('/newtrivia'); } }
             >
               Play
             </button>
