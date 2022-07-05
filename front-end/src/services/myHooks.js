@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { setLoading } from '../redux-test/loading';
 import { fetchGetInfo } from '../redux-test/player';
-import { fetchToken } from '../redux-test/trivia';
+import { fetchQuestions, fetchToken } from '../redux-test/trivia';
 import { getLocalStorage } from './localStorage';
 
 const HTTP_UNAUTHORIZED = 401;
@@ -43,4 +43,19 @@ const useTokensLocalStorage = () => {
   }
 };
 
-export default useTokensLocalStorage;
+const useQuestions = () => {
+  const dispatch = useDispatch();
+
+  const {
+    token, questions, loading: isTriviaLoading,
+  } = useSelector((state) => state.trivia);
+  const { userToken } = useSelector((state) => state.player.info);
+  const { value: isLoading } = useSelector((state) => state.loading);
+  // const { category, difficulty, type } = useSelector((state) => state.settings)
+
+  if (token && userToken && !isLoading && !isTriviaLoading && !questions.length) {
+    dispatch(fetchQuestions({ token/* , category, difficulty, type */ }));
+  }
+};
+
+export { useQuestions, useTokensLocalStorage };
