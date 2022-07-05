@@ -31,14 +31,14 @@ const ProfileInfoContainer = ({
       <div className="info-container password-container">
         <input
           type="text"
-          className="edit-input edit-password"
+          className="edit-password"
           value={ isLoading ? LOADING : password1 }
           placeholder="Password"
           onChange={ ({ target }) => setPassword1(target.value) }
         />
         <input
           type="text"
-          className="edit-input edit-password"
+          className="edit-password"
           value={ isLoading ? LOADING : password2 }
           placeholder="Confirm Password"
           onChange={ ({ target }) => setPassword2(target.value) }

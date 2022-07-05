@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import triviaLogo from '../../images/trivia.png';
+import loadingGif from '../../images/loading.gif';
 import './style.css';
 
 import { fetchLogin, fetchSignUp } from '../../redux-test/player';
@@ -16,7 +17,9 @@ const LoginNew = () => {
   const [password, setPassword] = useState('');
   const [isSigningUp, setIsSigningUp] = useState(false);
 
-  const { userToken, name } = useSelector((state) => state.player.info);
+  const {
+    info: { userToken, name }, loading: isUserLoading,
+  } = useSelector((state) => state.player);
   const { token } = useSelector((state) => state.trivia);
   const { value: isLoading } = useSelector((state) => state.loading);
 
@@ -61,36 +64,45 @@ const LoginNew = () => {
         <img src={ triviaLogo } alt="Trivia logo" className="logo-login" />
 
         <main className="container-form-main">
-          <label htmlFor="email" className="login-label">
-            <input
-              className="login-input"
-              id="email"
-              value={ email }
-              onChange={ ({ target }) => setEmail(target.value) }
-              onKeyDown={ (event) => handleEnterKey(event) }
-              type="email"
-              placeholder="Email"
-              name="email"
-              autoComplete="off"
-              required
-            />
-          </label>
-
-          <label htmlFor="password" className="login-label">
-            <input
-              className="login-input"
-              id="password"
-              value={ password }
-              onChange={ ({ target }) => setPassword(target.value) }
-              onKeyDown={ (event) => handleEnterKey(event) }
-              type="text"
-              placeholder="Password"
-              name="password"
-              autoComplete="off"
-              required
-            />
-          </label>
-
+          {!isUserLoading
+            ? (
+              <>
+                <label htmlFor="email" className="login-label">
+                  <input
+                    className="login-input"
+                    id="email"
+                    value={ email }
+                    onChange={ ({ target }) => setEmail(target.value) }
+                    onKeyDown={ (event) => handleEnterKey(event) }
+                    type="email"
+                    placeholder="Email"
+                    autoComplete="off"
+                    required
+                  />
+                </label>
+                <label htmlFor="password" className="login-label">
+                  <input
+                    className="login-input"
+                    id="password"
+                    value={ password }
+                    onChange={ ({ target }) => setPassword(target.value) }
+                    onKeyDown={ (event) => handleEnterKey(event) }
+                    type="text"
+                    placeholder="Password"
+                    autoComplete="off"
+                    required
+                  />
+                </label>
+              </>
+            ) : (
+              <div className="login-loading-container">
+                <img
+                  className="login-loading-gif"
+                  src={ loadingGif }
+                  alt="Loading gif"
+                />
+              </div>
+            )}
           <button
             className={
               isDisabledButton
@@ -106,8 +118,13 @@ const LoginNew = () => {
           </button>
 
           <button
-            className="container-form-main-button2"
+            className={
+              isDisabledButton
+                ? 'container-form-main-button1 disabled'
+                : 'container-form-main-button1'
+            }
             type="button"
+            disabled={ isDisabledButton }
             onClick={ handleSignUp }
           >
             {isSigningUp ? 'Confirm Sign Up' : 'Sign Up'}

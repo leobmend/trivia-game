@@ -10,10 +10,19 @@
 .password-container {
   display: flex;
   flex-direction: column;
+  height: 40%;
 }
 
 .edit-password {
-  margin: 10px auto;
-  padding: 8px;
-  width: 80%;
+  background-color: whitesmoke;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin: auto;
+  padding: 10px;
+  text-align: center;
+  width: 90%;
+}
+
+.edit-password::placeholder {
+  text-align: center;
 }
