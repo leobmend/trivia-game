@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import Loading from '../../pages/Loading';
 
 import getGravatarUrl from '../../services/gravatar';
 
@@ -9,9 +8,6 @@ const NewHeader = () => {
 
   const { info: player } = useSelector((state) => state.player);
   const { scorePoints } = useSelector((state) => state.score);
-  const { value: isLoading } = useSelector((state) => state.loading);
-
-  if (isLoading) return <Loading />;
 
   return (
     <header className="Header">

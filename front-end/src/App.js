@@ -10,6 +10,7 @@ import ProfilePage from './pages/Profile';
 import LoginNewPage from './pages/LoginNew';
 import LobbyPage from './pages/Lobby';
 import NewTriviaPage from './pages/NewTrivia';
+import NewFeedbackPage from './pages/NewFeedback';
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
         <Route path="/ranking" component={ RankingPage } />
         <Route path="/settings" component={ ConfigurationPage } />
         <Route path="/feedback" component={ FeedBackPage } />
+        <Route path="/newfeedback" component={ NewFeedbackPage } />
       </Switch>
     </div>
   );
