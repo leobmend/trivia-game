@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import triviaLogo from '../../images/trivia.png';
-import { useTokensLocalStorage } from '../../services/localStorage';
+import useTokensLocalStorage from '../../services/myHooks';
 import Loading from '../Loading';
 
 import './style.css';
