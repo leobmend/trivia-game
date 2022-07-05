@@ -28,7 +28,13 @@
   padding: 5px 15px;
 }
 
-.home-button {
+.navigate-container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.navigate-button {
   background-color: #2a9d8f;
   border: 3px solid #2a9d8f;
   border-radius: 5px;
@@ -40,7 +46,7 @@
   transition-duration: 0.4s;
 }
 
-.home-button:hover {
+.navigate-button:hover {
   background-color: whitesmoke;
   color: black;
   transform: scale(1.1);
@@ -124,7 +130,7 @@
     padding: 5px 50px;
   }
 
-  .home-button {
+  .navigate-button {
     font-size: 22px;
     padding: 3px 20px;
   }
@@ -153,7 +159,7 @@
     padding: 5px 120px;
   }
 
-  .home-button {
+  .navigate-button {
     font-size: 25px;
     padding: 3px 50px;
   }

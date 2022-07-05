@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import Loading from '../Loading';
+import ProfileInfoContainer from '../../components/ProfileInfoContainer';
 
 import './style.css';
 
+import useTokensLocalStorage from '../../services/myHooks';
+import { fetchEditUser, fetchEditPassword, setEditing, setLogout,
+} from '../../redux-test/player';
+import { setLocalStorage } from '../../services/localStorage';
 import getGravatar from '../../services/gravatar';
-import {
-  fetchEditUser, fetchEditPassword, setEditing } from '../../redux-test/player';
-import ProfileInfoContainer from '../../components/ProfileInfoContainer';
-import Loading from '../Loading';
-import { useTokensLocalStorage } from '../../services/localStorage';
 
 const Profile = () => {
   const [name, setName] = useState('');
@@ -24,10 +25,6 @@ const Profile = () => {
   const history = useHistory();
 
   useTokensLocalStorage();
-
-  const handleClick = () => {
-    history.push('/login');
-  };
 
   const handleEdit = () => {
     if (editing === 'user') {
@@ -55,14 +52,27 @@ const Profile = () => {
     <main className="Profile">
       <section className="title-container">
         <h1 className="profile-title" data-testid="ranking-title">Profile</h1>
-        <button
-          className="home-button"
-          data-testid="btn-go-home"
-          type="button"
-          onClick={ handleClick }
-        >
-          Início
-        </button>
+        <div className="navigate-container">
+          <button
+            className="navigate-button"
+            data-testid="btn-go-home"
+            type="button"
+            onClick={ () => history.push('/login') }
+          >
+            Lobby
+          </button>
+          <button
+            className="navigate-button"
+            data-testid="btn-go-home"
+            type="button"
+            onClick={ () => {
+              dispatch(setLogout({ setLocalStorage }));
+              history.push('/login');
+            } }
+          >
+            Log out
+          </button>
+        </div>
       </section>
       <section className="profile-container">
         <div className="gravatar-container">
