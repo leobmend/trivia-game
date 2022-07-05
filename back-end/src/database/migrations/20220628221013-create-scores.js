@@ -11,7 +11,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      ranking: {
+      category: {
         allowNull: false,
         type: Sequelize.STRING,
       },
@@ -19,10 +19,15 @@ module.exports = {
         allowNull: false,
         type:Sequelize.STRING,
       },
-      questionsType: {
+      type: {
         allowNull: false,
         type: Sequelize.STRING,
-        field: 'questions_type',
+        field: 'type',
+      },
+      playedAt: {
+        type: Sequelize.DATE,
+        defaultValue: new Date(),
+        field: 'played_at',
       },
       userId: {
         allowNull: false,

@@ -8,7 +8,8 @@ const scoreSchema = (sequelize, DataTypes) => {
     score: DataTypes.INTEGER,
     category: DataTypes.STRING,
     difficulty: DataTypes.STRING,
-    questionsType: DataTypes.STRING,
+    type: DataTypes.STRING,
+    playedAt: DataTypes.DATE,
     userId: DataTypes.STRING,
   },
   {
