@@ -5,9 +5,11 @@ const routes = express.Router();
 
 const loginRouter = require('./loginRouter');
 const userRouter = require('./userRouter');
+const scoreRouter = require('./scoreRouter');
 
 routes.use('/login', loginRouter);
 routes.use('/user', userRouter);
+routes.use('/score', scoreRouter);
 
 routes.use(errorHandling);
 
