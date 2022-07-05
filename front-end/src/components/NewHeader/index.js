@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import Loading from '../../pages/Loading';
+
 import getGravatarUrl from '../../services/gravatar';
 
 const NewHeader = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const { info: player } = useSelector((state) => state.player);
+  const { scorePoints } = useSelector((state) => state.score);
+  const { value: isLoading } = useSelector((state) => state.loading);
+
+  if (isLoading) return <Loading />;
 
   return (
     <header className="Header">
@@ -56,7 +62,7 @@ const NewHeader = () => {
         className="player-score"
       >
         Pontuação atual:
-        <span data-testid="header-score">{` ${1}`}</span>
+        <span data-testid="header-score">{` ${scorePoints}`}</span>
       </p>
     </header>
   );
