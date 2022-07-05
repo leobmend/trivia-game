@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import usersAPI from '../services/usersAPI';
 
 const HTTP_SUCCESS = 200;
+const HTTP_CREATED = 201;
 const USER_TOKEN_KEY = 'trivia-user-token';
 
 const initialState = {
@@ -44,7 +45,7 @@ const fetchSignUp = createAsyncThunk(
     const { data: { token: userToken, id } = {}, status } = await usersAPI.signUp(
       { email, password, name: 'Player' },
     );
-    if (status === HTTP_SUCCESS) setLocalStorage(USER_TOKEN_KEY, userToken);
+    if (status === HTTP_CREATED) setLocalStorage(USER_TOKEN_KEY, userToken);
     const info = { id, userToken, email, name: 'Player' };
     return { info, status };
   },
