@@ -2,8 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import PropTypes, { oneOfType } from 'prop-types';
 import sanitizeHtml from 'sanitize-html';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import QuestionAndTimer from '../QuestionAndTimer';
 import Answers from '../Answers';
+import { resetQuestions } from '../../redux-test/trivia';
 
 const TIMER_SEC = 10;
 const LIMIT_QUESTIONS = 4;
@@ -22,6 +24,7 @@ const NewQuestion = ({ question, questionIndex, setQuestionIndex }) => {
   const randomCorrectIndex = useRef(getRandom());
 
   const history = useHistory();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!isAnswered && timer === 0) setIsAnswered(true);
@@ -34,7 +37,8 @@ const NewQuestion = ({ question, questionIndex, setQuestionIndex }) => {
       setIsAnswered(false);
       setTimer(TIMER_SEC);
     } else {
-      history.push('/feedback');
+      dispatch(resetQuestions());
+      history.push('/newfeedback');
     }
   };
 

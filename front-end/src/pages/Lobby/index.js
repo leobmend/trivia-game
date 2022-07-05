@@ -1,7 +1,8 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import triviaLogo from '../../images/trivia.png';
+import { resetQuestions } from '../../redux-test/trivia';
 import { useTokensLocalStorage } from '../../services/myHooks';
 import Loading from '../Loading';
 
@@ -9,10 +10,14 @@ import './style.css';
 
 const Lobby = () => {
   const { value: isLoading } = useSelector((state) => state.loading);
+  const { questions } = useSelector((state) => state.trivia);
 
   const history = useHistory();
+  const dispatch = useDispatch();
 
   useTokensLocalStorage();
+
+  if (questions.length) dispatch(resetQuestions());
 
   if (isLoading) return <Loading />;
 

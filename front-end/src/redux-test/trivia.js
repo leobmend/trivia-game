@@ -30,6 +30,9 @@ const fetchQuestions = createAsyncThunk(
 const triviaSlice = createSlice({
   name: 'trivia',
   initialState,
+  reducers: {
+    resetQuestions: (state) => { state.questions = []; },
+  },
   extraReducers: (builder) => {
     [fetchToken, fetchQuestions].forEach(
       (fetchFunc) => {
@@ -52,5 +55,5 @@ const triviaSlice = createSlice({
 });
 
 export { fetchToken, fetchQuestions };
-export const { setToken } = triviaSlice.actions;
+export const { resetQuestions } = triviaSlice.actions;
 export default triviaSlice.reducer;
