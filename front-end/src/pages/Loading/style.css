@@ -12,10 +12,10 @@
 
 .loading-pg-container {
   background-color: #264653;
-  border-radius: 20px;
+  border-radius: 10px;
   height: 70%;
   margin: auto;
-  padding: 10px;
+  padding: 20px;
   width: 90%;
 }
 
