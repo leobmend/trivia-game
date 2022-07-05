@@ -60,7 +60,7 @@ const Lobby = () => {
           <button
             className="profile-button"
             type="button"
-            onClick={ () => { history.push('/settings'); } }
+            onClick={ () => { history.push('/newsettings'); } }
           >
             Settings
           </button>
