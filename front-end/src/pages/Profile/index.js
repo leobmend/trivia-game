@@ -51,11 +51,10 @@ const Profile = () => {
   return (
     <main className="Profile">
       <section className="title-container">
-        <h1 className="profile-title" data-testid="ranking-title">Profile</h1>
+        <h1 className="profile-title">Profile</h1>
         <div className="navigate-container">
           <button
             className="navigate-button"
-            data-testid="btn-go-home"
             type="button"
             onClick={ () => history.push('/login') }
           >
@@ -63,7 +62,6 @@ const Profile = () => {
           </button>
           <button
             className="navigate-button"
-            data-testid="btn-go-home"
             type="button"
             onClick={ () => {
               dispatch(setLogout({ setLocalStorage }));
@@ -100,7 +98,6 @@ const Profile = () => {
         />
         <button
           className={ `home-button ${editing === 'user' && 'editing-btn'}` }
-          data-testid="btn-go-home"
           type="button"
           disabled={ editing === 'password' }
           onClick={ handleEdit }
@@ -109,7 +106,6 @@ const Profile = () => {
         </button>
         <button
           className={ `home-button ${editing === 'password' && 'editing-btn'}` }
-          data-testid="btn-go-home"
           type="button"
           disabled={
             editing === 'user' || (editing === 'password' && password1 !== password2)
