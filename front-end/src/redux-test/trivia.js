@@ -6,6 +6,7 @@ const initialState = {
   error: '',
   token: '',
   questions: [],
+  categories: [],
   responseCode: 0,
 };
 
@@ -27,6 +28,15 @@ const fetchQuestions = createAsyncThunk(
   },
 );
 
+const fetchCategories = createAsyncThunk(
+  'trivia/fetchCategories',
+  async () => {
+    const { trivia_categories: categoriesFetched } = await triviaAPI.getCategories();
+    const categories = [{ name: 'Any', id: '' }, ...categoriesFetched];
+    return { categories };
+  },
+);
+
 const triviaSlice = createSlice({
   name: 'trivia',
   initialState,
@@ -34,7 +44,7 @@ const triviaSlice = createSlice({
     resetQuestions: (state) => { state.questions = []; },
   },
   extraReducers: (builder) => {
-    [fetchToken, fetchQuestions].forEach(
+    [fetchToken, fetchQuestions, fetchCategories].forEach(
       (fetchFunc) => {
         builder.addCase(fetchFunc.pending, (state) => {
           state.loading = true;
@@ -43,6 +53,7 @@ const triviaSlice = createSlice({
           state.loading = false;
           if (action.payload.token) state.token = action.payload.token;
           if (action.payload.questions) state.questions = action.payload.questions;
+          if (action.payload.categories) state.categories = action.payload.categories;
           state.error = '';
         });
         builder.addCase(fetchFunc.rejected, (state, action) => {
@@ -54,6 +65,6 @@ const triviaSlice = createSlice({
   },
 });
 
-export { fetchToken, fetchQuestions };
+export { fetchToken, fetchQuestions, fetchCategories };
 export const { resetQuestions } = triviaSlice.actions;
 export default triviaSlice.reducer;
