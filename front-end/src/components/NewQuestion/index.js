@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes, { oneOfType } from 'prop-types';
 import sanitizeHtml from 'sanitize-html';
 import { useHistory } from 'react-router-dom';
@@ -7,6 +7,9 @@ import Answers from '../Answers';
 
 const TIMER_SEC = 10;
 const LIMIT_QUESTIONS = 4;
+const ANSWERS_ARRAY_SIZE = 4;
+
+const getRandom = () => Math.floor(Math.random() * ANSWERS_ARRAY_SIZE);
 
 const NewQuestion = ({ question, questionIndex, setQuestionIndex }) => {
   const { type, category, question: questionText, correct_answer: correctAnswer,
@@ -16,6 +19,8 @@ const NewQuestion = ({ question, questionIndex, setQuestionIndex }) => {
   const [timer, setTimer] = useState(TIMER_SEC);
   const [isAnswered, setIsAnswered] = useState(false);
 
+  const randomCorrectIndex = useRef(getRandom());
+
   const history = useHistory();
 
   useEffect(() => {
@@ -24,6 +29,7 @@ const NewQuestion = ({ question, questionIndex, setQuestionIndex }) => {
 
   const handleClickNextQuestion = () => {
     if (questionIndex < LIMIT_QUESTIONS) {
+      randomCorrectIndex.current = getRandom();
       setQuestionIndex(questionIndex + 1);
       setIsAnswered(false);
       setTimer(TIMER_SEC);
@@ -54,6 +60,7 @@ const NewQuestion = ({ question, questionIndex, setQuestionIndex }) => {
           difficulty={ difficulty }
           isAnswered={ isAnswered }
           setIsAnswered={ setIsAnswered }
+          randomCorrectIndex={ randomCorrectIndex.current }
         />
         {(isAnswered || timer < 1) && (
           <button

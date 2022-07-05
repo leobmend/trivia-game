@@ -1,14 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import sanitizeHtml from 'sanitize-html';
 import { useDispatch } from 'react-redux';
 import { setScore } from '../../redux-test/score';
 
-const ANSWERS_ARRAY_SIZE = 4;
 const DEFAULT_SCORE = 10;
-
-const getRandom = () => Math.floor(Math.random() * ANSWERS_ARRAY_SIZE);
-
 const difficultyPoints = { hard: 3, medium: 2, easy: 1 };
 
 const setStylesQuestions = (isCorrect, isSelected) => (
@@ -17,17 +13,15 @@ const setStylesQuestions = (isCorrect, isSelected) => (
 );
 
 const Answers = ({ type, correctAnswer, incorrectAnswers, timer,
-  difficulty, isAnswered, setIsAnswered }) => {
+  difficulty, isAnswered, setIsAnswered, randomCorrectIndex }) => {
   const dispatch = useDispatch();
 
   const [clickedIndex, setClickedIndex] = useState();
 
-  const randomCorrectIndex = useRef(getRandom());
-
   const handleClickAnswer = ({ target: { value } }) => {
     setClickedIndex(value);
     setIsAnswered(true);
-    if (Number(value) === randomCorrectIndex.current || value === correctAnswer) {
+    if (Number(value) === randomCorrectIndex || value === correctAnswer) {
       dispatch(setScore(DEFAULT_SCORE + timer * difficultyPoints[difficulty]));
     }
   };
@@ -38,13 +32,13 @@ const Answers = ({ type, correctAnswer, incorrectAnswers, timer,
       .map((incorrectAnswer) => sanitizeHtml(incorrectAnswer));
 
     const answersList = [...incorrectList];
-    answersList.splice(randomCorrectIndex.current, 0, correct);
+    answersList.splice(randomCorrectIndex, 0, correct);
 
     return answersList.map((answer, index) => (
       <button
         onClick={ handleClickAnswer }
         className={ isAnswered
-          ? setStylesQuestions((index === randomCorrectIndex.current),
+          ? setStylesQuestions((index === randomCorrectIndex),
             (index === Number(clickedIndex)))
           : 'answer' }
         type="button"
@@ -102,6 +96,7 @@ Answers.propTypes = {
   difficulty: PropTypes.string.isRequired,
   isAnswered: PropTypes.bool.isRequired,
   setIsAnswered: PropTypes.func.isRequired,
+  randomCorrectIndex: PropTypes.number.isRequired,
 };
 
 export default Answers;
