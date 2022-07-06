@@ -1,8 +1,0 @@
-.loading {
-  align-items: center;
-  display: flex;
-  font-size: 50px;
-  height: calc(100vh - 150px - 50px - 50px);
-  justify-content: center;
-  margin: auto;
-}

@@ -34,12 +34,27 @@ const updatePassword = async (id, userToken, { password }) => (
     .catch((err) => err.message)
 );
 
+const registerScore = async (userToken, { score, category, difficulty, type }) => (
+  api.post('/score',
+    { score, category, difficulty, type }, { headers: { Authorization: userToken } })
+    .then(({ data }) => ({ data }))
+    .catch((err) => err.message)
+);
+
+const getScores = async (userToken) => (
+  api.get('/score', { headers: { Authorization: userToken } })
+    .then(({ data }) => ({ data }))
+    .catch((err) => err.message)
+);
+
 const usersAPI = {
   login,
   signUp,
   getById,
   update,
   updatePassword,
+  registerScore,
+  getScores,
 };
 
 export default usersAPI;

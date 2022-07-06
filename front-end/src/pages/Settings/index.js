@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { setSettings } from '../../redux-test/settings';
-import { useCategories, useTokensLocalStorage } from '../../services/myHooks';
-import Loading from '../Loading';
+
+import './style.css';
+
+import { setSettings } from '../../redux/settings';
+import { resetQuestions, resetResponseCode } from '../../redux/trivia';
+
+const TIME_TO_SHOW_MODAL = 5000;
 
 const difficultyObj = [
   { value: 'any', name: 'Any' },
@@ -13,25 +17,23 @@ const difficultyObj = [
 ];
 
 const typeObj = [
-  { value: '', name: 'Any' },
+  { value: 'any', name: 'Any' },
   { value: 'boolean', name: 'True / False' },
   { value: 'multiple', name: 'Multiple Choice' },
 ];
 
 const Settings = () => {
-  const [category, setCategory] = useState('');
-  const [difficulty, setDifficulty] = useState('');
-  const [type, setType] = useState('');
+  const {
+    trivia: { categories, responseCode },
+    settings: { category, difficulty, type },
+  } = useSelector((state) => state);
 
-  const { categories } = useSelector((state) => state.trivia);
-  const { value: isLoading } = useSelector((state) => state.loading);
+  const [categorySelect, setCategory] = useState(category);
+  const [difficultySelect, setDifficulty] = useState(difficulty);
+  const [typeSelect, setType] = useState(type);
 
   const history = useHistory();
   const dispatch = useDispatch();
-
-  useTokensLocalStorage();
-
-  useCategories();
 
   const handleChange = ({ target: { id, value } }) => {
     switch (id) {
@@ -48,11 +50,22 @@ const Settings = () => {
     }
   };
 
-  const handleApply = () => {
-    dispatch(setSettings({ category, difficulty, type }));
-  };
+  useEffect(() => {
+    if (responseCode) {
+      setTimeout(() => {
+        dispatch(resetResponseCode());
+      }, TIME_TO_SHOW_MODAL);
+    }
+  });
 
-  if (isLoading || !categories.length) return <Loading />;
+  const handleApply = () => {
+    dispatch(setSettings(
+      { category: categorySelect, difficulty: difficultySelect, type: typeSelect },
+    ));
+    dispatch(resetQuestions());
+
+    history.push('/lobby');
+  };
 
   return (
     <main className="Configuration">
@@ -63,6 +76,7 @@ const Settings = () => {
         <button
           className="config-home-button"
           type="button"
+          disabled={ responseCode }
           onClick={ () => history.push('/lobby') }
         >
           Lobby
@@ -76,7 +90,7 @@ const Settings = () => {
             className="config-select"
             id="category"
             onChange={ handleChange }
-            value={ category }
+            value={ categorySelect }
           >
             {categories.map(({ name, id }) => (
               <option key={ id } value={ id }>{name}</option>
@@ -90,7 +104,7 @@ const Settings = () => {
             className="config-select"
             id="difficulty"
             onChange={ handleChange }
-            value={ difficulty }
+            value={ difficultySelect }
           >
             {difficultyObj.map(({ name, value }) => (
               <option key={ value } value={ value }>{name}</option>
@@ -104,7 +118,7 @@ const Settings = () => {
             className="config-select"
             id="type"
             onChange={ handleChange }
-            value={ type }
+            value={ typeSelect }
           >
             {typeObj.map(({ name, value }) => (
               <option key={ value } value={ value }>{name}</option>
@@ -112,8 +126,9 @@ const Settings = () => {
           </select>
         </label>
         <button
-          className="home-button"
+          className="apply-button"
           type="button"
+          disabled={ responseCode }
           onClick={ handleApply }
         >
           Apply

@@ -1,153 +1,136 @@
-import propTypes from 'prop-types';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchToken, resetGame, setUser } from '../../redux/actions';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import triviaLogo from '../../images/trivia.png';
+import loadingGif from '../../images/loading.gif';
 import './style.css';
+
+import { fetchLogin, fetchSignUp } from '../../redux/player';
+import { setLocalStorage } from '../../services/localStorage';
+import Loading from '../Loading';
 
 const pattern = /^\w.+@\w.+[\w]$/;
 
-class Login extends Component {
-  state = {
-    gravatarEmail: '',
-    name: '',
-  }
+const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isSigningUp, setIsSigningUp] = useState(false);
 
-  componentDidMount() {
-    const { dispatchResetGame } = this.props;
-    dispatchResetGame();
-  }
+  const {
+    info: { userToken, name }, loading: isUserLoading,
+  } = useSelector((state) => state.player);
+  const { value: isLoading } = useSelector((state) => state.loading);
 
-  componentDidUpdate() {
-    const { token, history } = this.props;
-    const isFetchedToken = Boolean(token.length);
-    if (isFetchedToken) {
-      history.push('/trivia');
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  useEffect(() => {
+    if (userToken) {
+      history.push('/lobby');
     }
-  }
+  }, [userToken, history, name]);
 
-  handleChange = ({ target: { id, value } }) => {
-    this.setState({
-      [id]: value,
-    });
+  const isDisabledButton = !(email.match(pattern) && password.length);
+
+  const handleLogin = async () => {
+    dispatch(fetchLogin({ setLocalStorage, email, password }));
   };
 
-  handleClick = () => {
-    const { dispatchSetUser, dispatchFetchToken } = this.props;
-    dispatchSetUser(this.state);
-    dispatchFetchToken();
+  const handleEnterKey = (event) => {
+    if (event.key === 'Enter' && !isDisabledButton) handleLogin();
   };
 
-  handleEnterKey = (event, isDisabledButton) => {
-    if (event.key === 'Enter' && !isDisabledButton) {
-      this.handleClick();
+  const handleSignUp = () => {
+    if (isSigningUp) {
+      dispatch(fetchSignUp({ setLocalStorage, email, password }));
+    } else {
+      setIsSigningUp(true);
     }
   };
 
-  render() {
-    const { gravatarEmail, name } = this.state;
-    const isDisabledButton = !(gravatarEmail.match(pattern) && name.length);
-    const { history } = this.props;
+  if (isLoading) return <Loading />;
 
-    return (
-      <div className="container-form">
-        <form
-          action="/action_page.php"
-          method="post"
-          className="container-form-box"
-        >
-          <header className="container-form-header">
-            <img src={ triviaLogo } alt="Trivia logo" className="trivia-logo" />
-          </header>
+  return (
+    <div className="container-form">
+      <form
+        action="/action_page.php"
+        method="post"
+        className="container-form-box"
+      >
+        <img src={ triviaLogo } alt="Trivia logo" className="logo-login" />
 
-          <main className="container-form-main">
-            <label
-              htmlFor="gravatarEmail"
-              className="container-form-main-label1"
-            >
-              <input
-                className="container-form-main-label1-input1"
-                id="gravatarEmail"
-                value={ gravatarEmail }
-                onChange={ this.handleChange }
-                onKeyDown={ (event) => this.handleEnterKey(event, isDisabledButton) }
-                data-testid="input-gravatar-email"
-                type="email"
-                placeholder="Email do Gravatar"
-                name="gravatarEmail"
-                autoComplete="off"
-                required
-              />
-            </label>
+        <main className="container-form-main">
+          {!isUserLoading
+            ? (
+              <>
+                <label htmlFor="email" className="login-label">
+                  <input
+                    className="login-input"
+                    id="email"
+                    value={ email }
+                    onChange={ ({ target }) => setEmail(target.value) }
+                    onKeyDown={ (event) => handleEnterKey(event) }
+                    type="email"
+                    placeholder="Email"
+                    autoComplete="off"
+                    required
+                  />
+                </label>
+                <label htmlFor="password" className="login-label">
+                  <input
+                    className="login-input"
+                    id="password"
+                    value={ password }
+                    onChange={ ({ target }) => setPassword(target.value) }
+                    onKeyDown={ (event) => handleEnterKey(event) }
+                    type="text"
+                    placeholder="Password"
+                    autoComplete="off"
+                    required
+                  />
+                </label>
+              </>
+            ) : (
+              <div className="login-loading-container">
+                <img
+                  className="login-loading-gif"
+                  src={ loadingGif }
+                  alt="Loading gif"
+                />
+              </div>
+            )}
+          <button
+            className={
+              isDisabledButton
+                ? 'container-form-main-button1 disabled'
+                : 'container-form-main-button1'
+            }
+            id="play-Button"
+            type="button"
+            disabled={ isDisabledButton }
+            onClick={ handleLogin }
+          >
+            Login
+          </button>
 
-            <label htmlFor="name" className="container-form-main-label2">
-              <input
-                className="container-form-main-label2-input1"
-                id="name"
-                value={ name }
-                onChange={ this.handleChange }
-                onKeyDown={ (event) => this.handleEnterKey(event, isDisabledButton) }
-                data-testid="input-player-name"
-                type="text"
-                placeholder="Nome do Jogador"
-                name="name"
-                autoComplete="off"
-                required
-              />
-            </label>
+          <button
+            className={
+              isDisabledButton
+                ? 'container-form-main-button1 disabled'
+                : 'container-form-main-button1'
+            }
+            type="button"
+            disabled={ isDisabledButton }
+            onClick={ handleSignUp }
+          >
+            {isSigningUp ? 'Confirm Sign Up' : 'Sign Up'}
+          </button>
+        </main>
+        <footer className="container-form-footer" />
 
-            <button
-              className={
-                isDisabledButton
-                  ? 'container-form-main-button1 disabled'
-                  : 'container-form-main-button1'
-              }
-              id="play-Button"
-              type="button"
-              disabled={ isDisabledButton }
-              onClick={ this.handleClick }
-              data-testid="btn-play"
-            >
-              Jogar
-            </button>
-
-            <button
-              className="container-form-main-button2"
-              type="button"
-              data-testid="btn-settings"
-              onClick={ () => {
-                history.push('/configuration');
-              } }
-            >
-              Configurações
-            </button>
-          </main>
-          <footer className="container-form-footer" />
-
-        </form>
-      </div>
-    );
-  }
-}
-
-Login.propTypes = {
-  token: propTypes.string.isRequired,
-  dispatchSetUser: propTypes.func.isRequired,
-  dispatchFetchToken: propTypes.func.isRequired,
-  dispatchResetGame: propTypes.func.isRequired,
-  history: propTypes.shape({
-    push: propTypes.func,
-  }).isRequired,
+      </form>
+    </div>
+  );
 };
 
-const mapStateToProps = (state) => ({
-  token: state.token,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  dispatchSetUser: (user) => dispatch(setUser(user)),
-  dispatchFetchToken: () => dispatch(fetchToken()),
-  dispatchResetGame: () => dispatch(resetGame()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;

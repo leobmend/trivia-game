@@ -1,19 +1,19 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import NewHeader from '../../components/NewHeader';
-import { useTokensLocalStorage } from '../../services/myHooks';
+
+import './style.css';
+
+import Header from '../../components/Header';
 import Loading from '../Loading';
 
 const THREE_ASSERTIONS = 3;
 
-const NewFeedback = () => {
+const Feedback = () => {
   const { assertions, scorePoints: score } = useSelector((state) => state.score);
   const { value: isLoading } = useSelector((state) => state.loading);
 
   const history = useHistory();
-
-  useTokensLocalStorage();
 
   const feedback = () => {
     if (assertions < THREE_ASSERTIONS) {
@@ -22,19 +22,11 @@ const NewFeedback = () => {
     return (<h1 className="fb-h1" data-testid="feedback-text">Well Done!</h1>);
   };
 
-  const redirectToLogin = () => {
-    history.push('/lobby');
-  };
-
-  const redirectToRanking = () => {
-    history.push('/newranking');
-  };
-
   if (isLoading) return <Loading />;
 
   return (
     <>
-      <NewHeader />
+      <Header />
       <main className="FeedBack">
         <section className="feedback-container">
           {feedback()}
@@ -54,14 +46,14 @@ const NewFeedback = () => {
             className="play-again-button"
             type="button"
             data-testid="btn-play-again"
-            onClick={ redirectToLogin }
+            onClick={ () => history.push('/lobby') }
           >
             Lobby
           </button>
           <button
             type="button"
             data-testid="btn-ranking"
-            onClick={ redirectToRanking }
+            onClick={ () => history.push('/ranking') }
           >
             Ranking
           </button>
@@ -71,4 +63,4 @@ const NewFeedback = () => {
   );
 };
 
-export default NewFeedback;
+export default Feedback;

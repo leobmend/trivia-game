@@ -1,25 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import triviaLogo from '../../images/trivia.png';
-import { resetQuestions } from '../../redux-test/trivia';
-import { useTokensLocalStorage } from '../../services/myHooks';
-import Loading from '../Loading';
-
 import './style.css';
 
+import triviaLogo from '../../images/trivia.png';
+import { resetScore } from '../../redux/score';
+import { fetchQuestions } from '../../redux/trivia';
+import { getQuestionsBody } from '../../services/myHooks';
+
 const Lobby = () => {
-  const { value: isLoading } = useSelector((state) => state.loading);
-  const { questions } = useSelector((state) => state.trivia);
+  const {
+    trivia: { token, categories, questions, responseCode, loading: isFetchingQuestions },
+    score: { scorePoints },
+    settings,
+  } = useSelector((state) => state);
 
   const history = useHistory();
   const dispatch = useDispatch();
 
-  useTokensLocalStorage();
-
-  if (questions.length) dispatch(resetQuestions());
-
-  if (isLoading) return <Loading />;
+  useEffect(() => {
+    if (scorePoints) dispatch(resetScore());
+    if (responseCode) {
+      history.push('/settings');
+    } else if (!questions.length && !isFetchingQuestions) {
+      dispatch(fetchQuestions(getQuestionsBody(token, settings, categories)));
+    }
+  });
 
   return (
     <main className="Lobby">
@@ -33,7 +39,8 @@ const Lobby = () => {
             <button
               className="configs-button"
               type="button"
-              onClick={ () => { history.push('/newtrivia'); } }
+              disabled={ isFetchingQuestions }
+              onClick={ () => { history.push('/trivia'); } }
             >
               Play
             </button>
@@ -60,7 +67,7 @@ const Lobby = () => {
           <button
             className="profile-button"
             type="button"
-            onClick={ () => { history.push('/newsettings'); } }
+            onClick={ () => { history.push('/settings'); } }
           >
             Settings
           </button>

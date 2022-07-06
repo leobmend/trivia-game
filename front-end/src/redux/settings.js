@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  category: '',
-  difficulty: '',
-  type: '',
+  category: '999',
+  difficulty: 'any',
+  type: 'any',
 };
 
 const settingsSlice = createSlice({

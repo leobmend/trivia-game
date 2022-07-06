@@ -6,9 +6,8 @@ import ProfileInfoContainer from '../../components/ProfileInfoContainer';
 
 import './style.css';
 
-import { useTokensLocalStorage } from '../../services/myHooks';
 import { fetchEditUser, fetchEditPassword, setEditing, setLogout,
-} from '../../redux-test/player';
+} from '../../redux/player';
 import { setLocalStorage } from '../../services/localStorage';
 import getGravatar from '../../services/gravatar';
 
@@ -24,8 +23,6 @@ const Profile = () => {
 
   const history = useHistory();
 
-  useTokensLocalStorage();
-
   const handleEdit = () => {
     if (editing === 'user') {
       const newName = name || player.name;
@@ -39,11 +36,14 @@ const Profile = () => {
 
   const handleEditPassword = async () => {
     if (editing === 'password') {
-      return dispatch(fetchEditPassword(
+      dispatch(fetchEditPassword(
         { id: player.id, userToken: player.userToken, password: password1 },
       ));
+      setPassword1('');
+      setPassword2('');
+    } else {
+      dispatch(setEditing('password'));
     }
-    dispatch(setEditing('password'));
   };
 
   if (isLoading) return <Loading />;
@@ -56,7 +56,7 @@ const Profile = () => {
           <button
             className="navigate-button"
             type="button"
-            onClick={ () => history.push('/login') }
+            onClick={ () => history.push('/lobby') }
           >
             Lobby
           </button>
@@ -65,7 +65,7 @@ const Profile = () => {
             type="button"
             onClick={ () => {
               dispatch(setLogout({ setLocalStorage }));
-              history.push('/login');
+              history.push('/');
             } }
           >
             Log out
@@ -97,7 +97,7 @@ const Profile = () => {
           setStateFuncs={ { setName, setEmail, setPassword1, setPassword2 } }
         />
         <button
-          className={ `home-button ${editing === 'user' && 'editing-btn'}` }
+          className={ `edit-button ${editing === 'user' && 'editing-btn'}` }
           type="button"
           disabled={ editing === 'password' }
           onClick={ handleEdit }
@@ -105,7 +105,7 @@ const Profile = () => {
           {`${editing === 'user' ? 'Confirm ' : ''}Edit name / e-mail`}
         </button>
         <button
-          className={ `home-button ${editing === 'password' && 'editing-btn'}` }
+          className={ `edit-button ${editing === 'password' && 'editing-btn'}` }
           type="button"
           disabled={
             editing === 'user' || (editing === 'password' && password1 !== password2)

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import sanitizeHtml from 'sanitize-html';
+
 import { useDispatch } from 'react-redux';
-import { setScore } from '../../redux-test/score';
+import { setScore } from '../../redux/score';
 
 const DEFAULT_SCORE = 10;
 const difficultyPoints = { hard: 3, medium: 2, easy: 1 };
@@ -21,6 +22,7 @@ const Answers = ({ type, correctAnswer, incorrectAnswers, timer,
   const handleClickAnswer = ({ target: { value } }) => {
     setClickedIndex(value);
     setIsAnswered(true);
+
     if (Number(value) === randomCorrectIndex || value === correctAnswer) {
       dispatch(setScore(DEFAULT_SCORE + timer * difficultyPoints[difficulty]));
     }

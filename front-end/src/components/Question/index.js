@@ -1,223 +1,107 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes, { oneOfType } from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import sanitizeHtml from 'sanitize-html';
-import { connect } from 'react-redux';
-import { setScore } from '../../redux/actions';
+
 import './style.css';
 
+import QuestionAndTimer from '../QuestionAndTimer';
+import Answers from '../Answers';
+
+import { resetQuestions } from '../../redux/trivia';
+import usersAPI from '../../services/usersAPI';
+
 const TIMER_SEC = 30;
-const ANSWERS_ARRAY_SIZE = 4;
-const CORRECT_ANSWER = 'correct-answer';
-const ONE_SECOND = 1000;
 const LIMIT_QUESTIONS = 4;
-const TIMER_ENDING = 5;
-let interval;
+const ANSWERS_ARRAY_SIZE = 4;
 
-class Question extends React.Component {
-  state = {
-    timer: TIMER_SEC,
-    randomCorrectIndex: Math.floor(Math.random() * ANSWERS_ARRAY_SIZE),
-    isBtnNextVisible: false,
-    hasStylesBtns: false,
-    clickedAnswerIndex: '',
-  };
+const getRandom = () => Math.floor(Math.random() * ANSWERS_ARRAY_SIZE);
 
-  componentDidMount() {
-    this.startTimer();
-  }
+const Question = ({ question, questionIndex, setQuestionIndex }) => {
+  const { type, category, question: questionText, correct_answer: correctAnswer,
+    incorrect_answers: incorrectAnswers, difficulty } = question;
+  const cleanQuestionText = sanitizeHtml(questionText);
 
-  startTimer = () => {
-    interval = setInterval(() => {
-      const { timer } = this.state;
-      if (timer <= 0) {
-        clearInterval(interval);
-      } else {
-        this.setState({
-          timer: timer - 1,
-        }, () => {
-          if (timer === 1) {
-            this.setState({
-              hasStylesBtns: true,
-            });
-          }
-        });
-      }
-    }, ONE_SECOND);
-  }
+  const [timer, setTimer] = useState(TIMER_SEC);
+  const [isAnswered, setIsAnswered] = useState(false);
 
-  handleClickAnswer = ({ target: { value: clickedIndex } }, correctIndex) => {
-    const { timer } = this.state;
-    const { dispatchSetScore, question: { difficulty } } = this.props;
-    const difficultyPoints = { hard: 3, medium: 2, easy: 1 };
+  const { userToken } = useSelector((state) => state.player.info);
+  const { settings } = useSelector((state) => state);
+  const { scorePoints: score } = useSelector((state) => state.score);
 
-    // para o timer
-    clearInterval(interval);
+  const randomCorrectIndex = useRef(getRandom());
 
-    if (Number(clickedIndex) === correctIndex) {
-      // set o score se acertou no redux + Assertion +1
-      dispatchSetScore(timer, difficultyPoints[difficulty]);
-    }
+  const history = useHistory();
+  const dispatch = useDispatch();
 
-    this.setState({
-      isBtnNextVisible: true,
-      hasStylesBtns: true,
-      clickedAnswerIndex: clickedIndex,
-    });
-  }
+  useEffect(() => {
+    if (!isAnswered && timer === 0) setIsAnswered(true);
+  }, [isAnswered, timer]);
 
-  handleClickNextQuestion = () => {
-    // fazer um question++ para proxima pergunta
-    const { questionIndexNext, questionIndex, history } = this.props;
+  const handleClickNextQuestion = () => {
     if (questionIndex < LIMIT_QUESTIONS) {
-      questionIndexNext();
-      this.setState({
-        isBtnNextVisible: false,
-        hasStylesBtns: false,
-        timer: TIMER_SEC,
-        randomCorrectIndex: Math.floor(Math.random() * ANSWERS_ARRAY_SIZE),
-      }, this.startTimer);
+      randomCorrectIndex.current = getRandom();
+
+      setQuestionIndex(questionIndex + 1);
+      setIsAnswered(false);
+      setTimer(TIMER_SEC);
     } else {
-      // quando chegar na ultima e clickar em prox sera redirecionado para feedback
+      dispatch(resetQuestions());
+
+      usersAPI.registerScore(userToken, { score, ...settings });
+
       history.push('/feedback');
     }
-  }
+  };
 
-  setStylesQuestions = (isCorrect, isSelected) => (
-    `answer${isCorrect ? ' correct-answer' : ' wrong-answer'}`
-      + `${isSelected ? ' selected-answer' : ''}`
-  )
+  return (
+    <main className="Question">
+      <QuestionAndTimer
+        category={ category }
+        cleanQuestionText={ cleanQuestionText }
+        timer={ timer }
+        setTimer={ setTimer }
+        isAnswered={ isAnswered }
+      />
 
-  renderMultipleAnswers(correct, incorrectList) {
-    const { randomCorrectIndex, timer, hasStylesBtns,
-      isBtnNextVisible, clickedAnswerIndex } = this.state;
-    const answersList = [...incorrectList];
+      <div className="vl" />
 
-    answersList.splice(randomCorrectIndex, 0, correct);
-    return answersList.map((answer, index) => (
-      <button
-        onClick={ (event) => this.handleClickAnswer(event, randomCorrectIndex) }
-        className={ (hasStylesBtns)
-          ? this.setStylesQuestions((index === randomCorrectIndex),
-            (index === Number(clickedAnswerIndex)))
-          : 'answer' }
-        type="button"
-        disabled={ timer < 1 || isBtnNextVisible }
-        key={ index }
-        value={ index }
-        data-testid={ index === randomCorrectIndex
-          ? CORRECT_ANSWER
-          : `wrong-answer-${incorrectList.indexOf(answer)}` }
-      >
-        {answer}
-      </button>
-    ));
-  }
+      <section className="buttons-container" data-testid="answer-options">
+        <Answers
+          type={ type }
+          correctAnswer={ correctAnswer }
+          incorrectAnswers={ incorrectAnswers }
+          timer={ timer }
+          setTimer={ setTimer }
+          difficulty={ difficulty }
+          isAnswered={ isAnswered }
+          setIsAnswered={ setIsAnswered }
+          randomCorrectIndex={ randomCorrectIndex.current }
+        />
+        {(isAnswered || timer < 1) && (
+          <button
+            className="next-button"
+            onClick={ handleClickNextQuestion }
+            data-testid="btn-next"
+            type="button"
+          >
+            {questionIndex < LIMIT_QUESTIONS ? 'Next' : 'Finish'}
+          </button>
+        )}
+      </section>
 
-  renderBoolAnswers(correct) {
-    const answersList = ['True', 'False'];
-    const { timer, hasStylesBtns, isBtnNextVisible, clickedAnswerIndex } = this.state;
-
-    return (
-      <>
-        {
-          answersList.map((answer, index) => (
-            <button
-              type="button"
-              key={ index }
-              onClick={ (event) => (
-                this.handleClickAnswer(event, answersList.indexOf(correct))
-              ) }
-              className={ (hasStylesBtns)
-                ? this.setStylesQuestions((answer === correct),
-                  (index === Number(clickedAnswerIndex)))
-                : 'answer' }
-              disabled={ timer < 1 || isBtnNextVisible }
-              value={ index }
-              data-testid={ answer === correct
-                ? CORRECT_ANSWER
-                : 'wrong-answer-0' }
-            >
-              {answer}
-            </button>
-          ))
-        }
-      </>
-    );
-  }
-
-  renderQuestion = (category, cleanQuestionText) => (
-    <div className="rotated-card-1">
-      <div className="rotated-card-2">
-        <div className="rotated-card-3">
-          <div className="question-card">
-            <h1 className="category" data-testid="question-category">{category}</h1>
-            <p
-              className="question"
-              data-testid="question-text"
-              // eslint-disable-next-line react/no-danger
-              dangerouslySetInnerHTML={ { __html: cleanQuestionText } }
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-
-  render() {
-    const { question: { type, category, question: questionText,
-      correct_answer: correctAnswer, incorrect_answers: incorrectAnswers } } = this.props;
-    const { timer, isBtnNextVisible } = this.state;
-    const cleanQuestionText = sanitizeHtml(questionText);
-
-    return (
-      <main className="Question">
-        <section className="question-container">
-          {this.renderQuestion(category, cleanQuestionText)}
-          <div className={ `timer ${timer <= TIMER_ENDING && ' timer-ending'}` }>
-            { `${timer}'` }
-          </div>
-        </section>
-
-        <div className="vl" />
-
-        <section className="buttons-container" data-testid="answer-options">
-          {type === 'multiple'
-            ? this.renderMultipleAnswers(sanitizeHtml(correctAnswer),
-              incorrectAnswers.map((incorrectAnswer) => sanitizeHtml(incorrectAnswer)))
-            : this.renderBoolAnswers(correctAnswer)}
-          {
-            (isBtnNextVisible || timer < 1) && (
-              <button
-                className="next-button"
-                onClick={ this.handleClickNextQuestion }
-                data-testid="btn-next"
-                type="button"
-              >
-                Próxima
-              </button>
-            )
-          }
-        </section>
-      </main>
-    );
-  }
-}
+    </main>
+  );
+};
 
 Question.propTypes = {
   question: PropTypes.objectOf(oneOfType([
     PropTypes.string,
     PropTypes.array,
   ])).isRequired,
-  dispatchSetScore: PropTypes.func.isRequired,
-  questionIndexNext: PropTypes.func.isRequired,
   questionIndex: PropTypes.number.isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
+  setQuestionIndex: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  dispatchSetScore: (timer, difficulty) => dispatch(setScore(timer, difficulty)),
-});
-
-export default connect(null, mapDispatchToProps)(Question);
+export default Question;

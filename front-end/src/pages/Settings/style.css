@@ -87,6 +87,24 @@
   width: 100%;
 }
 
+.apply-button {
+  background-color: #2a9d8f;
+  border: 3px solid #2a9d8f;
+  border-radius: 5px;
+  box-shadow: 0 2px 2px 0 black;
+  color: whitesmoke;
+  font-size: 18px;
+  font-weight: 800;
+  padding: 3px 10px;
+  transition-duration: 0.4s;
+}
+
+.apply-button:hover {
+  background-color: whitesmoke;
+  color: black;
+  transform: scale(1.1);
+}
+
 @media screen and ( min-width : 500px ) {
 
   .config-title {

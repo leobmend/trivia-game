@@ -32,9 +32,9 @@ const fetchGetInfo = createAsyncThunk(
   'player/fetchGetInfo',
   async ({ userToken }) => {
     const { data: { id, name, email } = {}, status } = await usersAPI.getById(userToken);
-    const info = {
-      id, email, name, userToken: status === HTTP_SUCCESS ? userToken : '',
-    };
+    const info = status === HTTP_SUCCESS
+      ? { id, email, name, userToken }
+      : { id: '', email: '', name: '', userToken: '' };
     return { info, status };
   },
 );

@@ -8,19 +8,18 @@
   margin: auto;
   max-width: 90%;
   padding: 20px;
+  transition-duration: 0.4s;
 }
 
 .container-form-box {
   border: 3px solid #022433;
+  display: flex;
+  flex-direction: column;
   height: 100%;
 }
 
-.container-form-header {
-  margin: 24px 0 12px;
-  text-align: center;
-}
-
-.trivia-logo {
+.logo-login {
+  margin: 25px auto;
   width: 95%;
 }
 
@@ -29,7 +28,7 @@
   text-align: center;
 }
 
-.container-form-main-label1-input1, .container-form-main-label2-input1 {
+.login-input {
   background-color: whitesmoke;
   border: 3px solid black;
   border-radius: 10px;
@@ -41,11 +40,7 @@
   width: 90%;
 }
 
-.container-form-main-label1-input1::placeholder {
-  text-align: center;
-}
-
-.container-form-main-label2-input1::placeholder {
+.login-input::placeholder {
   text-align: center;
 }
 
@@ -69,18 +64,13 @@
   transform: scale(1.1);
 }
 
-.disabled {
-  cursor: not-allowed;
-  opacity: 0.75;
-}
-
 @media screen and ( min-width : 500px ) {
 
-  .trivia-logo {
+  .logo-login {
     width: 85%;
   }
 
-  .container-form-main-label1-input1, .container-form-main-label2-input1 {
+  .login-input {
     font-size: 20px;
   }
 
@@ -92,11 +82,11 @@
 
 @media screen and ( min-width : 1000px ) {
 
-  .trivia-logo {
+  .logo-login {
     width: 75%;
   }
 
-  .container-form-main-label1-input1, .container-form-main-label2-input1 {
+  .login-input {
     font-size: 24px;
   }
 
@@ -108,7 +98,7 @@
 
 @media screen and ( min-width : 1500px ) {
 
-  .trivia-logo {
-    width: 65%;
+  .logo-login {
+    width: 70%;
   }
 }
