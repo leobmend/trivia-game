@@ -29,43 +29,43 @@ const Lobby = () => {
 
   return (
     <main className="Lobby">
-      <div className="container-logo-lobby">
-        <img src={ triviaLogo } alt="Trivia logo" className="logo-lobby" />
+      <div className="lobby-logo-container">
+        <img src={ triviaLogo } alt="Trivia logo" className="lobby-logo" />
       </div>
 
       <div className="container-buttons">
         <div className="box-buttons">
           <div className="container-play-button">
             <button
-              className="configs-button"
+              className="lobby-button"
               type="button"
               disabled={ isFetchingQuestions }
               onClick={ () => { history.push('/trivia'); } }
             >
               Play
             </button>
-            <select>
+            {/* <select>
               <option>Hard</option>
               <option>Medium</option>
               <option>Easy</option>
-            </select>
+            </select> */}
           </div>
           <button
-            className="configs-button"
+            className="lobby-button"
             type="button"
             onClick={ () => { history.push('/profile'); } }
           >
             Profile
           </button>
           <button
-            className="ranking-button"
+            className="lobby-button"
             type="button"
             onClick={ () => { history.push('/ranking'); } }
           >
             Ranking
           </button>
           <button
-            className="profile-button"
+            className="lobby-button"
             type="button"
             onClick={ () => { history.push('/settings'); } }
           >
