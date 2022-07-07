@@ -13,8 +13,15 @@ const register = rescue(async (req, res, _next) => {
   res.status(201).json(newScore);
 });
 
+const getRanking = rescue(async (_req, res, _next) => {
+  const ranking = await scoreService.getRanking();
+
+  res.status(200).json(ranking);
+});
+
 const scoreController = {
   register,
+  getRanking,
 };
 
 module.exports = scoreController;

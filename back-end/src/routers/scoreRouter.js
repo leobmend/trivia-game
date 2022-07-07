@@ -11,4 +11,10 @@ scoreRouter.post(
   scoreController.register,
 );
 
+scoreRouter.get(
+  '/ranking',
+  userAuthentication,
+  scoreController.getRanking,
+);
+
 module.exports = scoreRouter;

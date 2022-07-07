@@ -1,4 +1,4 @@
-const { Score, User } = require('../database/models');
+const { Score, User, sequelize } = require('../database/models');
 const CustomError = require('../utils/customError');
 
 const checkIfUserExists = async (id) => {
@@ -16,8 +16,25 @@ const create = async ({ userId, score, category, difficulty, type }) => {
   return newScore;
 };
 
+const getRanking = async () => {
+  const ranking = await User.findAll({
+    attributes: [
+      'id', 'name', 'email', [sequelize.fn('MAX', sequelize.col('scores.score')), 'max_score'],
+    ],
+    include: {
+      model: Score,
+      as: 'scores',
+      attributes: [],
+    },
+    group: ['User.id', 'name', 'email'],
+  });
+
+  return ranking;
+};
+
 const scoreService = {
   create,
+  getRanking,
 };
 
 module.exports = scoreService;
