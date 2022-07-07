@@ -10,16 +10,18 @@ import { setLocalStorage } from '../../services/localStorage';
 
 const pattern = /^\w.+@\w.+[\w]$/;
 
-const getBtnClassName = (isDisabledButton, isSigningUp, type) => {
+const getBtnClassName = (isDisabledButton, isSigningUp, isUserLoading, type) => {
   const DISABLED_BTN = ' disabled-btn';
   if (type === 'login') {
     return 'login-button'
       + `${isDisabledButton ? DISABLED_BTN : ''}`
-      + `${isSigningUp ? DISABLED_BTN : ''}`;
+      + `${isSigningUp ? DISABLED_BTN : ''}`
+      + `${isUserLoading ? DISABLED_BTN : ''}`;
   }
   if (type === 'signup') {
     return 'login-button'
-      + `${isSigningUp && isDisabledButton ? DISABLED_BTN : ''}`;
+      + `${isSigningUp && isDisabledButton ? DISABLED_BTN : ''}`
+      + `${isUserLoading ? DISABLED_BTN : ''}`;
   }
 };
 
@@ -61,10 +63,6 @@ const Login = () => {
 
   return (
     <div className="Login">
-      {/* <div className="login-modal">
-
-      </div> */}
-
       <form className="login-box">
         <img src={ triviaLogo } alt="Trivia logo" className="login-logo" />
 
@@ -109,7 +107,9 @@ const Login = () => {
               </div>
             )}
           <button
-            className={ getBtnClassName(isDisabledButton, isSigningUp, 'login') }
+            className={
+              getBtnClassName(isDisabledButton, isSigningUp, isUserLoading, 'login')
+            }
             id="play-Button"
             type="button"
             disabled={ isDisabledButton || isSigningUp }
@@ -119,7 +119,9 @@ const Login = () => {
           </button>
 
           <button
-            className={ getBtnClassName(isDisabledButton, isSigningUp, 'signup') }
+            className={
+              getBtnClassName(isDisabledButton, isSigningUp, isUserLoading, 'signup')
+            }
             type="button"
             disabled={ isSigningUp && isDisabledButton }
             onClick={ handleSignUp }
