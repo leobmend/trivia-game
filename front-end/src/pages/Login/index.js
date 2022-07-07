@@ -7,9 +7,21 @@ import './style.css';
 
 import { fetchLogin, fetchSignUp } from '../../redux/player';
 import { setLocalStorage } from '../../services/localStorage';
-import Loading from '../Loading';
 
 const pattern = /^\w.+@\w.+[\w]$/;
+
+const getBtnClassName = (isDisabledButton, isSigningUp, type) => {
+  const DISABLED_BTN = ' disabled-btn';
+  if (type === 'login') {
+    return 'login-button'
+      + `${isDisabledButton ? DISABLED_BTN : ''}`
+      + `${isSigningUp ? DISABLED_BTN : ''}`;
+  }
+  if (type === 'signup') {
+    return 'login-button'
+      + `${isSigningUp && isDisabledButton ? DISABLED_BTN : ''}`;
+  }
+};
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -17,9 +29,8 @@ const Login = () => {
   const [isSigningUp, setIsSigningUp] = useState(false);
 
   const {
-    info: { userToken, name }, loading: isUserLoading,
+    info: { userToken }, loading: isUserLoading,
   } = useSelector((state) => state.player);
-  const { value: isLoading } = useSelector((state) => state.loading);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -28,7 +39,7 @@ const Login = () => {
     if (userToken) {
       history.push('/lobby');
     }
-  }, [userToken, history, name]);
+  }, [userToken, history]);
 
   const isDisabledButton = !(email.match(pattern) && password.length);
 
@@ -48,18 +59,16 @@ const Login = () => {
     }
   };
 
-  if (isLoading) return <Loading />;
-
   return (
-    <div className="container-form">
-      <form
-        action="/action_page.php"
-        method="post"
-        className="container-form-box"
-      >
-        <img src={ triviaLogo } alt="Trivia logo" className="logo-login" />
+    <div className="Login">
+      {/* <div className="login-modal">
 
-        <main className="container-form-main">
+      </div> */}
+
+      <form className="login-box">
+        <img src={ triviaLogo } alt="Trivia logo" className="login-logo" />
+
+        <main className="login-container">
           {!isUserLoading
             ? (
               <>
@@ -83,7 +92,7 @@ const Login = () => {
                     value={ password }
                     onChange={ ({ target }) => setPassword(target.value) }
                     onKeyDown={ (event) => handleEnterKey(event) }
-                    type="text"
+                    type="password"
                     placeholder="Password"
                     autoComplete="off"
                     required
@@ -100,27 +109,19 @@ const Login = () => {
               </div>
             )}
           <button
-            className={
-              isDisabledButton
-                ? 'container-form-main-button1 disabled'
-                : 'container-form-main-button1'
-            }
+            className={ getBtnClassName(isDisabledButton, isSigningUp, 'login') }
             id="play-Button"
             type="button"
-            disabled={ isDisabledButton }
+            disabled={ isDisabledButton || isSigningUp }
             onClick={ handleLogin }
           >
             Login
           </button>
 
           <button
-            className={
-              isDisabledButton
-                ? 'container-form-main-button1 disabled'
-                : 'container-form-main-button1'
-            }
+            className={ getBtnClassName(isDisabledButton, isSigningUp, 'signup') }
             type="button"
-            disabled={ isDisabledButton }
+            disabled={ isSigningUp && isDisabledButton }
             onClick={ handleSignUp }
           >
             {isSigningUp ? 'Confirm Sign Up' : 'Sign Up'}
