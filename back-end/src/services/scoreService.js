@@ -19,7 +19,7 @@ const create = async ({ userId, score, category, difficulty, type }) => {
 const getRanking = async () => {
   const ranking = await User.findAll({
     attributes: [
-      'id', 'name', 'email', [sequelize.fn('MAX', sequelize.col('scores.score')), 'max_score'],
+      'id', 'name', 'email', [sequelize.fn('MAX', sequelize.col('scores.score')), 'maxScore'],
     ],
     include: {
       model: Score,
