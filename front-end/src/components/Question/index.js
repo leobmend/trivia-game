@@ -11,6 +11,7 @@ import Answers from '../Answers';
 
 import { resetQuestions } from '../../redux/trivia';
 import usersAPI from '../../services/usersAPI';
+import { resetRanking } from '../../redux/ranking';
 
 const TIMER_SEC = 30;
 const LIMIT_QUESTIONS = 4;
@@ -47,6 +48,7 @@ const Question = ({ question, questionIndex, setQuestionIndex }) => {
       setIsAnswered(false);
       setTimer(TIMER_SEC);
     } else {
+      dispatch(resetRanking());
       dispatch(resetQuestions());
 
       usersAPI.registerScore(userToken, { score, ...settings });

@@ -41,8 +41,8 @@ const registerScore = async (userToken, { score, category, difficulty, type }) =
     .catch((err) => err.message)
 );
 
-const getScores = async (userToken) => (
-  api.get('/score', { headers: { Authorization: userToken } })
+const getTopTwenty = async (userToken) => (
+  api.get('/score/ranking', { headers: { Authorization: userToken } })
     .then(({ data }) => ({ data }))
     .catch((err) => err.message)
 );
@@ -54,7 +54,7 @@ const usersAPI = {
   update,
   updatePassword,
   registerScore,
-  getScores,
+  getTopTwenty,
 };
 
 export default usersAPI;

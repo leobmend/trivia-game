@@ -9,7 +9,7 @@ import loadingGif from '../../images/loading.gif';
 import myHooks from '../../services/myHooks';
 import { setLoading } from '../../redux/loading';
 
-const { useDataLoading } = myHooks;
+const { useDataLoading, useRanking } = myHooks;
 
 const HTTP_UNAUTHORIZED = 401;
 const HTTP_NOT_FOUND = 404;
@@ -20,15 +20,18 @@ const Loading = () => {
     loading: { value: isLoading },
     trivia: { token, categories, questions },
     player: { info: { userToken }, lastStatus },
+    ranking: { topTwenty },
   } = useSelector((state) => state);
 
   const dispatch = useDispatch();
   const history = useHistory();
 
   useDataLoading();
+  useRanking();
 
   useEffect(() => {
     if (isLoading && token && categories.length && questions.length
+      && (topTwenty.length || httpErrors.includes(lastStatus))
       && (userToken || httpErrors.includes(lastStatus))) {
       if (!userToken) {
         history.push('/');
@@ -38,7 +41,8 @@ const Loading = () => {
       }
       dispatch(setLoading(false));
     }
-  }, [isLoading, userToken, token, categories, questions, lastStatus, dispatch, history]);
+  }, [isLoading, userToken, token, categories, questions,
+    lastStatus, topTwenty, dispatch, history]);
 
   return (
     <main className="Loading">

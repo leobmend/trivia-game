@@ -60,6 +60,10 @@
   width: 85%;
 }
 
+.loading-ranking-gif {
+  margin: auto;
+}
+
 .rank-card {
   align-items: center;
   background-color: whitesmoke;

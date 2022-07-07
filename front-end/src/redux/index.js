@@ -5,6 +5,7 @@ import scoreReducer from './score';
 import triviaReducer from './trivia';
 import loadingReducer from './loading';
 import settingsReducer from './settings';
+import rankingReducer from './ranking';
 
 export default configureStore({
   reducer: {
@@ -13,5 +14,6 @@ export default configureStore({
     trivia: triviaReducer,
     loading: loadingReducer,
     settings: settingsReducer,
+    ranking: rankingReducer,
   },
 });

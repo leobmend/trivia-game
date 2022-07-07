@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGetInfo } from '../redux/player';
+import { fetchRanking } from '../redux/ranking';
 import { fetchCategories, fetchQuestions, fetchToken } from '../redux/trivia';
 import { getLocalStorage } from './localStorage';
 
@@ -50,8 +52,24 @@ const useDataLoading = () => {
   }
 };
 
+const useRanking = () => {
+  const dispatch = useDispatch();
+
+  const {
+    ranking: { loading: isRankingLoading, topTwenty },
+    player: { info: { userToken } },
+  } = useSelector((state) => state);
+
+  useEffect(() => {
+    if (userToken && !topTwenty.length && !isRankingLoading) {
+      dispatch(fetchRanking(userToken));
+    }
+  });
+};
+
 const myHooks = {
   useDataLoading,
+  useRanking,
 };
 
 export default myHooks;
