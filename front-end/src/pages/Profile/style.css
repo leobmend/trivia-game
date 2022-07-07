@@ -6,7 +6,7 @@
   width: 100vw;
 }
 
-.title-container {
+.profile-title-container {
   align-items: center;
   background-color: #264653;
   border-bottom-left-radius: 20px;
@@ -55,13 +55,18 @@
 .profile-container {
   background-color: #264653;
   border-radius: 10px;
-  display: flex;
-  flex-direction: column;
   height: 70%;
-  justify-content: space-between;
   margin: auto;
   padding: 20px;
   width: 90%;
+}
+
+.profile-box {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .gravatar-container {
@@ -97,32 +102,6 @@
   top: -20px;
 }
 
-.info-container {
-  align-items: center;
-  background-color: whitesmoke;
-  border-radius: 7px;
-  display: flex;
-  padding: 10px;
-}
-
-.info-container p {
-  margin: auto;
-}
-
-.edit-input {
-  background-color: whitesmoke;
-  border: 2px solid black;
-  border-radius: 5px;
-  margin: auto;
-  padding: 4px 5px;
-  text-align: center;
-  width: 60%;
-}
-
-.edit-input::placeholder {
-  text-align: center;
-}
-
 .edit-button {
   background-color: #2a9d8f;
   border: 3px solid #2a9d8f;
@@ -141,44 +120,151 @@
   transform: scale(1.1);
 }
 
-@media screen and ( min-width : 500px ) {
+.disabled-btn {
+  background-color: #a4a4a4;
+  border: 3px solid #a4a4a4;
+}
 
-  .profile-title {
-    font-size: 45px;
-    padding: 5px 50px;
-  }
+@media ( orientation : portrait ) {
 
-  .navigate-button {
-    font-size: 22px;
-    padding: 3px 20px;
-  }
+  @media screen and ( min-width : 500px ) {
 
-  .profile-container {
-    width: 60%;
+    .profile-title-container {
+      height: 15%;
+    }
+
+    .profile-container {
+      padding: 5%;
+    }
+
+    .profile-box {
+      justify-content: space-around;
+    }
+
+    .gravatar-container {
+      box-shadow: 0 2px 2px 0 black;
+    }
+
+    .edit-button {
+      margin: 0 auto;
+      width: 50%;
+    }
   }
 }
 
-@media screen and ( min-width : 1000px ) {
+@media ( orientation : landscape ) {
 
-  .title-container {
-    height: 25vh;
+  @media screen and ( max-width : 800px ) {
+
+    .profile-title-container {
+      height: auto;
+      width: 80%;
+    }
+
+    .navigate-container {
+      padding: 0 0 1%;
+    }
+
+    .profile-title {
+      font-size: 30px;
+      margin: 1%;
+      padding: 5px 25px;
+    }
+
+    .navigate-button {
+      font-size: 16px;
+    }
+
+    .profile-container {
+      width: 90%;
+    }
+
+    .profile-box {
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+    }
+
+    .gravatar-container {
+      margin-right: 5px;
+      padding: 5px;
+      width: 70%;
+    }
+
+    .edit-button {
+      width: 25%;
+    }
   }
 
-  .profile-title {
-    font-size: 55px;
-    padding: 5px 75px;
+  @media screen and ( min-width : 800px ) {
+
+    .profile-container {
+      padding: 40px;
+      width: 60%;
+    }
+
+    .profile-box {
+      justify-content: space-around;
+    }
+
+    .profile-title {
+      font-size: 45px;
+      padding: 5px 50px;
+    }
+
+    .gravatar-container {
+      box-shadow: 0 2px 2px 0 black;
+    }
+
+    .navigate-button {
+      font-size: 22px;
+      padding: 3px 20px;
+    }
+  }
+
+  @media screen and ( min-width : 1000px ) {
+
+    .profile-title {
+      font-size: 55px;
+      padding: 5px 75px;
+    }
+
+    .profile-container {
+      padding: 15px;
+    }
+
+    .profile-box {
+      border: 3px solid #022433;
+      padding: 5% 10%;
+    }
+
+    .edit-button {
+      margin: 0 auto;
+      width: 50%;
+    }
+  }
+
+  @media screen and ( min-width : 1500px ) {
+
+    .profile-title {
+      font-size: 65px;
+      padding: 5px 120px;
+    }
+
+    .navigate-button {
+      font-size: 25px;
+      padding: 5px 50px;
+    }
+
+    .profile-container {
+      padding: 30px;
+    }
+
+    .edit-button {
+      padding: 5px;
+    }
   }
 }
 
-@media screen and ( min-width : 1500px ) {
-
-  .profile-title {
-    font-size: 65px;
-    padding: 5px 120px;
-  }
-
-  .navigate-button {
-    font-size: 25px;
-    padding: 3px 50px;
-  }
+.disabled-btn:hover {
+  transform: scale(1);
 }

@@ -11,6 +11,19 @@ import { fetchEditUser, fetchEditPassword, setEditing, setLogout,
 import { setLocalStorage } from '../../services/localStorage';
 import getGravatar from '../../services/gravatar';
 
+const getBtnClassName = (editing, type) => {
+  if (type === 'user') {
+    return 'edit-button '
+      + `${editing === 'user' && ' editing-btn'}`
+      + `${editing === 'password' && ' disabled-btn'}`;
+  }
+  if (type === 'password') {
+    return 'edit-button '
+      + `${editing === 'password' && ' editing-btn'}`
+      + `${editing === 'user' && ' disabled-btn'}`;
+  }
+};
+
 const Profile = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -50,7 +63,7 @@ const Profile = () => {
 
   return (
     <main className="Profile">
-      <section className="title-container">
+      <section className="profile-title-container">
         <h1 className="profile-title">Profile</h1>
         <div className="navigate-container">
           <button
@@ -73,47 +86,49 @@ const Profile = () => {
         </div>
       </section>
       <section className="profile-container">
-        <div className="gravatar-container">
-          <h2>
-            Gravatar
-            <a
-              href="https://br.gravatar.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="gravatar-anchor"
-            >
-              ?
-            </a>
-          </h2>
-          <img
-            className="profile-player-img"
-            src={ getGravatar(player.email) }
-            alt="Gravatar profile"
+        <div className="profile-box">
+          <div className="gravatar-container">
+            <h2>
+              Gravatar
+              <a
+                href="https://br.gravatar.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="gravatar-anchor"
+              >
+                ?
+              </a>
+            </h2>
+            <img
+              className="profile-player-img"
+              src={ getGravatar(player.email) }
+              alt="Gravatar profile"
+            />
+          </div>
+          <ProfileInfoContainer
+            states={ { name, email, password1, password2 } }
+            currValues={ { currName: player.name, currEmail: player.email } }
+            setStateFuncs={ { setName, setEmail, setPassword1, setPassword2 } }
           />
+          <button
+            className={ getBtnClassName(editing, 'user') }
+            type="button"
+            disabled={ editing === 'password' }
+            onClick={ handleEdit }
+          >
+            {`${editing === 'user' ? 'Confirm ' : ''}Edit name / e-mail`}
+          </button>
+          <button
+            className={ getBtnClassName(editing, 'password') }
+            type="button"
+            disabled={
+              editing === 'user' || (editing === 'password' && password1 !== password2)
+            }
+            onClick={ handleEditPassword }
+          >
+            {`${editing === 'password' ? 'Confirm ' : ''}Change password`}
+          </button>
         </div>
-        <ProfileInfoContainer
-          states={ { name, email, password1, password2 } }
-          currValues={ { currName: player.name, currEmail: player.email } }
-          setStateFuncs={ { setName, setEmail, setPassword1, setPassword2 } }
-        />
-        <button
-          className={ `edit-button ${editing === 'user' && 'editing-btn'}` }
-          type="button"
-          disabled={ editing === 'password' }
-          onClick={ handleEdit }
-        >
-          {`${editing === 'user' ? 'Confirm ' : ''}Edit name / e-mail`}
-        </button>
-        <button
-          className={ `edit-button ${editing === 'password' && 'editing-btn'}` }
-          type="button"
-          disabled={
-            editing === 'user' || (editing === 'password' && password1 !== password2)
-          }
-          onClick={ handleEditPassword }
-        >
-          {`${editing === 'password' ? 'Confirm ' : ''}Change password`}
-        </button>
       </section>
     </main>
   );

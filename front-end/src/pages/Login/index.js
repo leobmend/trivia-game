@@ -5,7 +5,7 @@ import triviaLogo from '../../images/trivia.png';
 import loadingGif from '../../images/loading.gif';
 import './style.css';
 
-import { fetchLogin, fetchSignUp } from '../../redux/player';
+import { fetchLogin, fetchSignUp, setEditing } from '../../redux/player';
 import { setLocalStorage } from '../../services/localStorage';
 
 const pattern = /^\w.+@\w.+[\w]$/;
@@ -31,7 +31,7 @@ const Login = () => {
   const [isSigningUp, setIsSigningUp] = useState(false);
 
   const {
-    info: { userToken }, loading: isUserLoading,
+    info: { userToken }, loading: isUserLoading, editing,
   } = useSelector((state) => state.player);
 
   const dispatch = useDispatch();
@@ -42,6 +42,10 @@ const Login = () => {
       history.push('/lobby');
     }
   }, [userToken, history]);
+
+  useEffect(() => {
+    if (editing) dispatch(setEditing(''));
+  });
 
   const isDisabledButton = !(email.match(pattern) && password.length);
 

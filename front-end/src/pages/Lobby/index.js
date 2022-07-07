@@ -7,11 +7,13 @@ import triviaLogo from '../../images/trivia.png';
 import { resetScore } from '../../redux/score';
 import { fetchQuestions } from '../../redux/trivia';
 import { getQuestionsBody } from '../../services/myHooks';
+import { setEditing } from '../../redux/player';
 
 const Lobby = () => {
   const {
     trivia: { token, categories, questions, responseCode, loading: isFetchingQuestions },
     score: { scorePoints },
+    player: { editing },
     settings,
   } = useSelector((state) => state);
 
@@ -19,6 +21,7 @@ const Lobby = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (editing) dispatch(setEditing(''));
     if (scorePoints) dispatch(resetScore());
     if (responseCode) {
       history.push('/settings');
