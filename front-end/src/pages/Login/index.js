@@ -9,6 +9,7 @@ import { fetchLogin, fetchSignUp, setEditing } from '../../redux/player';
 import { setLocalStorage } from '../../services/localStorage';
 
 const pattern = /^\w.+@\w.+[\w]$/;
+const PASSWORD_MIN = 6;
 
 const getBtnClassName = (isDisabledButton, isSigningUp, isUserLoading, type) => {
   const DISABLED_BTN = ' disabled-btn';
@@ -47,7 +48,7 @@ const Login = () => {
     if (editing) dispatch(setEditing(''));
   });
 
-  const isDisabledButton = !(email.match(pattern) && password.length);
+  const isDisabledButton = !(email.match(pattern) && password.length >= PASSWORD_MIN);
 
   const handleLogin = async () => {
     dispatch(fetchLogin({ setLocalStorage, email, password }));
