@@ -5,11 +5,11 @@ module.exports = {
     await queryInterface.bulkInsert('scores',
       [{
         id: 1,
-        score: 100,
+        score: 53,
         category: 'any',
         difficulty: 'any',
         type: 'any',
-        user_id: 100
+        user_id: 1
       },
       ], { timestamps: false });
   },
