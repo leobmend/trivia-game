@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://trivia-game-back.herokuapp.com/',
+  baseURL: 'https://trivia-game-back.herokuapp.com/',
 });
 
 const login = async ({ email, password }) => (
