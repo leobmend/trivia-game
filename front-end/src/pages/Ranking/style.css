@@ -14,7 +14,7 @@
   box-shadow: 0 4px 8px 0 rgb(92, 92, 92);
   display: flex;
   flex-direction: column;
-  height: 20vh;
+  height: 22%;
   justify-content: space-evenly;
   text-align: center;
   width: 90%;
@@ -193,5 +193,41 @@
   .home-button {
     font-size: 25px;
     padding: 3px 50px;
+  }
+}
+
+@media ( orientation : landscape ) {
+
+  @media screen and ( max-width : 800px ) {
+
+    .title-container {
+      height: 28%;
+      padding: 0.5%;
+      width: 80%;
+    }
+
+    .ranking-title {
+      font-size: 30px;
+      margin: auto;
+      padding: 5px 25px;
+    }
+
+    .home-button {
+      font-size: 16px;
+      margin: auto;
+    }
+
+    .ranking-container {
+      width: 90%;
+    }
+
+    .rank-card {
+      margin: 15px;
+    }
+
+    .rank-img {
+      height: 65px;
+      width: 65px;
+    }
   }
 }

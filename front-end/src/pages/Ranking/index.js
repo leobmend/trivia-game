@@ -50,7 +50,7 @@ const Ranking = () => {
           type="button"
           onClick={ () => history.push('/lobby') }
         >
-          Início
+          Lobby
         </button>
       </section>
 
