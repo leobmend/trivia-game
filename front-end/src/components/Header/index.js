@@ -14,6 +14,7 @@ const Header = () => {
   return (
     <header className="Header">
       <div
+        className="player-img-container"
         onClick={ () => setIsModalVisible(!isModalVisible) }
         onKeyDown={ () => {} }
         role="button"

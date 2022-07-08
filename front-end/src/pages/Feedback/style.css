@@ -1,27 +1,43 @@
-.FeedBack {
+.Feedback {
   align-items: center;
-  background-color: #264653;
-  border-radius: 25px;
-  box-shadow: 0 4px 8px 0 rgb(99, 97, 97);
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  margin: auto;
-  min-height: 500px;
-  width: 85vw;
+  height: 100%;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .feedback-container {
   align-items: center;
+  background-color: #264653;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 black;
+  height: 85%;
+  margin: auto;
+  padding: 20px;
+  width: 85%;
+}
+
+.feedback-box {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-evenly;
+  padding: 10px;
+  width: 100%;
+}
+
+.feedback-text-container {
   background-color: rgb(224, 224, 224);
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 black;
   display: flex;
   flex-direction: column;
-  height: 60%;
+  height: 70%;
   justify-content: space-evenly;
-  padding: 20px;
-  width: 85%;
+  padding: 10px;
+  width: 95%;
 }
 
 .fb-h1 {
@@ -39,7 +55,9 @@
 .fb-buttons-container {
   align-items: center;
   display: flex;
-  flex-direction: column;
+  flex-flow: column;
+  flex-wrap: wrap;
+  height: 20%;
   justify-content: center;
   width: 100%;
 }
@@ -55,7 +73,7 @@
   margin: 8px;
   padding: 5px;
   transition-duration: 0.4s;
-  width: 70%;
+  width: 40%;
 }
 
 .fb-buttons-container button:hover {
@@ -73,30 +91,20 @@
   .fb-h2 {
     font-size: 20px;
   }
-
-  .fb-buttons-container button {
-    width: 50%;
-  }
 }
 
 @media screen and ( min-width : 1000px ) {
 
-  .FeedBack {
-    width: 60vw;
+  .feedback-container {
+    padding: 30px;
   }
 
-  .fb-buttons-container button {
-    width: 40%;
+  .feedback-box {
+    border: 3px solid #022433;
   }
-}
 
-@media screen and ( min-width : 1500px ) {
-
-  .FeedBack {
-    height: calc(100vh - 150px - 50px - 50px);
-    margin: 50px auto;
-    min-width: none;
-    width: 50vw;
+  .feedback-text-container {
+    width: 80%;
   }
 
   .fb-h1 {
@@ -104,7 +112,28 @@
   }
 
   .fb-h2 {
-    font-size: 24px;
+    font-size: 28px;
+  }
+}
+
+@media screen and ( min-width : 1500px ) {
+
+
+  .feedback-container {
+    border-radius: 30px;
+    padding: 40px;
+  }
+
+  .feedback-text-container {
+    border-radius: 20px;
+  }
+
+  .fb-h1 {
+    font-size: 50px;
+  }
+
+  .fb-h2 {
+    font-size: 30px;
   }
 
   .fb-buttons-container {
@@ -115,9 +144,10 @@
   }
 
   .fb-buttons-container button {
+    border-radius: 10px;
     font-size: 20px;
-    margin: 15px 12px;
-    padding: 8px;
+    margin: 15px;
+    padding: 10px;
     width: 30%;
   }
 }

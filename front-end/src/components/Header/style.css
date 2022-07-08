@@ -5,36 +5,40 @@
   border-bottom-right-radius: 15px;
   box-shadow: 0 4px 8px 0 rgb(92, 92, 92);
   display: flex;
-  justify-content: space-around;
+  height: 25%;
+  justify-content: center;
   margin: 0 auto;
-  width: 98%;
+  width: 95%;
+}
+
+.player-img-container {
+  border: 2px solid #c9c9c9;
+  border-radius: 100%;
+  height: 90%;
+  margin: 3% 1%;
 }
 
 .player-img {
-  border: 2px solid #c9c9c9;
   border-radius: 100%;
-  margin: 10px;
-  width: 80px;
 }
 
 .player-name {
   background-color: #c9c9c9;
   border-radius: 15px;
   font-size: 18px;
-  margin: 0 auto;
+  margin: auto;
   padding: 5px;
   text-align: center;
-  width: 130px;
 }
 
 .player-score {
   background-color: #c9c9c9;
   border-radius: 12px;
-  font-size: 15px;
-  margin: 0 10px;
+  font-size: 14px;
+  margin: 3% 1%;
   padding: 5px;
   text-align: center;
-  width: 100px;
+  width: 15%;
 }
 
 .player-score span {
@@ -105,65 +109,56 @@
   text-align: center;
 }
 
-@media screen and ( min-width : 500px ) {
+@media ( orientation : landscape ) {
 
-  .player-img {
-    border-width: 4px;
-    margin: 10px 25px;
-    width: 120px;
+  @media screen and ( min-width : 500px ) {
+
+    .player-img {
+      border-width: 4px;
+    }
+
+    .player-name {
+      font-size: 23px;
+      padding: 13px 20px;
+    }
   }
 
-  .player-name {
-    font-size: 23px;
-    padding: 13px 20px;
-    width: 180px;
+  @media screen and ( min-width : 1000px ) {
+
+    .player-img {
+      margin: 10px 60px;
+    }
+
+    .player-name {
+      font-size: 35px;
+      padding: 13px 30px;
+      width: auto;
+    }
+
+    .player-score {
+      font-size: 22px;
+      padding: 8px 25px;
+      width: 250px;
+    }
+
+    .modal-on {
+      height: 10vw;
+      width: 30vw;
+    }
+
+    .modal-p {
+      font-size: 20px;
+      padding: 12px;
+      text-align: center;
+    }
   }
 
-  .player-score {
-    font-size: 18px;
-    margin: 0 25px;
-    padding: 8px 20px;
-    width: 150px;
-  }
-}
+  @media screen and ( min-width : 1500px ) {
 
-@media screen and ( min-width : 1000px ) {
-
-  .player-img {
-    margin: 10px 60px;
-    width: 160px;
-  }
-
-  .player-name {
-    font-size: 35px;
-    padding: 13px 30px;
-    width: auto;
-  }
-
-  .player-score {
-    font-size: 22px;
-    margin: 0 60px;
-    padding: 8px 25px;
-    width: 250px;
-  }
-
-  .modal-on {
-    height: 10vw;
-    width: 30vw;
-  }
-
-  .modal-p {
-    font-size: 20px;
-    padding: 12px;
-    text-align: center;
-  }
-}
-
-@media screen and ( min-width : 1500px ) {
-
-  .player-name {
-    font-size: 40px;
-    padding: 13px 40px;
-    width: auto;
+    .player-name {
+      font-size: 40px;
+      padding: 13px 40px;
+      width: auto;
+    }
   }
 }
