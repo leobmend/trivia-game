@@ -74,7 +74,7 @@ const Settings = () => {
           Game Settings
         </h1>
         <button
-          className="config-home-button"
+          className="config-navigate-button"
           type="button"
           disabled={ responseCode }
           onClick={ () => history.push('/lobby') }
@@ -84,55 +84,57 @@ const Settings = () => {
       </section>
 
       <section className="config-container">
-        <label className="config-label" htmlFor="category">
-          Category
-          <select
-            className="config-select"
-            id="category"
-            onChange={ handleChange }
-            value={ categorySelect }
-          >
-            {categories.map(({ name, id }) => (
-              <option key={ id } value={ id }>{name}</option>
-            ))}
-          </select>
-        </label>
+        <div className="config-box">
+          <label className="config-label" htmlFor="category">
+            Category
+            <select
+              className="config-select"
+              id="category"
+              onChange={ handleChange }
+              value={ categorySelect }
+            >
+              {categories.map(({ name, id }) => (
+                <option key={ id } value={ id }>{name}</option>
+              ))}
+            </select>
+          </label>
 
-        <label className="config-label" htmlFor="difficulty">
-          Difficulty
-          <select
-            className="config-select"
-            id="difficulty"
-            onChange={ handleChange }
-            value={ difficultySelect }
-          >
-            {difficultyObj.map(({ name, value }) => (
-              <option key={ value } value={ value }>{name}</option>
-            ))}
-          </select>
-        </label>
+          <label className="config-label" htmlFor="difficulty">
+            Difficulty
+            <select
+              className="config-select"
+              id="difficulty"
+              onChange={ handleChange }
+              value={ difficultySelect }
+            >
+              {difficultyObj.map(({ name, value }) => (
+                <option key={ value } value={ value }>{name}</option>
+              ))}
+            </select>
+          </label>
 
-        <label className="config-label" htmlFor="type">
-          Question Type
-          <select
-            className="config-select"
-            id="type"
-            onChange={ handleChange }
-            value={ typeSelect }
+          <label className="config-label" htmlFor="type">
+            Question Type
+            <select
+              className="config-select"
+              id="type"
+              onChange={ handleChange }
+              value={ typeSelect }
+            >
+              {typeObj.map(({ name, value }) => (
+                <option key={ value } value={ value }>{name}</option>
+              ))}
+            </select>
+          </label>
+          <button
+            className="apply-button"
+            type="button"
+            disabled={ responseCode }
+            onClick={ handleApply }
           >
-            {typeObj.map(({ name, value }) => (
-              <option key={ value } value={ value }>{name}</option>
-            ))}
-          </select>
-        </label>
-        <button
-          className="apply-button"
-          type="button"
-          disabled={ responseCode }
-          onClick={ handleApply }
-        >
-          Apply
-        </button>
+            Apply
+          </button>
+        </div>
       </section>
     </main>
   );
