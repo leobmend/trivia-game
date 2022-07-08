@@ -29,15 +29,6 @@ const QuestionAndTimer = (
     }
   });
 
-  // const resetTimer = () => {
-  //   stopTimer();
-  //   if (seconds) {
-  //     renders.current++;
-  //     setSeconds(0);
-  //   }
-  //   inputRef.current.focus();
-  // }
-
   return (
     <section className="question-container">
       <div className="rotated-card-1">

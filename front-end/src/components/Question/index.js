@@ -13,7 +13,7 @@ import { resetQuestions } from '../../redux/trivia';
 import usersAPI from '../../services/usersAPI';
 import { resetRanking } from '../../redux/ranking';
 
-const TIMER_SEC = 30;
+const TIMER_SEC = 8;
 const LIMIT_QUESTIONS = 4;
 const ANSWERS_ARRAY_SIZE = 4;
 

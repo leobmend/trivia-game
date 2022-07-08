@@ -82,7 +82,7 @@ const Answers = ({ type, correctAnswer, incorrectAnswers, timer,
   };
 
   return (
-    <section className="buttons-container" data-testid="answer-options">
+    <section className="answers-container" data-testid="answer-options">
       {type === 'multiple'
         ? renderMultipleAnswers()
         : renderBoolAnswers(correctAnswer)}

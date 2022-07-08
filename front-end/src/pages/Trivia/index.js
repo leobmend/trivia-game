@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+
+import './style.css';
+
 import Header from '../../components/Header';
 import Question from '../../components/Question';
 
@@ -11,7 +14,6 @@ const Trivia = () => {
   return (
     <main className="Trivia">
       <Header />
-
       <Question
         question={ questions[questionIndex] }
         questionIndex={ questionIndex }
