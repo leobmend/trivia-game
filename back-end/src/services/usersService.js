@@ -1,6 +1,7 @@
 const { User } = require('../database/models');
 const CustomError = require('../utils/customError');
 const { generateToken } = require('../utils/jwtUtils');
+const { hashPassword, comparePassword } = require('../utils/bcryptUtils');
 
 const checkIfUserExists = async (id) => {
   const oldUser = await User.findByPk(id);
@@ -15,7 +16,9 @@ const authentication = async ({ email, password }) => {
 
   if (!user) throw new CustomError(404, 'User does not exist');
 
-  if (user.password !== password) throw new CustomError(401, 'Wrong credentials');
+  if (!(await comparePassword(password, user.password))) {
+    throw new CustomError(401, 'Wrong credentials');
+  }
 
   const jwtToken = generateToken(user);
 
@@ -27,7 +30,9 @@ const create = async ({ name, email, password }) => {
 
   if (userByEmail) throw new CustomError(409, 'The e-mail already exists');
 
-  const newUser = await User.create({ name: name || 'Player', email, password });
+  const hash = await hashPassword(password);
+
+  const newUser = await User.create({ name: name || 'Player', email, password: hash });
 
   const jwtToken = generateToken(newUser);
 
