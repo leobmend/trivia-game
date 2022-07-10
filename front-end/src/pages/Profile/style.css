@@ -1,0 +1,271 @@
+.Profile {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.profile-title-container {
+  align-items: center;
+  background-color: #264653;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgb(92, 92, 92);
+  display: flex;
+  flex-direction: column;
+  height: 22%;
+  justify-content: space-evenly;
+  text-align: center;
+  width: 90%;
+}
+
+.profile-title {
+  background-color: #c9c9c9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 black;
+  font-size: 35px;
+  padding: 5px 15px;
+}
+
+.navigate-container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.navigate-button {
+  background-color: #2a9d8f;
+  border: 3px solid #2a9d8f;
+  border-radius: 5px;
+  box-shadow: 0 2px 2px 0 black;
+  color: whitesmoke;
+  font-size: 18px;
+  font-weight: 800;
+  padding: 3px 10px;
+  transition-duration: 0.4s;
+}
+
+.navigate-button:hover {
+  background-color: whitesmoke;
+  color: black;
+  transform: scale(1.1);
+}
+
+.profile-container {
+  background-color: #264653;
+  border-radius: 10px;
+  height: 70%;
+  margin: auto;
+  padding: 20px;
+  width: 90%;
+}
+
+.profile-box {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.gravatar-container {
+  align-items: center;
+  background-color: whitesmoke;
+  border-radius: 7px;
+  display: flex;
+  padding: 10px;
+}
+
+.gravatar-container h2 {
+  margin-right: 10px;
+}
+
+.profile-player-img {
+  border: 2px solid #c9c9c9;
+  border-radius: 100%;
+  margin: auto;
+  width: 17vh;
+}
+
+.gravatar-anchor {
+  background-color: #264653;
+  border: 1px solid #1a2f38;
+  border-radius: 6px;
+  color: whitesmoke;
+  font-size: 12px;
+  left: 5px;
+  padding: 2px 6px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  top: -20px;
+}
+
+.edit-button {
+  background-color: #2a9d8f;
+  border: 3px solid #2a9d8f;
+  border-radius: 5px;
+  box-shadow: 0 2px 2px 0 black;
+  color: whitesmoke;
+  font-size: 18px;
+  font-weight: 800;
+  padding: 3px 10px;
+  transition-duration: 0.4s;
+}
+
+.edit-button:hover {
+  background-color: whitesmoke;
+  color: black;
+  transform: scale(1.1);
+}
+
+.disabled-btn {
+  background-color: #a4a4a4;
+  border: 3px solid #a4a4a4;
+}
+
+@media ( orientation : portrait ) {
+
+  @media screen and ( min-width : 500px ) {
+
+    .profile-title-container {
+      height: 15%;
+    }
+
+    .profile-container {
+      padding: 5%;
+    }
+
+    .profile-box {
+      justify-content: space-around;
+    }
+
+    .gravatar-container {
+      box-shadow: 0 2px 2px 0 black;
+    }
+
+    .edit-button {
+      margin: 0 auto;
+      width: 50%;
+    }
+  }
+}
+
+@media ( orientation : landscape ) {
+
+  @media screen and ( max-width : 800px ) {
+
+    .profile-title-container {
+      height: auto;
+      width: 80%;
+    }
+
+    .navigate-container {
+      padding: 0 0 1%;
+    }
+
+    .profile-title {
+      font-size: 30px;
+      margin: 1%;
+      padding: 5px 25px;
+    }
+
+    .navigate-button {
+      font-size: 16px;
+    }
+
+    .profile-container {
+      width: 90%;
+    }
+
+    .profile-box {
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+    }
+
+    .gravatar-container {
+      margin-right: 5px;
+      padding: 5px;
+      width: 70%;
+    }
+
+    .edit-button {
+      width: 25%;
+    }
+  }
+
+  @media screen and ( min-width : 800px ) {
+
+    .profile-container {
+      padding: 40px;
+      width: 60%;
+    }
+
+    .profile-box {
+      justify-content: space-around;
+    }
+
+    .profile-title {
+      font-size: 45px;
+      padding: 5px 50px;
+    }
+
+    .gravatar-container {
+      box-shadow: 0 2px 2px 0 black;
+    }
+
+    .navigate-button {
+      font-size: 22px;
+      padding: 3px 20px;
+    }
+  }
+
+  @media screen and ( min-width : 1000px ) {
+
+    .profile-title {
+      font-size: 55px;
+      padding: 5px 75px;
+    }
+
+    .profile-container {
+      padding: 15px;
+    }
+
+    .profile-box {
+      border: 3px solid #022433;
+      padding: 5% 10%;
+    }
+
+    .edit-button {
+      margin: 0 auto;
+      width: 50%;
+    }
+  }
+
+  @media screen and ( min-width : 1500px ) {
+
+    .profile-title {
+      font-size: 65px;
+      padding: 5px 120px;
+    }
+
+    .navigate-button {
+      font-size: 25px;
+      padding: 5px 50px;
+    }
+
+    .profile-container {
+      padding: 30px;
+    }
+
+    .edit-button {
+      font-size: 22px;
+      padding: 5px;
+    }
+  }
+}
+
+.disabled-btn:hover {
+  transform: scale(1);
+}

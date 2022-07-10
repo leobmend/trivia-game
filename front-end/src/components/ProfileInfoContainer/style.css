@@ -1,0 +1,97 @@
+.loading-container {
+  height: 30%;
+  margin: 0 auto;
+}
+
+.loading-gif {
+  height: 100%;
+}
+
+.info-container {
+  align-items: center;
+  background-color: whitesmoke;
+  border-radius: 7px;
+  display: flex;
+  padding: 10px;
+}
+
+.info-container p {
+  margin: auto;
+}
+
+.edit-input {
+  background-color: whitesmoke;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin: auto;
+  padding: 4px 5px;
+  text-align: center;
+  width: 60%;
+}
+
+.edit-input::placeholder {
+  text-align: center;
+}
+
+.password-container {
+  display: flex;
+  flex-direction: column;
+  height: 40%;
+}
+
+.edit-password {
+  background-color: whitesmoke;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin: auto;
+  padding: 10px;
+  text-align: center;
+  width: 90%;
+}
+
+.edit-password::placeholder {
+  text-align: center;
+}
+
+@media ( orientation : portrait ) {
+
+  @media screen and ( min-width : 500px ) {
+
+    .info-container {
+      box-shadow: 0 2px 2px 0 black;
+    }
+  }
+}
+
+@media ( orientation : landscape ) {
+
+  @media screen and ( max-width : 800px ) {
+
+    .info-container {
+      margin-right: 5px;
+      width: 70%;
+    }
+
+    .password-container {
+      height: auto;
+    }
+
+    .edit-password {
+      margin: 2px;
+    }
+  }
+
+  @media screen and ( min-width : 800px ) {
+
+    .info-container {
+      box-shadow: 0 2px 2px 0 black;
+    }
+  }
+
+  @media screen and ( min-width : 1500px ) {
+
+    .info-container {
+      padding: 20px;
+    }
+  }
+}

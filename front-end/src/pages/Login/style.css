@@ -1,0 +1,161 @@
+.Login {
+  align-items: center;
+  background-color: #264653;
+  border-radius: 10px;
+  display: flex;
+  font-weight: 900;
+  justify-content: center;
+  margin: auto;
+  max-width: 90%;
+  padding: 20px;
+  transition-duration: 0.4s;
+}
+
+.login-box {
+  backdrop-filter: blur(15px);
+  border: 3px solid #022433;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.login-logo {
+  margin: 25px auto;
+  width: 95%;
+}
+
+.login-container {
+  padding: 16px;
+  text-align: center;
+}
+
+.login-input {
+  background-color: whitesmoke;
+  border: 3px solid black;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 800;
+  margin: 8px 0;
+  padding: 12px 20px;
+  text-align: center;
+  width: 90%;
+}
+
+.login-input::placeholder {
+  text-align: center;
+}
+
+.login-button {
+  background-color: #2a9d8f;
+  border: 3px solid #2a9d8f;
+  border-radius: 5px;
+  box-shadow: 0 2px 2px 0 black;
+  color: whitesmoke;
+  font-size: 14px;
+  font-weight: 800;
+  margin: 15px 12px;
+  padding: 8px;
+  transition-duration: 0.4s;
+  width: 60%;
+}
+
+.disabled-btn {
+  background-color: #a4a4a4;
+  border: 3px solid #a4a4a4;
+}
+
+@media screen and ( min-width : 500px ) {
+
+  .login-logo {
+    width: 85%;
+  }
+
+  .login-input {
+    font-size: 20px;
+  }
+
+  .login-button {
+    font-size: 16px;
+    width: 40%;
+  }
+}
+
+@media screen and ( min-width : 1000px ) {
+
+  .login-logo {
+    width: 75%;
+  }
+
+  .login-input {
+    font-size: 24px;
+  }
+
+  .login-button {
+    font-size: 20px;
+    width: 35%;
+  }
+}
+
+@media screen and ( min-width : 1500px ) {
+
+  .Login {
+    padding: 30px;
+  }
+
+  .login-button {
+    font-size: 20px;
+    width: 30%;
+  }
+
+  .login-button:hover {
+    background-color: whitesmoke;
+    color: black;
+    transform: scale(1.1);
+  }
+
+  .disabled-btn:hover {
+    transform: scale(1);
+  }
+
+  .login-logo {
+    width: 70%;
+  }
+}
+
+@media ( orientation : landscape ) {
+
+  @media screen and ( max-width : 800px ) {
+
+    .Login {
+      height: 90%;
+    }
+
+    .login-logo {
+      margin: 8px auto auto;
+      width: 65%;
+    }
+
+    .login-container {
+      margin: auto;
+      padding: 5px;
+      width: 80%;
+    }
+
+    .login-input {
+      font-size: 18px;
+      margin: 5px;
+      padding: 5px;
+    }
+
+    .login-button {
+      font-size: 16px;
+      margin: 5px;
+      padding: 5px;
+      width: 40%;
+    }
+
+    .login-loading-gif {
+      width: 15%;
+    }
+  }
+}

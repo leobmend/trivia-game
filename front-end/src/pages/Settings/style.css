@@ -1,0 +1,237 @@
+.Configuration {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.config-title-container {
+  align-items: center;
+  background-color: #264653;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgb(92, 92, 92);
+  display: flex;
+  flex-direction: column;
+  height: 20vh;
+  justify-content: space-evenly;
+  text-align: center;
+  width: 90%;
+}
+
+.config-title {
+  background-color: #c9c9c9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 black;
+  font-size: 35px;
+  padding: 5px 15px;
+}
+
+.config-navigate-button {
+  background-color: #2a9d8f;
+  border: 3px solid #2a9d8f;
+  border-radius: 5px;
+  box-shadow: 0 2px 2px 0 black;
+  color: whitesmoke;
+  font-size: 18px;
+  font-weight: 800;
+  padding: 3px 10px;
+  transition-duration: 0.4s;
+}
+
+.config-navigate-button:hover {
+  background-color: whitesmoke;
+  color: black;
+  transform: scale(1.1);
+}
+
+.config-container {
+  background-color: #264653;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px 0 rgb(99, 97, 97);
+  height: 65%;
+  margin: auto;
+  padding: 10px;
+  width: 80%;
+}
+
+.config-box {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.config-label {
+  align-items: center;
+  background-color: #c9c9c9;
+  border-radius: 10px;
+  box-shadow: 0 2px 2px 0 black;
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  font-weight: 800;
+  justify-content: space-between;
+  padding: 20px 40px;
+  text-align: center;
+  width: 90%;
+}
+
+.config-select {
+  background-color: whitesmoke;
+  border: 3px solid black;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 800;
+  margin-top: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+.apply-button {
+  background-color: #2a9d8f;
+  border: 3px solid #2a9d8f;
+  border-radius: 5px;
+  box-shadow: 0 2px 2px 0 black;
+  color: whitesmoke;
+  font-size: 18px;
+  font-weight: 800;
+  padding: 3px 10px;
+  transition-duration: 0.4s;
+}
+
+.apply-button:hover {
+  background-color: whitesmoke;
+  color: black;
+  transform: scale(1.1);
+}
+
+@media screen and ( min-width : 500px ) {
+
+  .config-title {
+    font-size: 45px;
+    padding: 5px 50px;
+  }
+
+  .config-navigate-button {
+    font-size: 22px;
+    padding: 3px 20px;
+  }
+
+  .config-label {
+    font-size: 23px;
+  }
+
+  .config-select {
+    font-size: 18px;
+  }
+}
+
+@media screen and ( min-width : 1000px ) {
+
+  .config-title-container {
+    height: 25vh;
+  }
+
+  .config-title {
+    font-size: 55px;
+    padding: 5px 75px;
+  }
+
+  .config-container {
+    padding: 20px;
+  }
+
+  .config-box {
+    border: 3px solid #022433;
+  }
+
+  .config-label {
+    flex-direction: row;
+    font-size: 25px;
+    padding: 25px 50px;
+    text-align: start;
+  }
+
+  .config-select {
+    font-size: 20px;
+    margin-top: 0;
+    width: 50%;
+  }
+
+  .apply-button {
+    font-size: 25px;
+    padding: 5px 30px;
+  }
+}
+
+@media screen and ( min-width : 1500px ) {
+
+  .config-title {
+    font-size: 65px;
+    padding: 5px 120px;
+  }
+
+  .config-navigate-button {
+    font-size: 25px;
+    padding: 3px 50px;
+  }
+
+  .config-label {
+    font-size: 28px;
+  }
+
+  .config-select {
+    font-size: 22px;
+  }
+}
+
+@media ( orientation : landscape ) {
+
+  @media screen and ( max-width : 900px ) {
+
+    .config-title-container {
+      height: auto;
+      padding: 4px;
+      width: 80%;
+    }
+
+    .config-title {
+      font-size: 30px;
+      margin: 1%;
+      padding: 5px 25px;
+    }
+
+    .config-navigate-button {
+      font-size: 14px;
+    }
+
+    .config-container {
+      width: 90%;
+    }
+
+    .config-box {
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+    }
+
+    .config-label {
+      flex-direction: row;
+      font-size: 18px;
+      margin: 4px 0;
+      padding: 10px;
+      width: 60%;
+    }
+
+    .config-select {
+      width: 60%;
+    }
+
+    .apply-button {
+      padding: 8px 18px;
+    }
+  }
+}
