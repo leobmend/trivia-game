@@ -30,7 +30,7 @@ A aplicação possui as páginas de *Login*, *Lobby*, *Profile*, *Settings*, *Tr
 
 * Observação: Toda a aplicação foi construída utilizando os frameworks [React](https://pt-br.reactjs.org/) e [Redux](https://redux.js.org/), inicialmente sendo utilizado componentes de classe. Após extensa refatoração, foram aplicados componentes funcionais na totalidade do projeto e todo o gerenciamento de estado global foi atualizado para o [Redux Toolkit](https://redux-toolkit.js.org/).
 
-### **Tecnologias e Características** :muscle:
+### **Tecnologias e Características**
 
 - Construído com o framwork [React](https://pt-br.reactjs.org/) e componentes funcionais;
 - Gerencia o estado global com o framwork [Redux Toolkit](https://redux-toolkit.js.org/);
@@ -40,7 +40,7 @@ A aplicação possui as páginas de *Login*, *Lobby*, *Profile*, *Settings*, *Tr
 - Testes construídos com os frameworks [Jest](https://jestjs.io/pt-BR/) e [React Testing Library](https://testing-library.com/docs/react-testing-library/intro) (verificar próxima seção);
 - Online utilizando a plataforma de deploy [Heroku](https://devcenter.heroku.com/start), disponível [aqui](https://game-trivia.herokuapp.com/).
 
-## **Testes automatizados**
+## **Testes automatizados** :mechanical_arm:
 
 A aplicação front-end foi desenvolvida com testes de integração com cobertura de 95% de todo o código. Para tal, foram utilizados os frameworks *Jest* e *React Testing Library*. **No entanto**, após a refatoração mencionada acima, este ponto ficou à ser implementado novamente como melhoria futura.
 
@@ -48,7 +48,7 @@ Além disso, testes para a aplicação back-end também precisam ser implementad
 
 * Você pode acessar a aplicação front-end anterior à refatoração [aqui](https://leobmend.github.io/trivia-game/), e seu código fonte [aqui](https://github.com/leobmend/trivia-game/tree/8cb9e0b8d6aaa84e4ede86a7d7899ce59f93c7e3).
 
-## **Teste você mesmo!**
+## **Teste você mesmo!** :muscle:
 
 A aplicação está em produção [aqui](https://game-trivia.herokuapp.com/)! Qualquer dúvida, sugestão ou bug encontrado, por favor entre em contato! :smile:
 
